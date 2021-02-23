@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/order.css' %}" />
+  </head>
+  <body>
+    {% comment %}
+    <h1>Oreder Customers</h1>
+    <h1>Employee List:</h1>
+    {% endcomment %}
+    <div >
+        <h1 class="h3 bg-danger text-white p-2 text-center">Orders App </h1>
+      {% if orders %}
+      <table class="table table-success table-hover">
+        <thead>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Family</th>
+        </thead>
+        {% for order in orders %}
+        <tbody>
+            <td><img src="{{order.thumbnail.url}}" title="{{order.gig}}"></td>
+          <td>{{order.user}}</td>
+          <td>{{order.gig}}</td>
+          <td>{{order.gescription}}</td>
+          <td>{{order.price}}</td>
+          <td>{{order.status}}</td>
+          <td>
+            <a href="{{order.slug}}">
+                <button class="btn btn-success buy" data-id="{{order.slug}}">Detail</button>
+            </a>
+          </td>
+        </tbody>
+        {% endfor %}
+      </table>
+      {% else %}
+      <p>there is no Gig in the database</p>
+      {% endif %}
+    </div>
+
+    <script rel="stylesheet" src="{% static 'js/order.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/order.css' %}" />
+  </head>
+  <body>
+
+    
+    <div>
+        <h1 class="h3 bg-danger text-white p-2 text-center">Detail Orders App </h1>
+      {% if detailorder %}
+      <table class="table table-success table-hover">
+        <thead>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Family</th>
+        </thead>
+        <tbody>
+            <td><img src="{{detailorder.thumbnail.url}}" title="{{detailorder.gig}}"></td>
+          <td>{{detailorder.user}}</td>
+          <td>{{detailorder.gig}}</td>
+          <td>{{detailorder.gescription}}</td>
+          <td>{{detailorder.price}}</td>
+          <td>{{detailorder.status}}</td>
+          <td>
+            <a href="{{detailorder.id}}">
+                <button class="btn btn-success buy" data-id="{{detailorder.id}}">buy</button>
+            </a>
+          </td>
+        </tbody>
+      </table>
+      {% else %}
+      <p>there is no Gig in the database</p>
+      {% endif %}
+    </div>
+
+    {% comment %} <script rel="stylesheet" src="{% static 'js/order.js' %}"></script> {% endcomment %}
+  </body>
+</html>
