@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
+from django.views.generic import TemplateView # for django-allauth
 from . import settings
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='authApp/index.html')), # for django-allauth
     path('admin/', admin.site.urls),
     path('accounts/', include('user.urls')),
+    path('accounts/', include('allauth.urls')), # for django-allauth
 ]
 if settings.DEBUG:
     # add root static files
