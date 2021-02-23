@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'category',
     # google auth section
     'django.contrib.sites', # for google auth / must be above the rest <--
+    'authApp'
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
