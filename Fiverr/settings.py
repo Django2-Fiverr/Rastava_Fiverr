@@ -43,6 +43,13 @@ INSTALLED_APPS = [
     'proFile',
     'user',
     'category',
+    # google auth section
+    'django.contrib.sites', # for google auth / must be above the resr <--
+    'authApp',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
