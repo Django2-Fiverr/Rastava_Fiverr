@@ -1,6 +1,7 @@
 <html>
     <body>
         <h1>Sign In To Explore!</h1>
+        <p>If you don't have an account, first <a href="{% url 'proFile:Register' %}">register here</a>.</p>
         <form method="POST">
             {% csrf_token %}
             {{form.as_p}}
