@@ -3,9 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 
 
-
-
-# Create custom User table using required fields or overrdide predefiend fields
+# Create custom User table using required fields or override predefined fields
 class User(AbstractUser):
     first_name = models.CharField(_('first name'), max_length=150)
     last_name = models.CharField(_('last name'), max_length=150)
@@ -16,6 +14,4 @@ class User(AbstractUser):
     date_joined = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
-
-
+        return f'{self.username}'
