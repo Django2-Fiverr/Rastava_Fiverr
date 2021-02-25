@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}SIGN-IN{% endblock %}
+{% block content %}
+    <h1>Sign In To Explore!</h1>
+    <p>If you don't have an account, first <a href="{% url 'proFile:Register' %}">register here</a>.</p>
+    <form method="POST">
+        {{form.as_p}}
+        {% csrf_token %}
+        <input type="submit" value="SIGN IN" />  
+    </form>       
+{% endblock %}
