@@ -1,6 +1,5 @@
-<html>
-    <body>
+{% extends 'base.html' %}
+{% block content %}
         <h1>Welcome {{new_user.first_name}}</h1>
-        <p>You have been registerd. Now you can <a href="{% url 'proFile:SignIn' %}">Sign In</a></p>
-    </body>
-</html>
+        <p>You have been registerd successfuly. Now you can <a href="{% url 'login' %}">Sign In</a></p>
+{% endblock %}

@@ -2,11 +2,31 @@ from django import forms
 from user.models import User
 from proFile.models import Profile
 
+# class SignInForm(forms.Form):
+#     username = forms.CharField(required = True)
+#     password = forms.CharField(required = True,widget = forms.PasswordInput)
+
+
+    # def clean_username(self):
+    #     username = self.cleaned_data['username']
+    #     get_user = User.objects.filter(username=username).exists()
+    #     if not get_user:
+    #         raise forms.ValidationError("This username does not exist.Register first!")
+    #     return username
+
+    # def clean_password(self):
+    #     password = self.cleaned_data['password']
+    #     get_password = User.objects.filter(password=password)
+    #     if get_password != password :
+    #         raise forms.ValidationError("Password is wrong!")
+    #     return password
+
+
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(required = True,widget = forms.PasswordInput)
     re_password = forms.CharField(required = True,widget = forms.PasswordInput)
-    email = forms.EmailField(required = True,widget = forms.EmailInput)
-    first_name = forms.CharField(required=True)
+    # email = forms.EmailField(required = True,widget = forms.EmailInput)
+    # first_name = forms.CharField(required=True)
     class Meta:
         model = User
         fields = (
@@ -35,21 +55,22 @@ class RegisterForm(forms.ModelForm):
     #     return email
 
     
-class SignInForm(forms.Form):
-    username = forms.CharField(required = True)
-    password = forms.CharField(required = True,widget = forms.PasswordInput)
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = (
+            'first_name',
+            'last_name',
+            'email',
+            'phone_number',
+        )
 
-
-    # def clean_username(self):
-    #     username = self.cleaned_data['username']
-    #     get_user = User.objects.filter(username=username).exists()
-    #     if not get_user:
-    #         raise forms.ValidationError("This username does not exist.Register first!")
-    #     return username
-
-    # def clean_password(self):
-    #     password = self.cleaned_data['password']
-    #     get_password = User.objects.filter(password=password)
-    #     if get_password != password :
-    #         raise forms.ValidationError("Password is wrong!")
-    #     return password
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = (
+            'bio',
+            'skills',
+            'birth',
+            'image',
+        )

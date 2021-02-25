@@ -4,6 +4,8 @@ from . import views
 app_name = "proFile"
 
 urlpatterns = [
-    path('signin/',views.SignInView, name="SignIn"),
-    path('register/',views.RegistrationView, name="Register"),
+    path('register/',views.registration_view, name="Register"),
+    path('edit/',views.edit_view, name="Edit"),
+    path('dashboard/',views.dashboard, name="Dashboard"),
+    path('home/',views.homepage, name="Home"),
 ]

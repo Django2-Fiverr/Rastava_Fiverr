@@ -13,3 +13,6 @@ class Profile(models.Model):
     birth = models.DateField('Birth', null=True, blank=True)
     image = models.ImageField(upload_to='users/%Y/%m/%d/',blank=True)
     last_update = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user.username
