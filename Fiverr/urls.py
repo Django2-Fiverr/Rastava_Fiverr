@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
-from . import settings
+from . import settings,views
 
 urlpatterns = [
+    path('', views.home_page),
+    path('accounts/', include('user.urls')),
+    path('gigs/', include('gig.urls')),
     path('admin/', admin.site.urls),
 ]
 if settings.DEBUG:

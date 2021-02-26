@@ -2,6 +2,7 @@ import os
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from category.models import Category
 
 # use the custom user table ( the default one in settings.py) 
 User = get_user_model()
@@ -32,16 +33,18 @@ class GigManager(models.Manager):
 
 
 class Gig(models.Model):
-    slug = models.SlugField(unique=True)
-    cost = models.CharField(max_length=10)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    slug = models.SlugField(max_length=20, blank=True, )
+    cost = models.IntegerField()
     description = models.TextField(max_length=1000)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     sell_count = models.IntegerField(default=0)
     active = models.BooleanField(default=False)
     image = models.ImageField(upload_to=get_name, null=True, blank=True)
+    create = models.DateTimeField(auto_now_add=True, null=True)
 
     objects = GigManager()  # the previous class (Gig menager)
 
     # returns the name of the gig owner
     def __str__(self):
-        return f'{self.user.username}'
+        return f'{self.user.username}-{self.category}'
