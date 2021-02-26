@@ -13,5 +13,8 @@ class User(AbstractUser):
     age = models.CharField(_('age'), max_length=3, blank=True, null=True)
     date_joined = models.DateTimeField(auto_now_add=True)
 
+    class Meta(AbstractUser.Meta):
+        swappable = 'AUTH_USER_MODEL'
+
     def __str__(self):
         return f'{self.username}'
