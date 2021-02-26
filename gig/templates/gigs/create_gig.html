@@ -10,7 +10,7 @@
                 <div class="signup-form">
                     <!--sign up form-->
                     <h2>ایجاد گیگ جدیـد</h2>
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
 
                         {{ form }}

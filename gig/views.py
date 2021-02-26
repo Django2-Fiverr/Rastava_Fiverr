@@ -22,6 +22,7 @@ def create_gig(request):
         context = {
             'form': form,
         }
+    # return render(request, 'gigs/create_gig.html', context)
     return render(request, 'gigs/create_gig.html', context)
 
 

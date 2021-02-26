@@ -10,8 +10,8 @@
             </div>
             <div class="product-overlay">
                 <div class="overlay-content">
-                    <h2>{{ gig.cost }} تومان</h2>
-                    <p>{{ gig.title }}</p>
+                    <h3><a href="{{ gig.get_absolute_url }}">{{ gig.title }}</a></h3>
+                    <h2 style="color:yellow">{{ gig.cost }} تومان</h2>
                     <a href="#" class="btn btn-default add-to-cart"><i
                             class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                 </div>
