@@ -11,7 +11,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=1000, help_text='User bio')
     skills = models.ManyToManyField(Category, help_text='Choose Your Skills',blank=True)
     birth = models.DateField('Birth', null=True, blank=True)
-    image = models.ImageField(upload_to='users/%Y/%m/%d/',blank=True)
+    image = models.ImageField(upload_to='users/%Y/%m/%d/',blank=True) 
     last_update = models.DateTimeField(auto_now=True)
 
     def __str__(self):
