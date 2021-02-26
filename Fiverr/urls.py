@@ -13,19 +13,30 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path,include
-from django.conf import settings
+
+from django.urls import path, include
 from django.conf.urls.static import static
+<<<<<<< Updated upstream
 from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='registration/login.html')), # for django-allauth
+=======
+from . import settings,views
+
+urlpatterns = [
+    path('googleauth', TemplateView.as_view(template_name='authApp/index.html')), # for django-allauth
+    path('', views.home_page),
+    path('accounts/', include('user.urls')),
+    path('gigs/', include('gig.urls')),
+>>>>>>> Stashed changes
     path('admin/', admin.site.urls),
-    path('profile/',include('proFile.urls')),
-    path('account/',include('django.contrib.auth.urls')),
+     path('account/',include('django.contrib.auth.urls')),
 ]
 
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    # add root static files
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # add media static files
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from gig.models import Gig
+
+
+@admin.register(Gig)
+class AdminGig(admin.ModelAdmin):
+    list_display = ('id', 'category', 'user', 'create', 'cost', 'active')
