@@ -44,9 +44,6 @@ def login_user(request):
         password = form.cleaned_data.get('password')
         print(password)
         user = authenticate(username=username, password=password)
-        user2 = User.objects.filter(username = username,password=password)
-        print(user)
-        print(user2)
         if user:
             login(request, user)
             return redirect('/')
@@ -66,6 +63,7 @@ def logout_user(request):
 
 def register_user(request):
     if request.user.is_authenticated:
+        login(request,request.user)
         return redirect('/')
 
     form = RegisterForm(request.POST or None)
@@ -75,8 +73,8 @@ def register_user(request):
     if form.is_valid():
         data = form.cleaned_data
         data.popitem()
-        user = User(**data)
-        user.save()
-        login(request, user)
+        User.objects.create_user(**data)
+        user = authenticate(**data)
+        login(request,user)
         return redirect('/')
     return render(request, 'register.html', context)
