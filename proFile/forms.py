@@ -1,6 +1,6 @@
 from django import forms
 from user.models import User
-from proFile.models import Profile
+from proFile.models import Profile, Skills
 
 # class SignInForm(forms.Form):
 #     username = forms.CharField(required = True)
@@ -66,6 +66,9 @@ class UserEditForm(forms.ModelForm):
         )
 
 class ProfileEditForm(forms.ModelForm):
+    # skills = forms.ChoiceField(choices=[
+    #     (item.pk, item) for item in Skills.objects.all()])
+    # skills = forms.ModelChoiceField(queryset = Skills.objects.all())
     class Meta:
         model = Profile
         fields = (

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from proFile.models import Profile
+from proFile.models import Profile, Skills
 from user.models import User
 from proFile.forms import RegisterForm, UserEditForm, ProfileEditForm
 # from django.contrib.auth import get_user_model
