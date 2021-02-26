@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'category',
     # google auth section
     'django.contrib.sites', # for google auth / must be above the rest <--
-    'authApp'
+    'authApp',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -88,13 +88,10 @@ WSGI_APPLICATION = 'Fiverr.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fiverr',
-        'USER': 'root',
-        'PASSWORD': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
