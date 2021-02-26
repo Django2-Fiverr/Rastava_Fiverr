@@ -57,6 +57,7 @@ class Gig(models.Model):
     class Meta:
         verbose_name = 'گیگ'
         verbose_name_plural = 'گیگ ها'
+        ordering = ('-create',)
 
     # returns the name of the gig owner
     def __str__(self):

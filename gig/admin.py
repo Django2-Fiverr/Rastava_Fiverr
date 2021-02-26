@@ -29,6 +29,6 @@ make_available.short_description = 'تغییر وضعیت به حالت فعال
 class AdminGig(admin.ModelAdmin):
     list_display = ('title', 'id', 'category', 'user', 'create', 'cost', 'active')
     list_filter = ('create', 'active', 'user', 'category')
-    ordering = ('cost', 'active')
+    ordering = ('-create','cost', 'active')
     search_fields = ('title', 'description', 'user')
     actions = [make_available,make_unavailable]

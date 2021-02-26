@@ -22,7 +22,7 @@ def create_gig(request):
         context = {
             'form': form,
         }
-    return render(request, 'gig.html', context)
+    return render(request, 'gigs/create_gig.html', context)
 
 
 class GigList(ListView):
@@ -59,3 +59,13 @@ class SearchGig(ListView):
         else:
             return Gig.objects.get_active_gigs()
 
+
+class MyGigList(ListView):
+    model = Gig
+    template_name = 'components/my_gig.html'
+    context_object_name = 'gigs'
+    paginate_by = 9
+
+    def get_queryset(self):
+        request = self.request
+        return Gig.objects.filter(user=request.user, active=True)
