@@ -11,10 +11,12 @@ class User(AbstractUser):
     phone_number = models.CharField(
         _('Phone number'), max_length=11, blank=True, null=True)
     age = models.CharField(_('age'), max_length=3, blank=True, null=True)
-    date_joined = models.DateTimeField(auto_now_add=True)
+    date_joined = models.DateTimeField(auto_now_add=True,verbose_name='تاریخ ورود')
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
+        verbose_name = 'کاربر'
+        verbose_name_plural = 'کاربران'
 
     def __str__(self):
         return f'{self.username}'

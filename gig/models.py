@@ -2,9 +2,10 @@ import os
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+
 from category.models import Category
 
-# use the custom user table ( the default one in settings.py) 
+# use the custom user table ( the default one in settings.py)
 User = get_user_model()
 
 
@@ -28,23 +29,38 @@ class GigManager(models.Manager):
     def get_active_gigs(self):
         return self.get_queryset().filter(active=True)  # returns active ( available gigs )
 
-    def search(self, query):  # This one requires category table ( going to be fixed later )
-        pass
+    def get_by_id(self, pk):
+        result = self.get_queryset().filter(id=pk)
+        if result:
+            return result.first()
+        return None
+
+    def search(self, query):
+        lock_up = Q(title__icontains=query) | Q(description__icontains=query)
+        return self.get_queryset().filter(lock_up, active=True).distinct()
 
 
 class Gig(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    slug = models.SlugField(max_length=20, blank=True, )
-    cost = models.IntegerField()
-    description = models.TextField(max_length=1000)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    sell_count = models.IntegerField(default=0)
-    active = models.BooleanField(default=False)
-    image = models.ImageField(upload_to=get_name, null=True, blank=True)
-    create = models.DateTimeField(auto_now_add=True, null=True)
+    title = models.CharField(max_length=100, verbose_name='عنوان')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, verbose_name='موضوع')
+    slug = models.SlugField(max_length=20, blank=True, verbose_name='پیوست')
+    cost = models.IntegerField(verbose_name='قیمت')
+    description = models.TextField(max_length=5000, verbose_name='توضیحات')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='کاربر')
+    sell_count = models.IntegerField(default=0, verbose_name='تعداد دفعات فروش')
+    active = models.BooleanField(default=False, verbose_name='فعال/غیرفعال')
+    image = models.ImageField(upload_to=get_name, null=True, blank=True, verbose_name='تصویر')
+    create = models.DateTimeField(auto_now_add=True, null=True, verbose_name='تاریخ ایجاد')
 
-    objects = GigManager()  # the previous class (Gig menager)
+    objects = GigManager()  # the previous class (Gig manager)
+
+    class Meta:
+        verbose_name = 'گیگ'
+        verbose_name_plural = 'گیگ ها'
 
     # returns the name of the gig owner
     def __str__(self):
         return f'{self.user.username}-{self.category}'
+
+    def get_absolute_url(self):
+        return f'/gigs/gig-detail/{self.id}/'

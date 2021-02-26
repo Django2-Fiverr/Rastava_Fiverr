@@ -40,18 +40,13 @@ def login_user(request):
     }
     if form.is_valid():
         username = form.cleaned_data.get('username')
-        print(username)
         password = form.cleaned_data.get('password')
-        print(password)
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
             return redirect('/')
-        elif user2:
-            login(request, user2.first())
-            return redirect('/')
         else:
-            print('Error')
+            form.add_error('username','کاربری با مشخصات فوق یافت نشد')
     return render(request, 'login.html', context)
 
 
