@@ -22,12 +22,8 @@ urlpatterns = [
     path('', views.home_page),
     path('admin/', admin.site.urls),
     path('profile/',include('proFile.urls')),
-    path('accounts/', include('user.urls')),
-    path('gigs/', include('gig.urls')),
     path('account/',include('django.contrib.auth.urls')),
 ]
-
-
 if settings.DEBUG:
     # add root static files
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -28,7 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'user.User'
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -61,7 +60,7 @@ ROOT_URLCONF = 'Fiverr.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,6 +129,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'static_root')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'static_cdn','media_root')
-
-LOGIN_REDIRECT_URL = 'proFile:Home'
-LOGOUT_REDIRECT_URL = 'proFile:Home'
