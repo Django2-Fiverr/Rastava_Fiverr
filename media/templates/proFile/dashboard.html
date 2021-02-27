@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <h1>Dashboard</h1>
+    <p>{{user.first_name}} welcome to your dashboard</p>
+    <p>Bio: {{user.profile.bio}}</p>
+    {% if user.profile.image %}
+        <img src="{{user.profile.image.url}}">
+    {% else %}
+        <br />
+    {% endif %}
+    {{user.profile.skills}}
+    <p>You can <a href="{% url 'proFile:Edit' %}">edit</a> your profile.</p>
+{% endblock %}
