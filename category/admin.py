@@ -2,4 +2,8 @@ from django.contrib import admin
 
 from category.models import Category
 
-admin.site.register(Category)
+
+@admin.register(Category)
+class AdminCategory(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)

@@ -21,9 +21,12 @@ def create_gig(request):
         form = GigForm()
         context = {
             'form': form,
+            'text': 'ایجاد گیگ',
+            'operation': 'ایجاد گیگ جدید',
+            'title': 'ایجاد گیگ',
         }
-    # return render(request, 'gigs/create_gig.html', context)
-    return render(request, 'gigs/create_gig.html', context)
+    # return render(request, 'gigs/gig_operation.html', context)
+    return render(request, 'gigs/gig_operation.html', context)
 
 
 class GigList(ListView):
@@ -69,4 +72,20 @@ class MyGigList(ListView):
 
     def get_queryset(self):
         request = self.request
-        return Gig.objects.filter(user=request.user, active=True)
+        return Gig.objects.filter(user=request.user)
+
+
+@login_required
+def edit_gig(request, id):
+    form = GigForm(instance=request.user.gig_set.filter(id=id).first())
+    if request.method == 'POST':
+        form = GigForm(instance=request.user.gig_set.filter(id=id).first(), files=request.FILES,data=request.POST)
+        if form.is_valid():
+            form.save()
+    context = {
+        'form': form,
+        'text': 'اعمال ویرایش',
+        'operation': 'ویرایش گیگ',
+        'title':'ویرایش گیگ',
+    }
+    return render(request, 'gigs/gig_operation.html', context)
