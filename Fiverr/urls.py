@@ -27,7 +27,7 @@ urlpatterns = [
     path('gigs/', include('gig.urls')),
     path('admin/', admin.site.urls),
     path('account/',include('django.contrib.auth.urls')),
-
+]
 
 if settings.DEBUG:
     # add root static files
