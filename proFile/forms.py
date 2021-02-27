@@ -1,6 +1,10 @@
 from django import forms
-from user.models import User
+# from user.models import User
 from proFile.models import Profile, Skills
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model
 
 # class SignInForm(forms.Form):
 #     username = forms.CharField(required = True)

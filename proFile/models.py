@@ -1,9 +1,9 @@
 from django.db import models
-# from django.contrib.auth import get_user_model
-from user.models import User
+from django.contrib.auth import get_user_model
+# from user.models import User
 
 
-# User=get_user_model()
+User=get_user_model()
 
 class Skills(models.Model):
     name = models.CharField(max_length=30)
