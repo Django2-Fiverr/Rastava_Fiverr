@@ -46,9 +46,6 @@ INSTALLED_APPS = [
     #['category','mptt','categoryApp'] for category
     'category',
     'mptt',
-    'categoryApp',
-    #['commentsApp'] for comment
-    'commentsApp'
 ]
 
 MIDDLEWARE = [
