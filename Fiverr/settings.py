@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'category',
     'mptt',
     'categoryApp',
+    #['commentsApp'] for comment
+    'commentsApp'
 ]
 
 MIDDLEWARE = [
@@ -85,7 +87,7 @@ WSGI_APPLICATION = 'Fiverr.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django-category',
+        'NAME': 'django-category', 'django-comments',
         'USER':'root',
         'PASSWORD':'',
     }

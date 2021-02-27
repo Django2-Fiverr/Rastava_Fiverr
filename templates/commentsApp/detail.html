@@ -1,0 +1,37 @@
+<br>
+
+<form method="POST"
+>{% csrf_token %}
+    {{ form.as_p }}
+  <input type="submit" value="send">
+</form>
+
+{% if comments %}
+
+    {% for comment in comments %}
+
+      <ul>
+        <li>{{comment.pk}},{{ comment.comment }}
+            <ul>
+              <li class="comment-detail">@ {{comment.user.username}} | {{comment.time }}</li>
+              <hr>
+              {# {% if re_comments %} #}
+                {% for reply in comment.recomment.all %}
+                  <li>{{ reply.re_comment }}</li>
+                  <li class="comment-detail">@ {{reply.user.username}} | {{reply.time }}</li>
+                {% endfor %}
+              {# {% endif %} #}
+            </ul>
+        </li>
+      </ul>
+    {% endfor %}
+
+{% else %}
+
+    <ul>
+      <li>No Comments for this post !</li>
+    </ul>
+
+
+
+{% endif %}
