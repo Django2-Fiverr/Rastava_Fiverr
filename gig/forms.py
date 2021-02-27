@@ -2,6 +2,7 @@ from django import forms
 from category.models import Category
 from .models import Gig
 
+
 # categories = Category.objects.all().values()
 # CHOICES = [(category.get('name'), category.get('name').capitalize())
 #            for category in categories]
@@ -24,4 +25,4 @@ from .models import Gig
 class GigForm(forms.ModelForm):
     class Meta:
         model = Gig
-        fields = ('category','cost','description','active','image')
+        fields = ('title', 'category', 'cost', 'description', 'active', 'image')
