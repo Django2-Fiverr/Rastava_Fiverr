@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'order',
     'proFile',
     'user',
-    #['category','mptt','categoryApp'] for category
+    #['category','mptt'] for category
     'category',
     'mptt',
 ]

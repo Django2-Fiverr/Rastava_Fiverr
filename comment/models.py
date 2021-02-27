@@ -5,7 +5,6 @@ from proFile.models import Profile
 
 User = get_user_model()
 
-
 class Comment(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='commentProfile')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='commentUser')

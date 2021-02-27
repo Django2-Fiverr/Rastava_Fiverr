@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from comment.models import Comment, ReplyComment
 from comment.forms import CommentForm
-from profile.models import Profile
-
+from proFile.models import Profile
 
 def show_comment(request,my_id):
     comments = Comment.objects.filter(profile_id=my_id)
@@ -24,4 +23,4 @@ def show_comment(request,my_id):
         "form" : form
         }
     print(form.as_p)
-        return render(request, 'detail.html',dic)
+    return render(request, 'detail.html',dic)
