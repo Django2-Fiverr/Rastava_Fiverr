@@ -19,5 +19,5 @@ from commentsApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('ccommentsApp/', views.show_comment)
+     path('commentsApp/', views.show_comment)
 ]
