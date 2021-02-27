@@ -129,8 +129,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'static_root')
 
 
 # Google Auth section starts
@@ -160,8 +158,14 @@ SOCIALACCOUNT_PROVIDERS = {
 
 
 # Google Auth section ends
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'media/static')]
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'static_root')
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images')
-LOGIN_REDIRECT_URL = 'proFile:Home'
-LOGOUT_REDIRECT_URL = 'proFile:Home'
+MEDIA_ROOT = os.path.join(BASE_DIR,'static_cdn','media_root')
