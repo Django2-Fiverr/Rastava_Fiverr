@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from categoryApp.models import Category,Post
+from category.models import Category,Post
 from django.shortcuts import get_list_or_404
 
-def show_category(request,hierarchy=''):
+def category(request,hierarchy=''):
     category_slug = hierarchy.split('/')
     parent = ''
     root = Category.objects.all()
@@ -17,4 +17,3 @@ def show_category(request,hierarchy=''):
         return render(request, "postDetail.html", {'instance':instance})
     else:
         return render(request, 'categories.html', {'instance':instance})
-

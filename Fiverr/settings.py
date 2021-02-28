@@ -43,10 +43,9 @@ INSTALLED_APPS = [
     'order',
     'proFile',
     'user',
-    #['category','mptt'] for category
     'category',
     'mptt',
-]
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

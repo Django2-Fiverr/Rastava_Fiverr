@@ -3,7 +3,7 @@ from comment.models import Comment, ReplyComment
 from comment.forms import CommentForm
 from proFile.models import Profile
 
-def show_comment(request,my_id):
+def comment(request,my_id):
     comments = Comment.objects.filter(profile_id=my_id)
     is_active = True
 
