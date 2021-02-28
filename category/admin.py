@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import Category
-from mptt.admin import MPTTModelAdmin
+from category.models import Category
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name',]
+    list_display = ['name', 'parent']
     
-admin.site.register(Category , MPTTModelAdmin)
+admin.site.register(Category , CategoryAdmin)
