@@ -18,6 +18,7 @@ def create_gig(request):
         if form.is_valid():
             data = form.cleaned_data
             Gig(user=request.user, **data).save()
+            return redirect('gig:my_gigs')
     else:
         form = GigForm()
         context = {

@@ -10,7 +10,10 @@ User = get_user_model
 
 @login_required
 def profile_view(request):
-    return render(request, 'profile_view.html',{})
+    context = {
+        'profile':request.user.profile
+    }
+    return render(request, 'profile_view.html',context)
 
 
 # def registration_view(request):
@@ -39,7 +42,7 @@ def edit_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            return redirect('/')
+            return redirect('proFile:profile')
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
