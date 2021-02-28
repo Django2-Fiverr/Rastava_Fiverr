@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 
 from .models import Gig
@@ -49,7 +50,7 @@ def gig_detail(request, pk):
     return render(request, 'gigs/gig_detail.html', context)
 
 
-class SearchGig(ListView):
+class SearchGig(LoginRequiredMixin,ListView):
     model = Gig
     template_name = 'gigs/gig_list.html'
     context_object_name = 'gigs'
@@ -64,7 +65,7 @@ class SearchGig(ListView):
             return Gig.objects.get_active_gigs()
 
 
-class MyGigList(ListView):
+class MyGigList(LoginRequiredMixin,ListView):
     model = Gig
     template_name = 'components/my_gig.html'
     context_object_name = 'gigs'
@@ -79,13 +80,14 @@ class MyGigList(ListView):
 def edit_gig(request, id):
     form = GigForm(instance=request.user.gig_set.filter(id=id).first())
     if request.method == 'POST':
-        form = GigForm(instance=request.user.gig_set.filter(id=id).first(), files=request.FILES,data=request.POST)
+        form = GigForm(instance=request.user.gig_set.filter(id=id).first(), files=request.FILES, data=request.POST)
         if form.is_valid():
             form.save()
+            return redirect('/')
     context = {
         'form': form,
         'text': 'اعمال ویرایش',
         'operation': 'ویرایش گیگ',
-        'title':'ویرایش گیگ',
+        'title': 'ویرایش گیگ',
     }
     return render(request, 'gigs/gig_operation.html', context)

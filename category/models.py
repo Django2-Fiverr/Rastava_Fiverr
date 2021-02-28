@@ -10,3 +10,14 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'موضوع'
         verbose_name_plural = 'موضوع ها'
+
+
+class Skills(models.Model):
+    name = models.CharField(max_length=30, verbose_name='مهارت')
+
+    class Meta:
+        verbose_name = 'مهارت'
+        verbose_name_plural = 'مهارت ها'
+
+    def __str__(self):
+        return self.name
