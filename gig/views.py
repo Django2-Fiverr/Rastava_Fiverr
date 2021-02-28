@@ -51,7 +51,7 @@ def gig_detail(request, pk):
     return render(request, 'gigs/gig_detail.html', context)
 
 
-class SearchGig(LoginRequiredMixin,ListView):
+class SearchGig(LoginRequiredMixin, ListView):
     model = Gig
     template_name = 'gigs/gig_list.html'
     context_object_name = 'gigs'
@@ -66,7 +66,7 @@ class SearchGig(LoginRequiredMixin,ListView):
             return Gig.objects.get_active_gigs()
 
 
-class MyGigList(LoginRequiredMixin,ListView):
+class MyGigList(LoginRequiredMixin, ListView):
     model = Gig
     template_name = 'components/my_gig.html'
     context_object_name = 'gigs'
@@ -81,10 +81,12 @@ class MyGigList(LoginRequiredMixin,ListView):
 def edit_gig(request, id):
     form = GigForm(instance=request.user.gig_set.filter(id=id).first())
     if request.method == 'POST':
-        form = GigForm(instance=request.user.gig_set.filter(id=id).first(), files=request.FILES, data=request.POST)
+        form = GigForm(instance=request.user.gig_set.filter(id=id).first(),
+                       files=request.FILES,
+                       data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('gig:my_gigs')
     context = {
         'form': form,
         'text': 'اعمال ویرایش',

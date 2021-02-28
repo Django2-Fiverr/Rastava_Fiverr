@@ -51,11 +51,11 @@ class RegisterForm(forms.Form):
                                  attrs={'placeholder': 'آدرس ایمیل را وارد کنید'}))
 
     phone_number = forms.CharField(required=False, label="شماره تماس",
-                                   widget=forms.TextInput(
+                                   widget=forms.NumberInput(
                                        attrs={'placeholder': 'شماره تماس را وارد کنید (اختیاری)'}))
 
     age = forms.CharField(required=False, label="سن",
-                          widget=forms.TextInput(
+                          widget=forms.NumberInput(
                               attrs={'placeholder': 'سن خود را وارد کنید (اختیاری)'}))
 
     # validator excepts passwords which contain more than 6 characters

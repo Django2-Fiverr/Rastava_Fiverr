@@ -68,7 +68,8 @@ class ProfileEditForm(forms.ModelForm):
         widgets = {
             'bio': forms.Textarea(attrs={'placeholder': 'بیو گرافی'}),
             'skills': forms.CheckboxSelectMultiple(),
-            'birth': forms.SelectDateWidget(years=list(range(1300, 1399, 1)))
+            'birth': forms.SelectDateWidget(years=list(range(1300, 1399, 1))),
+
         }
         labels = {
             'bio': 'بیوگرافی',

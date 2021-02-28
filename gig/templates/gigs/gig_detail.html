@@ -13,7 +13,7 @@
                     <div class="product-details"><!--product-details-->
                         <div class="col-sm-5">
                             <div class="view-product">
-                                {% if gig.image.url %}
+                                {% if gig.image %}
                                     <img src="{{ gig.image.url }}" alt="">
                                 {% else %}
                                     <img src="{% static 'images/product-details/1.jpg' %}" alt="">

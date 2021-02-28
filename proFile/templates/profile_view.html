@@ -62,7 +62,11 @@
                 <div class="col-sm-5 col-md-offset-0">
                     <div class="view-product col-md-offset-3" style="width:320px;height: 250px">
 
-                        <img src="/media/gigs/2021-02-27/mehdi/reduclusness.png" alt="">
+                        {% if profile.image %}
+                            <img src="{{ profile.image.url }}" alt="">
+                        {% else %}
+                            <img src="{% static 'images/product-details/1.jpg' %}" alt="">
+                        {% endif %}
 
                     </div>
 

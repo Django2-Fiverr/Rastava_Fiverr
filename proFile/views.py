@@ -11,9 +11,9 @@ User = get_user_model
 @login_required
 def profile_view(request):
     context = {
-        'profile':request.user.profile
+        'profile': request.user.profile
     }
-    return render(request, 'profile_view.html',context)
+    return render(request, 'profile_view.html', context)
 
 
 # def registration_view(request):
@@ -22,7 +22,7 @@ def profile_view(request):
 #         if user_form.is_valid():
 #             new_user = user_form.save(commit=False)
 #             new_user.set_password(
-#                 user_form.cleaned_data['password'])
+#                 user_form.cleaned_data['password')
 #             new_user.save()
 #             profile = Profile.objects.create(user=new_user)
 #             return render(request, 'proFile/register_done.html', {'new_user': new_user})
@@ -33,18 +33,21 @@ def profile_view(request):
 
 @login_required
 def edit_profile(request):
+    form = UserEditForm(instance=request.user)
+    profile_form = ProfileEditForm(instance=request.user.profile)
     if request.method == 'POST':
-        user_form = UserEditForm(instance=request.user,
-                                 data=request.POST)
+        form = UserEditForm(instance=request.user,
+                            files=request.FILES,
+                            data=request.POST)
         profile_form = ProfileEditForm(instance=request.user.profile,
-                                       data=request.POST,
-                                       files=request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
+                                       files=request.FILES,
+                                       data=request.POST)
+
+        if form.is_valid() and profile_form.is_valid():
+            print('The are valid')
             profile_form.save()
+            form.save()
             return redirect('proFile:profile')
-    else:
-        user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user.profile)
-    context = {'form': user_form, 'profile_form': profile_form}
+
+    context = {'form': form, 'profile_form': profile_form}
     return render(request, 'edit_profile.html', context)
