@@ -32,6 +32,10 @@ ul li {
   list-style: none;
 }
 
+.google-login {
+  color: blue;
+}
+
 a:hover {
 outline: none;
 text-decoration:none;

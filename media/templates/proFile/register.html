@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% block content %}
-        <h1>Register Now!</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{user_form.as_p}}
-            <input type="submit" value="SIGN IN" />
-        </form>
-{% endblock %}
