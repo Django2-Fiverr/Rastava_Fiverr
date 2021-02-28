@@ -17,15 +17,15 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from category import views as cat
-from comment import views as com
+from category import views as ca
+from comment import views as co
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/',include('proFile.urls')),
     path('account/',include('django.contrib.auth.urls')),
-    path('category/', cat.category),
-    path('comment/', com.comment),
+    path('category/', ca.category),
+    path('comment/', co.comment),
 ]
 
 
