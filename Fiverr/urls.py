@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
+from . import settings
+# <<<<<<< HEAD
 from . import settings, views
 
 urlpatterns = [
@@ -24,7 +27,10 @@ urlpatterns = [
     path('gigs/', include('gig.urls')),
     path('profile/', include('proFile.urls')),
     path('admin/', admin.site.urls),
+    path('', TemplateView.as_view(template_name='authApp/index.html')),
+    path('auth/', include('allauth.urls')),  # for django-allauth
 ]
+
 if settings.DEBUG:
     # add root static files
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
