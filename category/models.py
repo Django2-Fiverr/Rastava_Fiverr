@@ -2,7 +2,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    parent = models.foreignkey('self', default = None, Null = True, blank = True, on_delete = models.CASCADE, related_name = 'children')
+    parent = models.Foreignkey('self', default = None, Null = True, blank = True, on_delete = models.CASCADE, related_name = 'children')
     slug = models.SlugField(max_length=255, unique = True)
 
     class Meta:
