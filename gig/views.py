@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 
 from .models import Gig
@@ -17,13 +18,17 @@ def create_gig(request):
         if form.is_valid():
             data = form.cleaned_data
             Gig(user=request.user, **data).save()
+            return redirect('gig:my_gigs')
     else:
         form = GigForm()
         context = {
             'form': form,
+            'text': 'ایجاد گیگ',
+            'operation': 'ایجاد گیگ جدید',
+            'title': 'ایجاد گیگ',
         }
-    # return render(request, 'gigs/create_gig.html', context)
-    return render(request, 'gigs/create_gig.html', context)
+    # return render(request, 'gigs/gig_operation.html', context)
+    return render(request, 'gigs/gig_operation.html', context)
 
 
 class GigList(ListView):
@@ -46,7 +51,7 @@ def gig_detail(request, pk):
     return render(request, 'gigs/gig_detail.html', context)
 
 
-class SearchGig(ListView):
+class SearchGig(LoginRequiredMixin, ListView):
     model = Gig
     template_name = 'gigs/gig_list.html'
     context_object_name = 'gigs'
@@ -61,7 +66,7 @@ class SearchGig(ListView):
             return Gig.objects.get_active_gigs()
 
 
-class MyGigList(ListView):
+class MyGigList(LoginRequiredMixin, ListView):
     model = Gig
     template_name = 'components/my_gig.html'
     context_object_name = 'gigs'
@@ -69,4 +74,23 @@ class MyGigList(ListView):
 
     def get_queryset(self):
         request = self.request
-        return Gig.objects.filter(user=request.user, active=True)
+        return Gig.objects.filter(user=request.user)
+
+
+@login_required
+def edit_gig(request, id):
+    form = GigForm(instance=request.user.gig_set.filter(id=id).first())
+    if request.method == 'POST':
+        form = GigForm(instance=request.user.gig_set.filter(id=id).first(),
+                       files=request.FILES,
+                       data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('gig:my_gigs')
+    context = {
+        'form': form,
+        'text': 'اعمال ویرایش',
+        'operation': 'ویرایش گیگ',
+        'title': 'ویرایش گیگ',
+    }
+    return render(request, 'gigs/gig_operation.html', context)

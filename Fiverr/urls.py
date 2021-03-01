@@ -25,8 +25,9 @@ urlpatterns = [
     path('', views.home_page),
     path('accounts/', include('user.urls')),
     path('gigs/', include('gig.urls')),
+    path('profile/', include('proFile.urls')),
     path('admin/', admin.site.urls),
-    path('auth/', include('allauth.urls')),
+    path('auth/', include('allauth.urls')),  # for django-allauth
 ]
 
 if settings.DEBUG:

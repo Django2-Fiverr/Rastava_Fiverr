@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, RegisterForm
+from proFile.models import Profile
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -46,7 +47,7 @@ def login_user(request):
             login(request, user)
             return redirect('/')
         else:
-            form.add_error('username','کاربری با مشخصات فوق یافت نشد')
+            form.add_error('username', 'کاربری با مشخصات فوق یافت نشد')
     return render(request, 'login.html', context)
 
 
@@ -58,7 +59,7 @@ def logout_user(request):
 
 def register_user(request):
     if request.user.is_authenticated:
-        login(request,request.user)
+        login(request, request.user)
         return redirect('/')
 
     form = RegisterForm(request.POST or None)
@@ -70,6 +71,7 @@ def register_user(request):
         data.popitem()
         User.objects.create_user(**data)
         user = authenticate(**data)
-        login(request,user)
+        Profile.objects.create(user=user)
+        login(request, user)
         return redirect('/')
     return render(request, 'register.html', context)

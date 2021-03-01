@@ -2,6 +2,7 @@ import os
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from datetime import date
 
 from category.models import Category
 
@@ -19,8 +20,9 @@ def split_name(file_name):
 # This function changes default file name and uses the same format ( one.jpg -> two.jpg )
 # it returns an address to save the uploaded image file
 def get_name(instance, file_name):
-    name, format = split_name(file_name)
-    new_name = '{}-{}{}'.format(instance.user.username, instance.slug, format)
+    name, ext = split_name(file_name)
+    current_time = str(date.today())
+    new_name = '{}/{}/{}{}'.format(current_time, instance.user.username, instance.title, ext)
     return 'gigs/{}'.format(new_name)
 
 

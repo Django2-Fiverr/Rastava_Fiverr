@@ -1,8 +1,13 @@
+{% load static %}
 <div class="col-sm-4 pull-right">
     <div class="product-image-wrapper">
         <div class="single-products">
             <div class="productinfo text-center">
-                <img src="{{ gig.image.url }}" width="200" height="200" alt="">
+                {% if gig.image %}
+                    <img src="{{ gig.image.url }}" width="200" height="200" alt="">
+                {% else %}
+                    <img src="{% static 'images/product-details/1.jpg' %}" width="200" height="200" alt="">
+                {% endif %}
                 <h2>{{ gig.cost }} تومان</h2>
                 <p>{{ gig.title }}</p>
                 <a href="#" class="btn btn-default add-to-cart"><i
@@ -10,8 +15,8 @@
             </div>
             <div class="product-overlay">
                 <div class="overlay-content">
-                    <h3><a href="{{ gig.get_absolute_url }}">{{ gig.title }}</a></h3>
-                    <h2 style="color:yellow">{{ gig.cost }} تومان</h2>
+                    <h3><a href="{{ gig.get_absolute_url }}" style="color:#ff6347">{{ gig.title }}</a></h3>
+                    <h2>{{ gig.cost }} تومان</h2>
                     <a href="#" class="btn btn-default add-to-cart"><i
                             class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                 </div>
