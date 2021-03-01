@@ -15,11 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
+from . import settings
+# <<<<<<< HEAD
+from . import settings, views
 
 urlpatterns = [
+    path('', views.home_page),
+    path('accounts/', include('user.urls')),
+    path('gigs/', include('gig.urls')),
+    path('profile/', include('proFile.urls')),
     path('admin/', admin.site.urls),
-    path('', include('order.urls')),
-    path('', include('gig.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('', TemplateView.as_view(template_name='authApp/index.html')),
+    path('auth/', include('allauth.urls')),  # for django-allauth
+]
+
+if settings.DEBUG:
+    # add root static files
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # add media static files
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
