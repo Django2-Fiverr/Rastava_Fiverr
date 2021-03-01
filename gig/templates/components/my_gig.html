@@ -1,0 +1,17 @@
+{% extends 'gigs/gig_list.html' %}
+{% block title %} گیگ های من {% endblock %}
+
+{% block sell %}
+
+<a href="{% url 'gig:create_gig' %}"style="text-decoration:none"><h2 class="text-center" style="text-decoration:none">ایجاد گیگ جدید +</h2></a>
+<br>
+<br>
+
+{% endblock %}
+
+
+{% block list %}
+
+    {% include 'components/my_list_component.html' with gig=gig %}
+
+{% endblock %}

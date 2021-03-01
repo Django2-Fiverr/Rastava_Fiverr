@@ -28,8 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'user.User'
-
 # Application definition
+
+LOGIN_REDIRECT_URL = 'user:login'
+LOGOUT_REDIRECT_URL = 'user:logout'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -44,6 +46,13 @@ INSTALLED_APPS = [
     'proFile',
     'user',
     'category',
+    # google auth section
+    'django.contrib.sites', # for google auth / must be above the rest <--
+    'authApp',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -131,5 +140,31 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'static_root')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'static_cdn','media_root')
 
-LOGIN_REDIRECT_URL = 'proFile:Home'
-LOGOUT_REDIRECT_URL = 'proFile:Home'
+
+# Google Auth section starts
+
+SITE_ID = 2
+LOGIN_REDIRECT_URL = '/'
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS' : {
+            'access_type' : 'online',
+        }
+    }
+}
+
+
+# Google Auth section ends
