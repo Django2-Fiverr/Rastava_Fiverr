@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from category.models import Category
+from .models import Category
 
 def category(request,hierarchy=''):
     root = Category.objects.all()

@@ -2,8 +2,7 @@ from django.contrib import admin
 from category.models import Category
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'parent', 'slug']
-    search_fields = ('name', 'slug')
-    prepopulated_fields = {'slug': ('name',)}
+    list_display = ['title', 'parent', 'slug']
+    search_fields = ('title', 'slug')
     
 admin.site.register(Category , CategoryAdmin)
