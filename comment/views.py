@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .forms import CommentForm
 
-# Create your views here.
+def ViewComment(request):
+    cmform = CommentForm()
+    return render(request, 'comment.html', {'cmform': cmform})

@@ -1,0 +1,16 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% block title %}Comments{% endblock %}
+ 
+{% block content %}
+    <header>
+        <a href="{% url 'ViewComment' %}" class="top-menu">
+            {% include './icons/file-earmark-plus.svg' %}
+        </a>
+    </header>
+    <h2>New post</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ cmform.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
