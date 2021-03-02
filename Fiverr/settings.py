@@ -28,10 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'user.User'
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
 # Application definition
 
 LOGIN_REDIRECT_URL = 'user:login'
