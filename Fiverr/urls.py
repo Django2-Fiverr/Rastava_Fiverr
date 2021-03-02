@@ -28,7 +28,6 @@ urlpatterns = [
     path('profile/', include('proFile.urls')),
     path('admin/', admin.site.urls),
     path('auth/', include('allauth.urls')),  # for django-allauth
-    path('comment/', include('comment.urls')),
 ]
 
 if settings.DEBUG:

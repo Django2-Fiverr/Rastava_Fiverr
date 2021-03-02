@@ -1,6 +1,7 @@
 from django import forms
 from category.models import Category
 from .models import Gig
+from .models import Comment
 
 
 # categories = Category.objects.all().values()
@@ -26,3 +27,10 @@ class GigForm(forms.ModelForm):
     class Meta:
         model = Gig
         fields = ('title', 'category', 'cost', 'description', 'active' ,'image')
+
+# comment section
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content',)

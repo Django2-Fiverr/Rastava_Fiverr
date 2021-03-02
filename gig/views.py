@@ -3,9 +3,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
-
 from .models import Gig
 from .forms import GigForm
+from .forms import CommentForm
+from .models import Comment
+from django.shortcuts import redirect
+from django.utils import timezone
 
 
 @login_required
@@ -94,3 +97,19 @@ def edit_gig(request, id):
         'title': 'ویرایش گیگ',
     }
     return render(request, 'gigs/gig_operation.html', context)
+
+# comment section
+
+
+def post_comment(request):
+    if request.method == "POST":
+        cmform = CommentForm(request.POST)
+        if cmform.is_valid():
+            comment = cmform.save(commit=False)
+            comment.user = request.user
+            comment.publish = timezone.now()
+            comment.save()
+            return redirect('gigs/gig_detail.html', pk=comment.pk)
+    else:
+        cmform = CommentForm()
+    return render(request, 'comment.html', {'cmform': cmform})

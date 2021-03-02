@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from datetime import date
-
+from django.utils import timezone
 from category.models import Category
 
 # use the custom user table ( the default one in settings.py)
@@ -67,3 +67,21 @@ class Gig(models.Model):
 
     def get_absolute_url(self):
         return f'/gigs/gig-detail/{self.id}/'
+
+
+# Comment section
+
+class Comment(models.Model):
+    gig = models.ForeignKey(Gig, on_delete=models.CASCADE, related_name='gig')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    content = models.TextField(max_length=150)
+    publish = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=True)
+
+    # objects = comment_detail()
+
+    class Meta:
+        ordering = ("publish",)
+
+    def __str__(self):
+        return f'Comment by {self.user}, Email:'
