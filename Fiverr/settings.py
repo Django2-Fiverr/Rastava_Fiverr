@@ -28,8 +28,14 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'user.User'
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 # Application definition
+
+LOGIN_REDIRECT_URL = 'user:login'
+LOGOUT_REDIRECT_URL = 'user:logout'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -44,7 +50,14 @@ INSTALLED_APPS = [
     'proFile',
     'user',
     'category',
-    ]
+    # google auth section
+    'django.contrib.sites', # for google auth / must be above the rest <--
+    'authApp',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -110,9 +123,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -125,8 +138,37 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'media/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'static_root')
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images')
-LOGIN_REDIRECT_URL = 'proFile:Home'
-LOGOUT_REDIRECT_URL = 'proFile:Home'
+MEDIA_ROOT = os.path.join(BASE_DIR,'static_cdn','media_root')
+
+
+# Google Auth section starts
+
+SITE_ID = 2
+LOGIN_REDIRECT_URL = '/'
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS' : {
+            'access_type' : 'online',
+        }
+    }
+}
+
+
+# Google Auth section ends

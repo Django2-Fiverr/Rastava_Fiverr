@@ -27,7 +27,10 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+.idea/
 .Python
+.idea/*
+*/migrations/*
 build/
 develop-eggs/
 dist/
@@ -46,6 +49,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+migrations/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -158,6 +162,7 @@ dmypy.json
 .prof
 
 ### vscode ###
+.vscode/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
