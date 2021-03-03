@@ -1,8 +1,5 @@
 from django.contrib import admin
 
-<<<<<<< HEAD
-
-=======
 from category.models import Category, Skills
 
 
@@ -16,4 +13,3 @@ class AdminCategory(admin.ModelAdmin):
 class AdminCategory(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
->>>>>>> dev

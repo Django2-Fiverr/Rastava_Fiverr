@@ -1,6 +1,4 @@
 from django.db import models
-<<<<<<< HEAD
-=======
 
 
 class Category(models.Model):
@@ -25,4 +23,3 @@ class Skills(models.Model):
         return self.name
 
 
->>>>>>> dev

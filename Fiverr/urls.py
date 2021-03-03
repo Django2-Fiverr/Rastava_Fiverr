@@ -18,13 +18,14 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from . import settings
-# <<<<<<< HEAD
+
 from . import settings, views
 
 urlpatterns = [
     path('', views.home_page),
     path('accounts/', include('user.urls')),
     path('gigs/', include('gig.urls')),
+    path('order/', include('order.urls')),
     path('profile/', include('proFile.urls')),
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='authApp/index.html')),

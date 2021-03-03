@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-from django.db import models
-=======
 import os
 
 from django.db import models
@@ -41,4 +38,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
->>>>>>> dev

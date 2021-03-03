@@ -94,3 +94,7 @@ def edit_gig(request, id):
         'title': 'ویرایش گیگ',
     }
     return render(request, 'gigs/gig_operation.html', context)
+
+
+def add_gig_order(request, id):
+    return render(request, 'order/order.html') 

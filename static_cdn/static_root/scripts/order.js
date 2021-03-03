@@ -1,4 +1,4 @@
-console.log('order')
+console.log('start project..........................')
 // let getId = document.querySelectorAll('.buy')
 // console.log(getId)
 // getId.addEventListener('click', getDataID)
