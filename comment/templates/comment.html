@@ -1,18 +1,12 @@
 {% extends 'shared/_MainLayout.html' %}
 {% load static %}
-{% block title %}Comments{% endblock %}
+{% block title %}دیدگاه ها{% endblock %}
  
 {% block content %}
     <header>
         <h2>دیدگاه خود را به اشتراک بگذارید</h2>
     </header>
-    <header>
-        <a href="{% url 'post_comment' %}">
-            add new comment
-        </a>
-    </header>
-    
-    <form method="POST" class="post-form">{% csrf_token %}
+    <form method="POST">{% csrf_token %}
         {{ cmform.as_p }}
         <button type="submit" class="save btn btn-default">افزودن دیدگاه</button>
     </form>

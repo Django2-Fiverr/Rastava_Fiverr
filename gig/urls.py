@@ -12,5 +12,4 @@ urlpatterns = [
     path('my-gigs/', views.MyGigList.as_view(), name='my_gigs'),
     path('create-gig/', views.create_gig, name='create_gig'),
     path('edit-gig/<int:id>', views.edit_gig, name='edit_gig'),
-    path('post/', views.post_comment, name='post_comment'),
 ]

@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Comment
 from gig.models import Gig
 
 
@@ -33,11 +32,3 @@ class AdminGig(admin.ModelAdmin):
     search_fields = ('title', 'description', 'user')
     actions = [make_available,make_unavailable]
 
-
-# comment section
-
-@admin.register(Comment)
-class CommentsAdmin(admin.ModelAdmin):
-    list_display = ('gig', 'user', 'content', 'publish', 'status')
-    list_filter = ('status', 'publish')
-    search_fields = ('name', 'email', 'content')
