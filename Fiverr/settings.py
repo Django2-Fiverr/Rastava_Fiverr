@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    #gateway section
+    'azbankgateways',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -168,3 +171,22 @@ SOCIALACCOUNT_PROVIDERS = {
 
 
 # Google Auth section ends
+
+#Gateway setting starts
+
+AZ_IRANIAN_BANK_GATEWAYS = {
+   'GATEWAYS': {
+       'ZARINPAL': {
+           'MERCHANT_CODE': '1344b5d4-0048-11e8-94db-005056a205be',
+       },
+   },
+   'DEFAULT': 'ZARINPAL',
+   'CURRENCY': 'IRR', # اختیاری
+   'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
+   'TRACKING_CODE_LENGTH': 16, # اختیاری
+   'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
+   'BANK_PRIORITIES': [
+   ], # اختیاری
+}
+
+#Gateway setting ends

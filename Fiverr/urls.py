@@ -17,8 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
-from . import settings
-# <<<<<<< HEAD
 from . import settings, views
 
 urlpatterns = [
@@ -29,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='authApp/index.html')),
     path('auth/', include('allauth.urls')),  # for django-allauth
+    path('payment/',include('payment.urls')),  # for payment
 ]
 
 if settings.DEBUG:
