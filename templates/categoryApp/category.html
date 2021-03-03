@@ -1,0 +1,22 @@
+  
+  {% extends 'shared/_MainLayout.html' %} 
+  {% block content %}
+  <ul>
+    {% for c in category %}
+      {% if c.parent == None %}
+        <li class = "nav_item">
+          <li><a href="/">{{ c.title }}</a></li>
+            {% if c.children.all %}
+            <ul class = "navbar-nal ml-auto">
+              {% for c in c.children.all %}
+                <li class = "nav-item">
+                  <li><a href="/">{{ c.title }}</a></li>
+                </li>
+              {% endfor %}  
+            </ul>
+            {% endif %}  
+          </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {% endblock %}

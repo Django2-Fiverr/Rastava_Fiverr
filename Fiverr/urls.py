@@ -14,38 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-<<<<<<< HEAD
-from django.urls import path,include
-from django.conf import settings
-from django.conf.urls.static import static
-from category import views as ca
-from comment import views as co
-=======
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from . import settings
+from category import views as cat
 # <<<<<<< HEAD
 from . import settings, views
->>>>>>> dev
 
 urlpatterns = [
     path('', views.home_page),
+    path('category/', cat.category),
     path('accounts/', include('user.urls')),
     path('gigs/', include('gig.urls')),
     path('profile/', include('proFile.urls')),
     path('admin/', admin.site.urls),
-<<<<<<< HEAD
-    path('profile/',include('proFile.urls')),
-    path('account/',include('django.contrib.auth.urls')),
-    path('category/', ca.category),
-    path('comment/', co.comment),
-]
-
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-=======
     path('', TemplateView.as_view(template_name='authApp/index.html')),
     path('auth/', include('allauth.urls')),  # for django-allauth
 ]
@@ -55,4 +38,3 @@ if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     # add media static files
     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
->>>>>>> dev
