@@ -4,6 +4,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 
+from order.forms import OrderForm
 from .models import Gig
 from .forms import GigForm
 
@@ -43,10 +44,12 @@ class GigList(ListView):
 
 def gig_detail(request, pk):
     gig = Gig.objects.get_by_id(pk)
+    order_form = OrderForm(request.POST or None, initial={'count':0, 'gig_id': pk})
     if not gig:
         raise Http404('یافت نشد')
     context = {
-        'gig': gig
+        'gig': gig,
+        'order_form': order_form,
     }
     return render(request, 'gigs/gig_detail.html', context)
 
