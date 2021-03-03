@@ -1,18 +1,29 @@
+<<<<<<< HEAD
+=======
+from django.contrib.auth.decorators import login_required
+>>>>>>> dev
 from django.urls import reverse
 from azbankgateways import bankfactories, models as bank_models, default_settings as settings
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from order.models import get_total_price
 
+from order.models import Order
+
+
+@login_required
 def go_to_gateway_view(request):
     # خواندن مبلغ از هر جایی که مد نظر است
-    summation = get_total_price()
-    amount = summation
+    order:Order = Order.objects.filter(owner_id=request.user.id , paid=False).first()
+    if order:
+        amount = order.get_total_payment_price()
+    else:
+        amount = 0
+        raise Http404
     # تنظیم شماره موبایل کاربر از هر جایی که مد نظر است
     user_mobile_number = '+989112221234'  # اختیاری
 
     factory = bankfactories.BankFactory()
-    bank = factory.create() # or factory.create(bank_models.BankType.BMI) or set identifier
+    bank = factory.create()  # or factory.create(bank_models.BankType.BMI) or set identifier
     bank.set_request(request)
     bank.set_amount(amount)
     # یو آر ال بازگشت به نرم افزار برای ادامه فرآیند
@@ -22,7 +33,6 @@ def go_to_gateway_view(request):
     # در صورت تمایل اتصال این رکورد به رکورد فاکتور یا هر چیزی که بعدا بتوانید ارتباط بین محصول یا خدمات را با این
     # پرداخت برقرار کنید. 
     bank_record = bank.ready()
-    
     # هدایت کاربر به درگاه بانک
     return bank.redirect_gateway()
 
@@ -42,7 +52,7 @@ def callback_gateway_view(request):
         # پرداخت با موفقیت انجام پذیرفته است و بانک تایید کرده است.
         # می توانید کاربر را به صفحه نتیجه هدایت کنید یا نتیجه را نمایش دهید.
         # return HttpResponse("پرداخت با موفقیت انجام شد.")
-        return render(request,'success.html')
+        return render(request, 'success.html')
     # پرداخت موفق نبوده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.
     # return HttpResponse("پرداخت با شکست مواجه شده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.")
-    return render(request,'cancle.html')
+    return render(request, 'cancle.html')

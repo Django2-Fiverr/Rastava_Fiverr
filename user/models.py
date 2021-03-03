@@ -5,8 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 # Create custom User table using required fields or override predefined fields
 class User(AbstractUser):
-    first_name = models.CharField(_('first name'), max_length=150, null=True, blank=True)
-    last_name = models.CharField(_('last name'), max_length=150, null=True, blank=True)
+    first_name = models.CharField(_('first name'), default='نامشخص',max_length=150, null=True, blank=True)
+    last_name = models.CharField(_('last name'), default='نامشخص', max_length=150, null=True, blank=True)
     email = models.EmailField(_('email address'), null=True, blank=True)
     phone_number = models.CharField(
         _('Phone number'), max_length=11, blank=True, null=True)

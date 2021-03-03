@@ -61,7 +61,7 @@
                     <div class="signup-form">
                         <!--sign up form-->
                         <h2>ویرایش پروفایل</h2>
-                        <form method="POST">
+                        <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
                             {{ form.first_name }}

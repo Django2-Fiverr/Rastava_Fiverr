@@ -45,21 +45,22 @@
                 <div class="col-sm-4" style="text-align: left;">
                     <div class="logo">
                         <a href="/"><img src="{% static 'images/home/logo.png' %}" width="200px" alt="Logo"
-                                style="text-align: center;" /></a>
+                                         style="text-align: center;"/></a>
                     </div>
                 </div>
 
                 <div class="col-sm-8 header-middle-menu">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="{% url 'proFile:profile' %}"><i class="fa fa-user"></i> حساب کاربـری</a></li>
                             {% if request.user.is_authenticated %}
-                            <li><a href="{% url 'gig:my_gigs' %}"><i class="fa fa-star"></i>گیگ های من</a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i> سبد خریـد</a></li>
-                            <li><a href="{% url 'user:logout' %}"><i class="fa fa-lock"></i>خروج</a></li>
+                                <li><a href="{% url 'proFile:profile' %}"><i class="fa fa-user"></i> حساب کاربـری</a>
+                                </li>
+                                <li><a href="{% url 'gig:my_gigs' %}"><i class="fa fa-star"></i>گیگ های من</a></li>
+                                <li><a href="{% url 'order:order-details' %}"><i class="fa fa-shopping-cart"></i> سبد خریـد</a></li>
+                                <li><a href="{% url 'user:logout' %}"><i class="fa fa-lock"></i>خروج</a></li>
                             {% else %}
-                            <li><a href="{% url 'user:login' %}"><i class="fa fa-lock"></i> ورود</a></li>
-                            <li><a href="{% url 'user:register' %}"><i class="fa fa-lock"></i> ثبت نام</a></li>
+                                <li><a href="{% url 'user:login' %}"><i class="fa fa-lock"></i> ورود</a></li>
+                                <li><a href="{% url 'user:register' %}"><i class="fa fa-lock"></i> ثبت نام</a></li>
                             {% endif %}
                         </ul>
                     </div>
@@ -79,7 +80,7 @@
                 <div class="col-sm-9">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target=".navbar-collapse">
+                                data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>

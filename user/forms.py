@@ -14,8 +14,8 @@ class LoginForm(forms.Form):
                                    attrs={'placeholder': 'نام کاربری را وارد کنید'}),
                                validators=[validators.MaxLengthValidator(limit_value=20,
                                                                          message='نام کاربری نمیتواند بیشتر از 20 کاراکتر باشد'),
-                                           validators.MinLengthValidator(limit_value=5,
-                                                                         message='نام کاربری نمیتواند کمتر از 5 کاراکتر باشد')])
+                                           validators.MinLengthValidator(limit_value=4,
+                                                                         message='نام کاربری نمیتواند کمتر از 4 کاراکتر باشد')])
 
     password = forms.CharField(required=True, label="کلمه ی عبور",
                                widget=forms.PasswordInput(

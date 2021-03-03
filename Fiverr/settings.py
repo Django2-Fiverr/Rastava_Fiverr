@@ -146,7 +146,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'static_cdn','media_root')
 
 # Google Auth section starts
 
-SITE_ID = 2
+SITE_ID = 4
 LOGIN_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = [

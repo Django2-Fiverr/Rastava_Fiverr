@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from azbankgateways.urls import az_bank_gateways_urls
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
@@ -21,11 +22,13 @@ from . import settings, views
 
 urlpatterns = [
     path('', views.home_page),
+    path('', TemplateView.as_view(template_name='authApp/index.html')),
+    path('payment/',include('payment.urls')),
     path('accounts/', include('user.urls')),
     path('gigs/', include('gig.urls')),
     path('profile/', include('proFile.urls')),
+    path('order/', include('order.urls')),
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='authApp/index.html')),
     path('auth/', include('allauth.urls')),  # for django-allauth
     path('payment/',include('payment.urls')),  # for payment
 ]
