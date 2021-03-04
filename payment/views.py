@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 from django.contrib.auth.decorators import login_required
->>>>>>> dev
 from django.urls import reverse
 from azbankgateways import bankfactories, models as bank_models, default_settings as settings
 from django.http import HttpResponse, Http404

@@ -23,14 +23,13 @@ from . import settings, views
 urlpatterns = [
     path('', views.home_page),
     path('', TemplateView.as_view(template_name='authApp/index.html')),
-    path('payment/',include('payment.urls')),
+    path('payment/',include('payment.urls')), # for payment
     path('accounts/', include('user.urls')),
     path('gigs/', include('gig.urls')),
     path('profile/', include('proFile.urls')),
     path('order/', include('order.urls')),
     path('admin/', admin.site.urls),
     path('auth/', include('allauth.urls')),  # for django-allauth
-    path('payment/',include('payment.urls')),  # for payment
 ]
 
 if settings.DEBUG:

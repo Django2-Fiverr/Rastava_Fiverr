@@ -1,0 +1,9 @@
+{% extends 'gigs/gig_list.html' %}
+{% block title %} خرید های من {% endblock %}
+
+
+{% block list %}
+
+    {% include 'components/my_list_component.html' with gig=gig %}
+
+{% endblock %}
