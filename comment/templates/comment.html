@@ -3,12 +3,35 @@
 {% block title %}دیدگاه ها{% endblock %}
  
 {% block content %}
+<div class='col-md-12'>
+ <div class='col-md-6 col-md-offset-3'>
+        
+    
     <header>
         <h2>دیدگاه خود را به اشتراک بگذارید</h2>
     </header>
+    {% if user.is_authenticated %}
     <form method="POST">{% csrf_token %}
         {{ cmform.as_p }}
         <button type="submit" class="save btn btn-default">افزودن دیدگاه</button>
     </form>
+</div>
+</div>
+   
+<div>
+    {% else %}
+    <a style="text-align: center;" href="/accounts/login/">برای به اشتراک گذاشتن دیدگاه به حساب کاربـری خود وارد شوید </a>
+    {% endif %}
     <br>
+    <h2>دیدگاه ها</h2>
+    <ul>
+        {% for i in info %}
+        <h3>{{ i.user }}</h3>
+        <h5>{{ i.publish }}</h5>
+        <li>{{ i.content }}</li>
+        <hr>
+        {% endfor %}
+    </ul>
+</div>
+    
 {% endblock %}
