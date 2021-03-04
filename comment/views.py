@@ -1,3 +1,7 @@
+
+# MOVED COMMENT VIEWS TO GIG (gig_detail)
+
+"""
 from django.shortcuts import render
 from .forms import CommentForm
 from django.utils import timezone
@@ -5,6 +9,9 @@ from django.shortcuts import redirect
 from gig.models import Gig
 from comment.models import Comment
 from django.contrib.auth import get_user_model
+
+
+
 
 User = get_user_model()
 
@@ -23,3 +30,5 @@ def post_comment(request):
     
     context = {'info': info, 'cmform': cmform}
     return render(request, 'comment.html', context)
+
+"""

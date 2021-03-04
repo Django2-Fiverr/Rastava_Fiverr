@@ -7,6 +7,8 @@ from .models import Gig
 from .forms import GigForm
 from django.shortcuts import redirect
 from django.utils import timezone
+from comment.models import Comment
+from comment.forms import CommentForm
 
 
 @login_required
@@ -44,10 +46,23 @@ class GigList(ListView):
 
 def gig_detail(request, pk):
     gig = Gig.objects.get_by_id(pk)
-    if not gig:
-        raise Http404('یافت نشد')
-    context = {
-        'gig': gig
+    
+    info = Comment.objects.all()
+    if request.method == "POST":
+        cmform = CommentForm(request.POST)
+        if cmform.is_valid():
+            comment = cmform.save(commit=False)
+            comment.user = request.user
+            comment.publish = timezone.now()
+            comment.save()
+            return redirect('/')
+    else:
+        cmform = CommentForm()
+        if not gig:
+            raise Http404('یافت نشد')
+    context = {'info': info, 
+               'cmform': cmform,
+               'gig': gig,
     }
     return render(request, 'gigs/gig_detail.html', context)
 
