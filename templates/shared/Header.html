@@ -64,54 +64,80 @@
                         </ul>
                     </div>
                 </div>
+            <ul class="nav navbar-nav">
+            <li class="active"><a href="/">خانه</a></li>
+            <li class="dropdown">
+                <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">تبلیغات و بازاریابی</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">تبلیغات آنلاین</a></li>
+                    <li><a href="/">تبلیغات ایمیلی و پیامکی</a></li>
+                    <li><a href="/">بهینه سازی برای موتورهای جستجو (سئو)</a></li>  
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">تایپ، ترجمه و نویسندگی</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">تولید محتوا و نویسندگی برای کسب و کار ها</a></li>
+                    <li><a href="/">ترجمه متن</a></li>
+                    <li><a href="/">تایپ متن و ورود اطلاعات</a></li>
+                    <li><a href="/">تحقیق و گزارش</a></li>
+                    <li><a href="/">ویراستاری متن</a></li>
+                    <li><a href="/">رونویسی از صدا</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">گرافیک</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">طراحی لوگو</a></li>
+                    <li><a href="/">طراحی کارت ویزیت ، کاتالوگ و ست اداری</a></li>
+                    <li><a href="/">طراحی انواع پوستر و بنر</a></li>
+                    <li><a href="/">طراحی کاور، جلد، بسته بندی و صفحه آرایی</a></li>
+                    <li><a href="/">طراحی UI / UX</a></li>
+                    <li><a href="/">روتوش و ویرایش عکس</a></li>
+                    <li><a href="/">معماری ، نقشه‌کشی و مدل های سه بعدی</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">برنامه نویسی</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">طراحی سایت و برنامه نویسی وب</a></li>
+                    <li><a href="/">طراحی اپلیکیشن موبایل</a></li>
+                    <li><a href="/">نرم افزارهای مهندسی</a></li>  
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">دستیار مجازی</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">مدیریت سایت و شبکه های اجتماعی</a></li>
+                    <li><a href="/">طرح کسب و کار و تحقیق صنعت و بازار</a></li>
+                    <li><a href="/">آموزش و مشاوره کسب و کار و مسیر شغلی</a></li>  
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">انیمیشن</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">تیزر و انیمیشن دو بعدی</a></li>
+                    <li><a href="/">انیمیشن سه بعدی</a></li>
+                    <li><a href="/">ساخت ، ویرایش و زیرنویس فیلم و کلیپ</a></li>  
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">موسیقی و صدا</span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">گویندگی و دوبله</a></li>
+                    <li><a href="/">ویرایش صدا و موسیقی</a></li>
+                    <li><a href="/">نوازندگی و آهنگ سازی</a></li>  
+                </ul>
+            </li>
+        <li><a href="/">تماس با ما</a></li>
+        <li><a href="/">درباره ی ما</a></li>
+    </ul>
             </div>
+            {% include 'components/_search_component.html' %}
         </div>
     </div>
+
     <!--/header-middle-->
 
-    <div class="header-bottom">
-        <!--header-bottom-->
-        <div class="container">
-            <div class="row">
-
-                {% include 'components/_search_component.html' %}
-
-                <div class="col-sm-9">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="mainmenu pull-right">
-                        <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="/" class="active">خـانه</a></li>
-                            <li class="dropdown"><a href="#">فروشگـاه<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="{% url 'gig:gig_list' %}">محصولات</a></li>
-                                    <li><a href="#">جزئیات محصولات</a></li>
-                                    <li><a href="#">پرداخت</a></li>
-                                    <li><a href="#">سبـد خریـد</a></li>
-                                    <li><a href="{% url 'user:login' %}">ورود</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown"><a href="#">اخبـار<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="#">آزاده</a></li>
-                                    <li><a href="#">صفحـه خبـر</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">درباره مـا</a></li>
-                            <li><a href="#">تماس با مـا</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--/header-bottom-->
+   
 </header>
