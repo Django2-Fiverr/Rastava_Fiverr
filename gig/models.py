@@ -41,6 +41,8 @@ class GigManager(models.Manager):
         lock_up = Q(title__icontains=query) | Q(description__icontains=query)
         return self.get_queryset().filter(lock_up, active=True).distinct()
 
+   
+
 
 class Gig(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
@@ -63,10 +65,12 @@ class Gig(models.Model):
 
     # returns the name of the gig owner
     def __str__(self):
-        return f'{self.user.username}-{self.category}'
+        return f'{self.user.username}-{self.title}'
 
     def get_absolute_url(self):
         return f'/gigs/gig-detail/{self.id}/'
+
+
 
 
 

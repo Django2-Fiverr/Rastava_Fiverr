@@ -1,11 +1,12 @@
 from django.db import models
 from gig.models import Gig
 from django.contrib.auth import get_user_model
+from Fiverr import settings
 
 User = get_user_model()
 
 class Comment(models.Model):
-    gig = models.ForeignKey(Gig, on_delete=models.CASCADE, related_name='gig')
+    gig = models.ForeignKey(Gig, on_delete=models.CASCADE, related_name='comment_gig', null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
     subject = models.CharField(max_length=20)
     email = models.EmailField(max_length=30)
@@ -14,7 +15,7 @@ class Comment(models.Model):
     status = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ("publish",)
+        ordering = ("-publish",)
 
     def __str__(self):
-        return f'Comment by {self.user}, Email:'
+        return f'Comment by {self.user}'

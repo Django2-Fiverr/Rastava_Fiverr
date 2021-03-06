@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Gig
 from .forms import GigForm
@@ -44,18 +44,21 @@ class GigList(ListView):
         return Gig.objects.get_active_gigs()
 
 
+# GIG + COMMENTS
 def gig_detail(request, pk):
     gig = Gig.objects.get_by_id(pk)
-    
-    info = Comment.objects.all()
+    #info = gig.comment_gig.all()
+    info = Comment.objects.filter(status=True, gig=gig)
+    comment = ''
     if request.method == "POST":
         cmform = CommentForm(request.POST)
         if cmform.is_valid():
             comment = cmform.save(commit=False)
             comment.user = request.user
+            comment.gig = gig
             comment.publish = timezone.now()
             comment.save()
-            return redirect('/')
+            # return redirect('/gigs/gig-detail/<int:id>')
     else:
         cmform = CommentForm()
         if not gig:
@@ -65,6 +68,29 @@ def gig_detail(request, pk):
                'gig': gig,
     }
     return render(request, 'gigs/gig_detail.html', context)
+
+
+def update_comment(request):
+    pass
+
+"""
+    obj = get_object_or_404(Comment)
+
+    form = CommentForm(request.POST or None, instance = obj) 
+
+    if form.is_valid(): 
+        form.save() 
+        return redirect('/') 
+    context = {"form": form}
+    return render(request, "gigs/gig_detail.html", context) 
+"""
+
+def delete_comment(request):
+    pass
+
+def reply_comment():
+    pass
+
 
 
 class SearchGig(LoginRequiredMixin, ListView):

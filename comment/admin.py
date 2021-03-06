@@ -6,5 +6,9 @@ class CommentsAdmin(admin.ModelAdmin):
     list_display = ('gig', 'user', 'content', 'publish', 'status')
     list_filter = ('status', 'publish')
     search_fields = ('content',)
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(status=True)
     
 

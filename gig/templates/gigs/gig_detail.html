@@ -253,37 +253,59 @@
                     </div><!--/category-tab-->
                     <div>  <!-- COMMENT SECTION -->
                         
-                        <div class='col-md-12'>
-                            <div class='col-md-6 col-md-offset-3'>
-                                   
-                               
-                               <header>
-                                   <h2><b>دیدگاه خود را به اشتراک بگذارید </b></h2>
-                               </header>
-                               {% if user.is_authenticated %}
-                               <form method="POST">{% csrf_token %}
-                                   {{ cmform.as_p }}
-                                   <button type="submit" class="save btn btn-default">افزودن دیدگاه</button>
-                               </form>
-                           </div>
-                           </div>
+                        
                               
                            <div>
-                               {% else %}
-                               <a style="text-align: center;" href="/accounts/login/">برای به اشتراک گذاشتن دیدگاه به حساب کاربـری خود وارد شوید </a>
-                               {% endif %}
+                               
                                <br>
                                <h2>دیدگاه ها</h2>
                                <ul>
-                                   {% for i in info %}
-                                   <h3>{{ i.user }}</h3>
-                                   <h5>{{ i.publish }}</h5>
-                                   <li>{{ i.content }}</li>
-                                   <hr>
+                                   {% for a in info %}
+                                   <p> <span style="color: rgb(20, 36, 37);
+                                    opacity: 0.7;"> {{ a.publish }} </span> <span style="color: rgb(255, 153, 0);">•</span> <span style="color: rgb(20, 36, 37); opacity: 0.7;">{{ a.user }} </span>  </p>
+                                   
+                                   <li style="font-size: 15px; opacity: 0.8; font-family: Arial, Helvetica, sans-serif;">{{ a.content }}</li>
+                                   <br>
+                                   <input type="submit" class="btn" value="ویرایش" style="opacity: 0.8;"> 
+                                   <input type="submit" class="btn" value="حذف" style="opacity: 0.8;">
+                                   <hr style=" border-width: 1px; border-color: rgb(255, 153, 0); opacity: 0.4;">
+                                   
                                    {% endfor %}
                                </ul>
                            </div>
-                               
+                            <!-- 
+                                    <h4>Update comment</h4>
+                           
+                                <div class="main"> 
+                                    
+                                    <form method="POST"> 
+                                        
+                                        {% csrf_token %} 
+                                
+                                        
+                                        {{ form.as_p }} 
+                                
+                                        <input type="submit" value="Update"> 
+                                    </form> 
+                                
+                                </div> 
+                             -->
+
+                             <div class='col-md-12'>
+                                <div class='col-md-6 col-md-offset-3'>
+                                   <header>
+                                       <h2><b>دیدگاه خود را به اشتراک بگذارید </b></h2>
+                                   </header>
+                                   {% if user.is_authenticated %}
+                                   <form method="POST" action="">{% csrf_token %}
+                                       {{ cmform.as_p }}
+                                       <button type="submit" class="save btn btn-default">افزودن دیدگاه</button>
+                                   </form>
+                                   {% else %}
+                                   <a style="text-align: center;" href="/accounts/login?next={{request.path}}">برای به اشتراک گذاشتن دیدگاه به حساب کاربـری خود وارد شوید </a>
+                                   {% endif %}
+                               </div>
+                            </div>
                     </div>
 
                     <div class="recommended_items"><!--recommended_items-->
