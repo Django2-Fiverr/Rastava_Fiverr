@@ -43,7 +43,9 @@ def login_user(request):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
-        if user:
+        if 'next' in request.POST:
+            return redirect(request.POST.get('next'))
+        elif user:
             login(request, user)
             return redirect('/')
         else:
