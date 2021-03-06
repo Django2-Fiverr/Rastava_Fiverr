@@ -51,3 +51,4 @@ def edit_profile(request):
 
     context = {'form': form, 'profile_form': profile_form}
     return render(request, 'edit_profile.html', context)
+

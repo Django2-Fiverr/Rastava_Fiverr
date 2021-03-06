@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 from gig.models import Gig
 from order.forms import OrderForm
-from order.models import Order
+from order.models import Order, Transaction
 
 
 @login_required
@@ -35,3 +35,11 @@ def order_details(requset):
         'order_items': order_items
     }
     return render(requset, 'order_details.html', context)
+
+
+def my_orders(request):
+    buy_list = Transaction.objects.filter(client=request.user)
+    context = {
+        'buy_list': buy_list,
+    }
+    return render(request,'my_orders.html', context)

@@ -1,9 +1,47 @@
-{% extends 'gigs/gig_list.html' %}
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
 {% block title %} خرید های من {% endblock %}
 
+{% block content %}
 
-{% block list %}
-
-    {% include 'components/my_list_component.html' with gig=gig %}
+    <section id="cart_items">
+        <div class="container">
+            {% if buy_list %}
+                <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                <thead>
+                <tr class="cart_menu">
+                    <td class="image">کـالا</td>
+                    <td class="description"></td>
+                    <td class="price">قیمت واحد</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for buy in buy_list %}
+                    <tr>
+                        <td class="cart_product">
+                            <a href=""><img src="{{ buy.gig.image.url }}" width="180px" height="110px" alt=""></a>
+                        </td>
+                        <td class="cart_description">
+                            <h4><a href="{{ buy.gig.get_absolute_url }}">{{ buy.gig.title }}</a>
+                            </h4>
+                            <p>کد گیگ مورد نظر : {{ buy.gig.id }}</p>
+                        </td>
+                        <td class="cart_price">
+                            <p>{{ buy.gig.cost }} تومان</p>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                <div class="alert alert-danger">
+                    <h4 class="warning"> شما تاکنون خریدی انجام نداده اید. </h4>
+                </div>
+                </tbody>
+            {% endif %}
+            </table>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}
