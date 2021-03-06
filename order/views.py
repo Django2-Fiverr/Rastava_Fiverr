@@ -36,7 +36,7 @@ def order_details(requset):
     }
     return render(requset, 'order_details.html', context)
 
-
+@login_required
 def my_orders(request):
     buy_list = Transaction.objects.filter(client=request.user)
     context = {
