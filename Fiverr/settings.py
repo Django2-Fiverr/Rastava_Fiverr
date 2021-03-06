@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'proFile',
     'user',
     'category',
+    'contact',
+    'about_us',
     # google auth section
     'django.contrib.sites', # for google auth / must be above the rest <--
     'authApp',
@@ -63,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'Fiverr.urls'
