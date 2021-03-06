@@ -27,7 +27,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name='کاربر')
     bio = models.TextField(max_length=3000, blank=True, null=True, help_text='User bio', verbose_name='بیوگرافی')
     birth = models.DateField('Birth', null=True, blank=True)
-    skills = models.ManyToManyField(Skills, default='نامشخص',help_text='Choose Your Skills', blank=True,
+    skills = models.ManyToManyField(Skills, default='نامشخص', help_text='Choose Your Skills', blank=True,
                                     verbose_name='مهارت ها')
     image = models.ImageField(upload_to='users/', blank=True, null=True, verbose_name='تصویر')
     last_update = models.DateTimeField(auto_now=True, verbose_name='آخرین بروزرسانی')
@@ -38,3 +38,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def get_absolute_url(self):
+        return f'/profile/{self.user.id}'

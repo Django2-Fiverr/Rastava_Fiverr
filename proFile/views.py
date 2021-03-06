@@ -5,13 +5,14 @@ from proFile.forms import ProfileEditForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
-User = get_user_model
+User = get_user_model()
 
 
 @login_required
-def profile_view(request):
+def profile_view(request, pk):
+    user = User.objects.filter(id=pk).first()
     context = {
-        'profile': request.user.profile
+        'profile': user.profile
     }
     return render(request, 'profile_view.html', context)
 
@@ -47,7 +48,7 @@ def edit_profile(request):
             print('The are valid')
             profile_form.save()
             form.save()
-            return redirect('proFile:profile')
+            return redirect('proFile:profile', request.user.id)
 
     context = {'form': form, 'profile_form': profile_form}
     return render(request, 'edit_profile.html', context)

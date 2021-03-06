@@ -81,7 +81,9 @@
                         <li>مجمـوع <span>{{ order.convert_total_payment_price }} تومان</span></li>
                     </ul>
                     <a class="btn btn-default update" href="{% url 'gig:gig_list' %}">به روز رسانی سبـد خریـد </a>
-                    <a class="btn btn-default check_out" href="/payment/go-to-gateway/ ">پرداخت</a>
+                    {% if order_items and order_items|length > 0 %}
+                        <a class="btn btn-default check_out" href="/payment/go-to-gateway/ ">پرداخت</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

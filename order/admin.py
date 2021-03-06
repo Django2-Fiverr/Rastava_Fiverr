@@ -14,6 +14,6 @@ class AdminOrder(admin.ModelAdmin):
 
 @admin.register(OrderDetail)
 class AdminOrderDetail(admin.ModelAdmin):
-    list_display = ('order', 'price', 'gig', 'count')
+    list_display = ('order', 'price', 'gig')
     list_filter = ('order', 'gig')
     search_fields = ('order',)

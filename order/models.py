@@ -51,8 +51,8 @@ class Order(models.Model):
 class OrderDetail(models.Model):
     gig = models.ForeignKey(Gig, on_delete=models.CASCADE, verbose_name='گیگ مرد نظر')
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='سبد خرید')
-    count = models.PositiveIntegerField(default=0, verbose_name='تعداد')
     price = models.PositiveIntegerField(verbose_name='قیمت گیگ')
+    deadline = models.IntegerField(verbose_name='مهلت تحویل سفارش')
 
     class Meta:
         verbose_name = 'جزپیات محصول'
@@ -60,3 +60,19 @@ class OrderDetail(models.Model):
 
     def __str__(self):
         return self.gig.title
+
+
+class Transaction(models.Model):
+    seller = models.ForeignKey(User, on_delete=models.CASCADE,related_name='user', null=True, verbose_name='فروشنده')
+    client = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='خریدار')
+    gig = models.ForeignKey(Gig, on_delete=models.CASCADE, null=True, verbose_name='گیگ مورد معامله')
+    expiration = models.BooleanField(default=False, verbose_name='منقضی شده / نشده')
+    date_of_transaction = models.DateTimeField(verbose_name='زمان انجام معامله')
+    deadline = models.DateTimeField(verbose_name='مهلت تحویل')
+
+    def __str__(self):
+        return f'{self.seller}->{self.gig}'
+
+    class Meta:
+        verbose_name = 'معامله'
+        verbose_name_plural = 'معاملات'

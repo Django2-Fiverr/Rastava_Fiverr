@@ -11,19 +11,21 @@
             <div class="left-sidebar">
                 <h2 style="font-size:x-large">حساب کاربری</h2>
                 <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a href="{% url 'proFile:edit' %}">
-                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                    <p style="font-size: large">
-                                        ویرایش پروفایل
-                                    </p>
-                                </a>
-                            </h4>
-                        </div>
+                    {% if request.user.id == profile.user.id %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="{% url 'proFile:edit' %}">
+                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                        <p style="font-size: large">
+                                            ویرایش پروفایل
+                                        </p>
+                                    </a>
+                                </h4>
+                            </div>
 
-                    </div>
+                        </div>
+                    {% endif %}
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -71,7 +73,7 @@
                 </div>
                 <div class="col-sm-7">
                     <div class="product-information"><!--/product-information-->
-                        <img src="images/product-details/new.png" class="newarrival" alt="">
+                        <img src="{% static 'images/product-details/new.png' %}" class="newarrival" alt="">
                         <div>
                             <h2>مشخصات کاربر</h2>
                             <br>
@@ -105,27 +107,7 @@
                             <p><b>آخرین ویرایش :</b> {{ profile.last_update }} </p>
                         </div>
                         <span class="socials-share share">
-									<ul>
-										<a href="#">
-											<li>
-												<label>بلـه</label>
-												<img src="/static/images/product-details/Bale.png">
-											</li>
-										</a>
-										<a href="#">
-											<li>
-												<label>سـروش</label>
-												<img src="/static/images/product-details/Soroush.png">
-											</li>
-										</a>
-										<a href="#">
-											<li>
-												<label>اینستاگرام</label>
-												<img src="/static/images/product-details/Instagram.png">
-											</li>
-										</a>
-										<li><img src="/static/images/product-details/rating.png" alt=""></li>
-									</ul>
+
 								</span>
 
                     </div><!--/product-information-->

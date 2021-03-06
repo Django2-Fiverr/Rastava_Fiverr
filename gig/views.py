@@ -44,7 +44,7 @@ class GigList(ListView):
 
 def gig_detail(request, pk):
     gig = Gig.objects.get_by_id(pk)
-    order_form = OrderForm(request.POST or None, initial={'count':0, 'gig_id': pk})
+    order_form = OrderForm(request.POST or None, initial={'count': 0, 'gig_id': pk})
     if not gig:
         raise Http404('یافت نشد')
     context = {

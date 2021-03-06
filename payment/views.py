@@ -1,10 +1,12 @@
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse
 from azbankgateways import bankfactories, models as bank_models, default_settings as settings
+
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
+from django.utils import datetime_safe
 
 from order.models import Order
+from order.views import create_transaction
 
 
 @login_required
@@ -53,4 +55,11 @@ def callback_gateway_view(request):
         return render(request, 'success.html')
     # پرداخت موفق نبوده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.
     # return HttpResponse("پرداخت با شکست مواجه شده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.")
+    order = Order.objects.filter(owner_id=request.user.id,paid=False).first()
+    if order:
+        order.paid = True
+        order.date_of_payment = datetime_safe.datetime.now()
+        order.save()
+        create_transaction(request,order)
+
     return render(request, 'cancle.html')

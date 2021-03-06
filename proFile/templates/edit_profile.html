@@ -14,7 +14,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a href="{% url 'proFile:profile' %}">
+                                <a href="{% url 'proFile:profile' request.user.id %}">
                                     <span class="badge pull-right"><i class="fa fa-plus"></i></span>
                                     <p style="font-size: large">
                                         پروفایل

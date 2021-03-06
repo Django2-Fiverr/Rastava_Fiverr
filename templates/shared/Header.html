@@ -53,7 +53,7 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             {% if request.user.is_authenticated %}
-                                <li><a href="{% url 'proFile:profile' %}"><i class="fa fa-user"></i> حساب کاربـری</a>
+                                <li><a href="{% url 'proFile:profile' request.user.id %}"><i class="fa fa-user"></i> حساب کاربـری</a>
                                 </li>
                                 <li><a href="{% url 'gig:my_gigs' %}"><i class="fa fa-star"></i>گیگ های من</a></li>
                                 <li><a href="{% url 'order:order-details' %}"><i class="fa fa-shopping-cart"></i> سبد خریـد</a></li>
