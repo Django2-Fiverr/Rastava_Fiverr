@@ -12,7 +12,8 @@ User = get_user_model()
 def profile_view(request, pk):
     user = User.objects.filter(id=pk).first()
     context = {
-        'profile': user.profile
+        'profile': user.profile,
+        'pk':pk
     }
     return render(request, 'profile_view.html', context)
 

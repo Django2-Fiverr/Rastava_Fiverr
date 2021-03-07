@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -63,7 +64,7 @@ class OrderDetail(models.Model):
 
 
 class Transaction(models.Model):
-    seller = models.ForeignKey(User, on_delete=models.CASCADE,related_name='user', null=True, verbose_name='فروشنده')
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user', null=True, verbose_name='فروشنده')
     client = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='خریدار')
     gig = models.ForeignKey(Gig, on_delete=models.CASCADE, null=True, verbose_name='گیگ مورد معامله')
     expiration = models.BooleanField(default=False, verbose_name='منقضی شده / نشده')
@@ -71,8 +72,17 @@ class Transaction(models.Model):
     deadline = models.DateTimeField(verbose_name='مهلت تحویل')
 
     def __str__(self):
-        return f'{self.seller}->{self.gig}'
+        return f'{self.client}->{self.gig}'
 
     class Meta:
         verbose_name = 'معامله'
         verbose_name_plural = 'معاملات'
+
+    def remaining_time(self):
+        date = self.deadline.date()
+        time = self.deadline.time()
+        result = datetime.datetime.combine(date, time) - datetime.datetime.now()
+        if result.days < 0:
+            self.expiration = True
+            self.save()
+        return result.days

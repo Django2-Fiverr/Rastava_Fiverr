@@ -23,22 +23,59 @@
                                     </a>
                                 </h4>
                             </div>
-
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="{% url 'gig:my_gigs' %}">
+                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                        <p style="font-size: large">
+                                            گیگ های من
+                                        </p>
+                                    </a>
+                                </h4>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="{% url 'gig:user-gigs' pk %}">
+                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                        <p style="font-size: large">
+                                            گیگ های کاربر
+                                        </p>
+                                    </a>
+                                </h4>
+                            </div>
                         </div>
                     {% endif %}
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a href="{% url 'gig:my_gigs' %}">
-                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                    <p style="font-size: large">
-                                        گیگ های من
-                                    </p>
-                                </a>
-                            </h4>
+                    {% if request.user.id == profile.user.id %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="{% url 'gig:my-purchases' %}">
+                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                        <p style="font-size: large">
+                                            گیگ های خریداری شده
+                                        </p>
+                                    </a>
+                                </h4>
+                            </div>
                         </div>
-
-                    </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="{% url 'gig:my-sales' %}">
+                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                        <p style="font-size: large">
+                                            گیگ های فروخته شده
+                                        </p>
+                                    </a>
+                                </h4>
+                            </div>
+                        </div>
+                    {% endif %}
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -50,13 +87,10 @@
                                 </a>
                             </h4>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
-
         <div class="col-sm-9 padding-right">
             <div class="product-details"><!--product-details-->
                 <div class="col-sm-5 col-md-offset-0">
@@ -73,7 +107,6 @@
                 </div>
                 <div class="col-sm-7">
                     <div class="product-information"><!--/product-information-->
-                        <img src="{% static 'images/product-details/new.png' %}" class="newarrival" alt="">
                         <div>
                             <h2>مشخصات کاربر</h2>
                             <br>
@@ -109,12 +142,9 @@
                         <span class="socials-share share">
 
 								</span>
-
                     </div><!--/product-information-->
                 </div>
             </div><!--/product-details-->
-
-
         </div>
     </div>
 

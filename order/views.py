@@ -4,7 +4,7 @@ import datetime
 
 from gig.models import Gig
 from order.forms import OrderForm
-from order.models import Order, Transaction
+from order.models import Order, OrderDetail, Transaction
 
 
 @login_required
@@ -18,8 +18,9 @@ def add_order(request):
             order = Order.objects.create(owner=request.user, paid=False)
         gig_id = order_form.cleaned_data['gig_id']
         gig = Gig.objects.get(id=gig_id)
+        deadline = order_form.cleaned_data.get('deadline')
         price = gig.cost
-        order.orderdetail_set.create(price=price, gig=gig)
+        order.orderdetail_set.create(price=price, gig=gig, deadline=deadline)
         return redirect('gig:gig_detail', gig_id)
     return redirect('gig:gig_detail', gig_id)
 
@@ -36,6 +37,12 @@ def order_details(requset):
         'order_items': order_items
     }
     return render(requset, 'order_details.html', context)
+
+
+def delete_order(request, pk):
+    item = OrderDetail.objects.get(id=pk)
+    item.delete()
+    return redirect('order:order-details')
 
 
 def create_time_object(time, deadline):

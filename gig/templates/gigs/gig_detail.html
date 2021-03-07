@@ -68,6 +68,7 @@
                                         <span>
                                     <label> مهلت به روز :</label>
                                         {{ order_form.deadline }}
+                                        {{ order_form.gig_id }}
                                             {% for error in order_form.count.errors %}
                                                 <p style="color: red">{{ error }}</p>
                                                 <br>
