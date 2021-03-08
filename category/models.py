@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
@@ -22,3 +23,17 @@ class Skills(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Field(models.Model):
+    title = models.CharField(max_length=50)
+    category = models.ForeignKey(Category, on_delete = models.CASCADE)
+    content = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name = 'پست'
+        verbose_name_plural = 'پست ها'
+        ordering = ('title',)
+
+    def __str__(self):
+        return self.title

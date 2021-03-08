@@ -18,17 +18,14 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from . import settings
-from category import views as cat
-from contact import views as co
-from about_us import views as a
 # <<<<<<< HEAD
 from . import settings, views
 
 urlpatterns = [
     path('', views.home_page),
-    path('category/', cat.category),
-    path('contact/', co.contact),
-    path('about_us/', a.about_us),
+    path('category/', include('category.urls')),
+    path('about_us/', include('about_us.urls')),
+    path('contact/', include('contact.urls')),
     path('accounts/', include('user.urls')),
     path('gigs/', include('gig.urls')),
     path('profile/', include('proFile.urls')),

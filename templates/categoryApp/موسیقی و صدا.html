@@ -1,0 +1,104 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% block title %}موسیقی و صدا{% endblock %}
+{% block content %}
+
+{% for field in fields %}
+        <h2>{{ field.title }}</a></h2>
+{% endfor %}
+<div>
+<section class="my-5">
+
+  <!-- Grid row -->
+  <div class="row">
+
+    <!-- Grid column -->
+    <div class="col-md-12">
+
+      <!-- Card group-->
+      <div class="card-group">
+
+        <!-- Card -->
+        <div class="card card-personal mb-md-0 mb-4">
+
+          <!-- Card image-->
+          <div class="view overlay">
+            <a href="#!">
+            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(26).jpg" alt="Card image cap">
+            <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <!-- Card image-->
+
+          <!-- Card content -->
+          <div class="card-body">
+
+            <!-- Title-->
+            <a href="#!">
+              <h4 class="card-title">گویندگی و دوبله</h4>
+            </a>
+            <!-- Text -->
+
+          </div>
+          <!-- Card content -->
+
+          <!-- Card -->
+        <div class="card card-personal mb-md-0 mb-4">
+
+          <!-- Card image-->
+          <div class="view overlay">
+            <a href="#!">
+            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(26).jpg" alt="Card image cap">
+            <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <!-- Card image-->
+
+          <!-- Card content -->
+          <div class="card-body">
+
+            <!-- Title-->
+            <a href="#!">
+              <h4 class="card-title">ویرایش صدا و موسیقی</h4>
+            </a>
+            <!-- Text -->
+
+          </div>
+          <!-- Card content -->
+          
+          <!-- Card -->
+        <div class="card card-personal mb-md-0 mb-4">
+
+          <!-- Card image-->
+          <div class="view overlay">
+            <a href="#!">
+            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(26).jpg" alt="Card image cap">
+            <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <!-- Card image-->
+
+          <!-- Card content -->
+          <div class="card-body">
+
+            <!-- Title-->
+            <a href="#!">
+              <h4 class="card-title">نوازندگی و آهنگ سازی</h4>
+            </a>
+            <!-- Text -->
+
+          </div>
+          <!-- Card content -->
+
+      </div>
+      <!-- Card group-->
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+</section>
+</div>
+{% endblock %}

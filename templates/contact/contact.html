@@ -5,8 +5,8 @@
 
 {% if messages %}
     <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% for item in contactform %}
+        <li{% if message %} class="{{ messages }}"{% endif %}>{{ message }}</li>
         {% endfor %}
     </ul>
 {% endif %}
@@ -17,41 +17,31 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <h1 class="text-right">تماس با ما</h1><br />
 
+    
 <div class="row">
-  <div class="col-md-8">
-      <form action="/post" method="POST">
-        <input class="form-control" name="name" placeholder="نام و نام خانوادگی" /><br />
-        <input class="form-control" name="email" placeholder="ایمیـل" /><br />
-        <input class="form-control" name="subject" placeholder="موضوع" /><br />
-        <textarea class="form-control" name="text" placeholder="متن خود را بنویسید" style="height:150px;"></textarea><br />
+  <div class="col-md-6">
+    <form method="POST">
+    {% csrf_token %}
+        {{form}}
         <input class="btn btn-primary" type="submit" value="ارسال" /><br /><br />
       </form>
   </div>
   
-  <div class="col-md-4">
-    <b>Customer service:</b> <br />
-    Phone: +1 129 209 291<br />
-    E-mail: <a href="mailto:support@mysite.com">support@mysite.com</a><br />
-    <br /><br />
-    <b>Headquarter:</b><br />
-    Company Inc, <br />
-    Las vegas street 201<br />
-    55001 Nevada, USA<br />
-    Phone: +1 145 000 101<br />
-    <a href="mailto:usa@mysite.com">usa@mysite.com</a><br />
-
-
-    <br /><br />
-    <b>Hong kong:</b><br />
-    Company HK Litd, <br />
-    25/F.168 Queen<br />
-    Wan Chai District, Hong Kong<br />
-    Phone: +852 129 209 291<br />
-    <a href="mailto:hk@mysite.com">hk@mysite.com</a><br />
-
-
+  <div class="row">
+  <div class="col-md-5">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13860267.45937489!2d44.66259511470009!3d31.99196332073942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef7ec2ec16b1df1%3A0x40b095d39e51face!2sIran!5e0!3m2!1sen!2s!4v1615100861798!5m2!1sen!2s" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <br/> <br/><br/>
+    <b>خدمات مشتری:</b> <br />
+    شماره تماس: 00000000 021<br />
+    ایمیل: <a href="mailto:support@mysite.com">support@mysite.com</a><br />
+    <b>دفتر مرکزی:</b><br />
+    شماره تماس: 00000000 021<br />
+    ایمیل: <a href="mailto:usa@mysite.com">usa@mysite.com</a><br />
   </div>
 </div>
 </div>
+
+</div>
+<br/><br/><br/>
 
 {% endblock %}
