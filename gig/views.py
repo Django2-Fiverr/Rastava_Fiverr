@@ -8,8 +8,13 @@ from .forms import GigForm
 from django.shortcuts import redirect
 from django.utils import timezone
 from comment.models import Comment
-from comment.forms import CommentForm
-
+from comment.forms import CommentForm, UpdateCommentForm
+import json
+import urllib
+from django.contrib import messages
+from django.conf import settings
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.urls import reverse
 
 @login_required
 def create_gig(request):
@@ -44,6 +49,7 @@ class GigList(ListView):
         return Gig.objects.get_active_gigs()
 
 
+
 # GIG + COMMENTS
 def gig_detail(request, pk):
     gig = Gig.objects.get_by_id(pk)
@@ -58,7 +64,7 @@ def gig_detail(request, pk):
             comment.gig = gig
             comment.publish = timezone.now()
             comment.save()
-            # return redirect('/gigs/gig-detail/<int:id>')
+           
     else:
         cmform = CommentForm()
         if not gig:
@@ -70,23 +76,35 @@ def gig_detail(request, pk):
     return render(request, 'gigs/gig_detail.html', context)
 
 
-def update_comment(request):
-    pass
+@login_required
+def update_comment(request, pk):
+    gig = Gig.objects.get_by_id(pk)
+    detail = Comment.objects.filter(status=True, pk=pk)
+    comment = ''
+    #update_comment = ''
+    #detail = gig.comment_gig.get(id=id)
+    my_form = UpdateCommentForm(instance=Comment.objects.get(pk=pk))
+    if request.method == 'POST':
+        my_form = UpdateCommentForm(instance=Comment.objects.get(pk=pk) ,data=request.POST)
+        if my_form.is_valid():
+            comment = my_form.save(commit=False)
+            comment.save()
+    context = {
+        'detail': detail,
+        'my_form': my_form,
+        'gig': gig,
+        }
+    return render(request, 'gigs/update_comment.html', context)
 
-"""
-    obj = get_object_or_404(Comment)
 
-    form = CommentForm(request.POST or None, instance = obj) 
+def delete_comment(request, id):
+    context = {}
+    obj = Comment.objects.get(id = id)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('gig:my_gigs')
+    return render(request, "delete_cm.html", context)
 
-    if form.is_valid(): 
-        form.save() 
-        return redirect('/') 
-    context = {"form": form}
-    return render(request, "gigs/gig_detail.html", context) 
-"""
-
-def delete_comment(request):
-    pass
 
 def reply_comment():
     pass

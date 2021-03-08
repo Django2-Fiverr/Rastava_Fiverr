@@ -1,12 +1,15 @@
 from django.db import models
 from gig.models import Gig
+from proFile.models import Profile
 from django.contrib.auth import get_user_model
 from Fiverr import settings
+from django.urls import reverse
 
 User = get_user_model()
 
 class Comment(models.Model):
-    gig = models.ForeignKey(Gig, on_delete=models.CASCADE, related_name='comment_gig', null=True)
+    gig = models.ForeignKey(Gig, on_delete=models.CASCADE, related_name='comment_gig')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='profile', null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
     subject = models.CharField(max_length=20)
     email = models.EmailField(max_length=30)
@@ -19,3 +22,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.user}'
+
+    #def get_absolute_url(self):
+        #return reverse('gig:delete_comment', kwargs={'id': self.id})

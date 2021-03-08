@@ -259,17 +259,19 @@
                                
                                <br>
                                <h2>دیدگاه ها</h2>
+                               
                                <ul>
-                                   {% for a in info %}
+                                   {% for i in info %}
                                    <p> <span style="color: rgb(20, 36, 37);
-                                    opacity: 0.7;"> {{ a.publish }} </span> <span style="color: rgb(255, 153, 0);">•</span> <span style="color: rgb(20, 36, 37); opacity: 0.7;">{{ a.user }} </span>  </p>
+                                    opacity: 0.7;"> {{ i.publish }} </span> <span style="color: rgb(255, 153, 0);">•</span> <span style="color: rgb(20, 36, 37); opacity: 0.7;">{{ i.user }} </span>  </p>
                                    
-                                   <li style="font-size: 15px; opacity: 0.8; font-family: Arial, Helvetica, sans-serif;">{{ a.content }}</li>
+                                   <li style="font-size: 15px; opacity: 0.8; font-family: Arial, Helvetica, sans-serif;">{{ i.content }}</li>
                                    <br>
-                                   <input type="submit" class="btn" value="ویرایش" style="opacity: 0.8;"> 
-                                   <input type="submit" class="btn" value="حذف" style="opacity: 0.8;">
-                                   <hr style=" border-width: 1px; border-color: rgb(255, 153, 0); opacity: 0.4;">
-                                   
+                                    {% if user.id == i.user.id %}                                   
+                                        <a href="{% url 'gig:delete_comment' i.id %}" class="btn btn-default" style="opacity: 0.8; font-size: 12px; width:46px;height:25px;">حذف</a>
+                                        <a href="{% url 'gig:update_comment' i.id %}" class="btn btn-default" style="opacity: 0.8; font-size: 12px; width:58px;height:25px;">ویرایش</a>
+                                    {% endif %}
+                                    <hr style=" border-width: 1px; border-color: rgb(255, 153, 0); opacity: 0.4;">
                                    {% endfor %}
                                </ul>
                            </div>
@@ -293,16 +295,21 @@
 
                              <div class='col-md-12'>
                                 <div class='col-md-6 col-md-offset-3'>
-                                   <header>
-                                       <h2><b>دیدگاه خود را به اشتراک بگذارید </b></h2>
-                                   </header>
+                                   
                                    {% if user.is_authenticated %}
+                                   <header>
+                                     <h2><b>دیدگاه خود را به اشتراک بگذارید </b></h2>
+                                   </header>   
+                                   <p> gig id : {{ gig.id }}</p>
                                    <form method="POST" action="">{% csrf_token %}
                                        {{ cmform.as_p }}
+                                            <script src='https://www.google.com/recaptcha/api.js'></script>
+                                            <div class="g-recaptcha" data-sitekey="6LeCZnQaAAAAAF06IyLiugnjuj1N77aLR_TdD-l-"></div>
+                                            <br>
                                        <button type="submit" class="save btn btn-default">افزودن دیدگاه</button>
                                    </form>
                                    {% else %}
-                                   <a style="text-align: center;" href="/accounts/login?next={{request.path}}">برای به اشتراک گذاشتن دیدگاه به حساب کاربـری خود وارد شوید </a>
+                                   <a style="color: rgb(255, 153, 0); font-size: 16px;" href="/accounts/login?next={{request.path}}"><span style="color: rgb(15, 49, 49);">برای به اشتراک گذاری دیدگاه خود به حساب کاربـری</span><span><b> وارد</b></span><span style="color: rgb(15, 49, 49);"> شوید </span></a>
                                    {% endif %}
                                </div>
                             </div>

@@ -43,11 +43,16 @@ def login_user(request):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
-        if 'next' in request.POST:
-            return redirect(request.POST.get('next'))
-        elif user:
-            login(request, user)
-            return redirect('/')
+        
+        if user:
+            if 'next' in request.POST:
+                login(request, user)
+                return redirect(request.POST.get('next'))
+            else:
+                login(request, user)
+                return redirect('/')
+            
+        
         else:
             form.add_error('username', 'کاربری با مشخصات فوق یافت نشد')
     return render(request, 'login.html', context)

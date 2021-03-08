@@ -29,7 +29,7 @@
                                                  font-size: 30px;"
                         
                         class="btn btn-default google-login" href="/auth/google/login/?process=login">
-                        <span style="color: rgb(10, 155, 223);">  G</span>
+                        <span style="color: rgb(10, 155, 223);">G</span>
                         <span style="color: rgb(196, 27, 60);">o</span>
                         <span style="color: rgb(228, 245, 78);">o</span>
                         <span style="color: rgb(10, 155, 223);">g</span>
@@ -54,10 +54,10 @@
                     <p style="color: red;"> {{ error }} </p>
                     {% endfor %}
                             {% if request.GET.next %}
-                                <input type="hiddem" name="next" value="{{ request.GET.next }}">
+                                <input type="hidden" name="next" value="{{ request.GET.next }}">
                             {% endif %}
                             <button type="submit" class="btn btn-default">ورود</button>
-                        </form>
+                </form>
 
 
                 </div>

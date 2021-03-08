@@ -25,7 +25,7 @@ SECRET_KEY = ')he=$70((1a@=vz0s7g09#($3-tzbrh#ke&6dk=vl874&5p3f3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'd86fb4f31a53.ngrok.io']
 
 AUTH_USER_MODEL = 'user.User'
 # Application definition
@@ -137,6 +137,9 @@ USE_TZ = True
 
 
 # Google Auth section starts
+
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LeCZnQaAAAAAGjFuhrEQGNh6h0ZUrOlwRqUhJWZ'
+
 
 SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'

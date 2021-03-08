@@ -12,4 +12,6 @@ urlpatterns = [
     path('my-gigs/', views.MyGigList.as_view(), name='my_gigs'),
     path('create-gig/', views.create_gig, name='create_gig'),
     path('edit-gig/<int:id>', views.edit_gig, name='edit_gig'),
+    path('<int:id>/delete', views.delete_comment, name='delete_comment'),
+    path('<int:pk>/update', views.update_comment, name='update_comment'),
 ]
