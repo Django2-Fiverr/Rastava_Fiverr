@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.home_page),
     path('', TemplateView.as_view(template_name='authApp/index.html')),
     path('payment/',include('payment.urls')),
+    path('site-info/',include('site_info.urls')),
     path('accounts/', include('user.urls')),
     path('gigs/', include('gig.urls')),
     path('profile/', include('proFile.urls')),

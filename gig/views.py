@@ -45,6 +45,11 @@ class GigList(ListView):
     def get_queryset(self):
         return Gig.objects.get_active_gigs()
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(GigList, self).get_context_data(*args, **kwargs)
+        context['test'] = 'Hello men'
+        return context
+
 
 def gig_detail(request, pk):
     gig = Gig.objects.get_by_id(pk)
@@ -80,7 +85,8 @@ class GroupingGigs(ListView):
     paginate_by = 9
 
     def get_queryset(self):
-        result = Gig.objects.grouping_gigs('جنگو')
+        title = self.kwargs.get('title')
+        result = Gig.objects.grouping_gigs(title)
         return result if result else Gig.objects.get_active_gigs()
 
 
