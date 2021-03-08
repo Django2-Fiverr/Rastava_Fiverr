@@ -1,0 +1,33 @@
+{% extends 'shared/_MainLayout.html' %}
+
+{% load static %}
+
+{% block title %}لیست سفارش ها{% endblock %}
+
+{% block content %}
+
+    
+    <div>
+        <h1 class="h3 bg-danger text-white p-2 text-center">جزییات سبد خرید</h1>
+      {% if detailorder %}
+      <table class="table table-success table-hover">
+        <thead>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Family</th>
+        </thead>
+        <tbody>
+            <td><img src="{{detailorder.thumbnail.url}}" title="{{detailorder.gig}}"></td>
+          <td>{{detailorder.user}}</td>
+          <td>{{detailorder.gig}}</td>
+          <td>{{detailorder.gescription}}</td>
+          <td>{{detailorder.price}}</td>
+          <td>{{detailorder.status}}</td>
+        </tbody>
+      </table>
+      {% else %}
+      <p>there is no Order in the database</p>
+      {% endif %}
+    </div>
+
+{% endblock  %}

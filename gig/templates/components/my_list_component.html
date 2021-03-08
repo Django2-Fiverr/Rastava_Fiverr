@@ -1,0 +1,31 @@
+{% load static %}
+<div class="col-sm-4 pull-right">
+    <div class="product-image-wrapper">
+        <div class="single-products">
+            <div class="productinfo text-center">
+                {% if gig.image %}
+                    <img src="{{ gig.image.url }}" width="200" height="200" alt="">
+                {% else %}
+                    <img src="{% static 'images/product-details/1.jpg' %}" width="200" height="200" alt="">
+                {% endif %}
+                <h2>{{ gig.cost }} تومان</h2>
+                <p>{{ gig.title }}</p>
+                
+            </div>
+            <div class="product-overlay">
+                <div class="overlay-content">
+                    <h3><a href="{{ gig.get_absolute_url }}" style="color:#ff6347">{{ gig.title }}</a></h3>
+                    <h2>{{ gig.cost }} تومان</h2>
+                    <button class="btn btn-outline-secondary update-cart" data-gig="{{gig.id}}" data-action="add"><i
+                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</button>
+                </div>
+            </div>
+        </div>
+        <div class="choose">
+            <ul class="nav nav-pills nav-justified">
+                <li><a href="{% url 'gig:edit_gig' gig.id %}"><i class="fa fa-plus-square"></i> ویرایش گیگ </a></li>
+                <li><a href="{{ gig.get_absolute_url }}"><i class="fa fa-plus-square"></i>مشاهده محصول</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
