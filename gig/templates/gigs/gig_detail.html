@@ -54,52 +54,41 @@
                         </div>
                         <div class="col-sm-7">
                             <div class="product-information"><!--/product-information-->
-                                <img src="images/product-details/new.png" class="newarrival" alt="">
+                                <img src="{% static 'images/product-details/new.png' %}" class="newarrival" alt="">
                                 <div>
                                     <h2>{{ gig.title }}</h2>
-                                    <p>کد محصول : {{ gig.id }}</p>
+
                                 </div>
                                 <div>
 									<span>
 										<span>قیمت : {{ gig.cost }} تومان</span>
 									</span>
-                                    <span>
-										<label>تعداد :</label>
-										<input type="text" value="3" class="search_box">
-										<button type="button" class="btn btn-fefault cart">
-											<i class="fa fa-shopping-cart"></i>
-											افـزودن به سبـد خریـد
-										</button>
-									</span>
+                                    <form method="post" action="{% url 'order:add-order' %}">
+                                        {% csrf_token %}
+                                        <span>
+                                    <label> مهلت به روز :</label>
+                                        {{ order_form.deadline }}
+                                        {{ order_form.gig_id }}
+                                            {% for error in order_form.count.errors %}
+                                                <p style="color: red">{{ error }}</p>
+                                                <br>
+                                            {% endfor %}
+                                    </span><br><br>
+
+                                        <button type="submit" class="btn btn-fefault cart pull-right">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            افـزودن به سبـد خریـد
+                                        </button>
+                                    </form>
                                 </div>
-                                <div>
-                                    <p><b>موجـودی :</b> در انبـار موجود می باشد</p>
-                                    <p><b>شرایـط :</b> جدیـد</p>
-                                    <p><b>برنـد :</b> برنـد </p>
+                                <br>
+                                <div><br><br>
+                                    <p><b>وضعیت ارائه دهنده :</b> فعال</p>
+                                    <p><b>نام و نام خانوادگی : </b><a
+                                            href="{% url 'proFile:profile' gig.user.id %}">{{ gig.user.get_full_name }} </a>
+                                    </p>
                                 </div>
-                                <span class="socials-share share">
-									<ul>
-										<a href="#">
-											<li>
-												<label>بلـه</label>
-												<img src="{% static 'images/product-details/Bale.png' %}">
-											</li>
-										</a>
-										<a href="#">
-											<li>
-												<label>سـروش</label>
-												<img src="{% static 'images/product-details/Soroush.png' %}">
-											</li>
-										</a>
-										<a href="#">
-											<li>
-												<label>اینستاگرام</label>
-												<img src="{% static 'images/product-details/Instagram.png' %}">
-											</li>
-										</a>
-										<li><img src="{% static 'images/product-details/rating.png' %}" alt=""></li>
-									</ul>
-								</span>
+                                <br>
 
                             </div><!--/product-information-->
                         </div>
@@ -126,7 +115,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="images/home/gallery.jpg" alt="">
+                                                <img src="{% static 'images/home/gallery.jpg' %}" alt="">
                                                 <h2>1.250.000 ريال</h2>
                                                 <p>توضیحات کوتاه محصول</p>
                                                 <button type="button" class="btn btn-default add-to-cart"><i
@@ -140,7 +129,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="images/home/gallery.jpg" alt="">
+                                                <img src="{% static 'images/home/gallery.jpg' %}" alt="">
                                                 <h2>1.250.000 ريال</h2>
                                                 <p>توضیحات کوتاه محصول</p>
                                                 <button type="button" class="btn btn-default add-to-cart"><i
@@ -154,7 +143,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="images/home/gallery.jpg" alt="">
+                                                <img src="{% static 'images/home/gallery.jpg' %}" alt="">
                                                 <h2>1.250.000 ريال</h2>
                                                 <p>توضیحات کوتاه محصول</p>
                                                 <button type="button" class="btn btn-default add-to-cart"><i
@@ -168,7 +157,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="images/home/gallery.jpg" alt="">
+                                                <img src="{% static 'images/home/gallery.jpg' %}" alt="">
                                                 <h2>1.250.000 ريال</h2>
                                                 <p>توضیحات کوتاه محصول</p>
                                                 <button type="button" class="btn btn-default add-to-cart"><i
@@ -185,7 +174,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="images/home/gallery.jpg" alt="">
+                                                <img src="{% static 'images/home/gallery.jpg' %}" alt="">
                                                 <h2>1.250.000 ريال</h2>
                                                 <p>توضیحات کوتاه محصول</p>
                                                 <button type="button" class="btn btn-default add-to-cart"><i
@@ -199,7 +188,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="images/home/gallery.jpg" alt="">
+                                                <img src="{% static 'images/home/gallery.jpg' %}" alt="">
                                                 <h2>1.250.000 ريال</h2>
                                                 <p>توضیحات کوتاه محصول</p>
                                                 <button type="button" class="btn btn-default add-to-cart"><i
@@ -213,7 +202,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="images/home/gallery.jpg" alt="">
+                                                <img src="{% static 'images/home/gallery.jpg' %}" alt="">
                                                 <h2>1.250.000 ريال</h2>
                                                 <p>توضیحات کوتاه محصول</p>
                                                 <button type="button" class="btn btn-default add-to-cart"><i
@@ -227,7 +216,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="images/home/gallery.jpg" alt="">
+                                                <img src="{% static 'images/home/gallery.jpg' %}" alt="">
                                                 <h2>1.250.000 ريال</h2>
                                                 <p>توضیحات کوتاه محصول</p>
                                                 <button type="button" class="btn btn-default add-to-cart"><i
@@ -316,7 +305,7 @@
                     </div>
 
                     <div class="recommended_items"><!--recommended_items-->
-                        <h2 class="title text-center">محصولات پیشنهادی</h2>
+                        <h2 class="title text-center">گیگ های مرتبط</h2>
 
                         <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
@@ -325,7 +314,7 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img src="images/home/recommend1.jpg" alt="">
+                                                    <img src="{% static 'images/home/recommend1.jpg' %}" alt="">
                                                     <h2>1.250.000 ريال</h2>
                                                     <p>توضیحات کوتاه محصول</p>
                                                     <button type="button" class="btn btn-default add-to-cart"><i
@@ -339,7 +328,7 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img src="images/home/recommend2.jpg" alt="">
+                                                    <img src="{% static 'images/home/recommend2.jpg' %}" alt="">
                                                     <h2>1.250.000 ريال</h2>
                                                     <p>توضیحات کوتاه محصول</p>
                                                     <button type="button" class="btn btn-default add-to-cart"><i
@@ -369,7 +358,7 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img src="images/home/recommend1.jpg" alt="">
+                                                    <img src="{% static 'images/home/recommend1.jpg' %}" alt="">
                                                     <h2>1.250.000 ريال</h2>
                                                     <p>توضیحات کوتاه محصول</p>
                                                     <button type="button" class="btn btn-default add-to-cart"><i
@@ -383,7 +372,7 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img src="images/home/recommend2.jpg" alt="">
+                                                    <img src="{% static 'images/home/recommend2.jpg' %}" alt="">
                                                     <h2>1.250.000 ريال</h2>
                                                     <p>توضیحات کوتاه محصول</p>
                                                     <button type="button" class="btn btn-default add-to-cart"><i
@@ -397,7 +386,7 @@
                                         <div class="product-image-wrapper">
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
-                                                    <img src="images/home/recommend3.jpg" alt="">
+                                                    <img src="{% static 'images/home/recommend3.jpg' %}" alt="">
                                                     <h2>1.250.000 ريال</h2>
                                                     <p>توضیحات کوتاه محصول</p>
                                                     <button type="button" class="btn btn-default add-to-cart"><i
@@ -541,7 +530,7 @@
                         </div><!--/price-range-->
 
                         <div class="shipping text-center"><!--shipping-->
-                            <img src="images/home/shipping.jpg" alt="">
+                            <img src="{% static 'images/home/shipping.jpg' %}" alt="">
                         </div><!--/shipping-->
 
                     </div>

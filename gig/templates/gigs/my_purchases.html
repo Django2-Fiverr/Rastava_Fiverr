@@ -1,0 +1,87 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% block content %}
+
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="#">خانـه</a></li>
+                    <li class="active">پرداخت</li>
+                </ol>
+            </div><!--/breadcrums-->
+            {% if gigs %}
+                <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                <thead>
+                <tr class="cart_menu">
+                    <td class="image">تصویر</td>
+                    <td class="pull-right">نام</td>
+                    <td class="quantity pull-left" style="margin-right: 50px;">مهلت باقیمانده</td>
+                    <td class=""></td>
+                    <td class="total">قیمت</td>
+                    <td class="total pull-left"> نام فروشنده</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in gigs %}
+                    <tr>
+                        <td class="cart_product">
+                            <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt=""></a>
+                        </td>
+                        <td class="cart_description">
+                            <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.title }}</a>
+                            </h4>
+                            <p>کد گیگ مورد نظر : {{ item.gig.id }}</p>
+                        </td>
+                        {% if item.expiration %}
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button" style="margin-left: 20px"><span
+                                        class="text-success"></span>
+                                    <h4 class="text-danger"> منقضی شده </h4>
+                            </td>
+                        {% else %}
+                            {% if item.remaining_time > 5 %}
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button" style="margin-left: 20px"><span
+                                            class="text-success">روز</span>
+                                        <input class="cart_quantity_input alert-success" type="text" name="quantity"
+                                               value="{{ item.remaining_time }}"
+                                               autocomplete="off"
+                                               size="2">
+                                    </div>
+                                </td>
+                            {% else %}
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button" style="margin-left: 20px"><span
+                                            class="text-danger">روز</span>
+                                        <input class="cart_quantity_input alert-danger" type="text" name="quantity"
+                                               value="{{ item.remaining_time }}"
+                                               autocomplete="off"
+                                               size="2">
+                                    </div>
+                                </td>
+                            {% endif %}
+                        {% endif %}
+                        <td class="cart_total ">
+                            <p class="cart_total_price" style="margin-right: 60px">{{ item.gig.cost }} تومان</p>
+                        </td>
+                        <td class="cart_total ">
+                            <a href="{% url 'proFile:profile' item.seller.id %}"><p
+                                    class="cart_total_price pull-left">{{ item.seller.get_full_name }} </p></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                <div class="alert alert-danger">
+                    <h4 class="warning"> در حال حاضر سفارشی ثبت نشده است </h4>
+                </div>
+                </tbody>
+            {% endif %}
+            </table>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

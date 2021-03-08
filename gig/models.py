@@ -42,6 +42,9 @@ class GigManager(models.Manager):
         return self.get_queryset().filter(lock_up, active=True).distinct()
 
    
+    def grouping_gigs(self, slug):
+        items = self.get_queryset().filter(category__name=slug)
+        return items
 
 
 class Gig(models.Model):
@@ -65,7 +68,11 @@ class Gig(models.Model):
 
     # returns the name of the gig owner
     def __str__(self):
+<<<<<<< HEAD
         return f'{self.user.username}-{self.title}'
+=======
+        return f'{self.title}'
+>>>>>>> sajad
 
     def get_absolute_url(self):
         return f'/gigs/gig-detail/{self.id}/'
