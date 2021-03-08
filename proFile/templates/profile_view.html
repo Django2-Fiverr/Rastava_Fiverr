@@ -121,13 +121,7 @@
                             {% endif %}
                             </p>
                             <p><b>مهارت ها :</b>
-                                {% if profile.skills %}
-                                    {% for skill in profile.skills.all %}
-                                        {{ skill.name }} ,
-                                    {% endfor %}
-                                {% else %}
-                                    نامشخص
-                                {% endif %}
+                                {{ profile.show_skills }}
                             </p>
                             <p><b>آدرس ایمیل :</b>{{ profile.user.email }}</p>
                             <p><b>شماره تماس :</b>

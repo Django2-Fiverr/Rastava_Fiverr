@@ -4,5 +4,5 @@ from proFile.models import Profile
 
 @admin.register(Profile)
 class AdminProfile(admin.ModelAdmin):
-    list_display = ('user', 'last_update')
-    search_fields = ('user',)
+    list_display = ('user', 'last_update','show_skills')
+    search_fields = ('user','show_skills')

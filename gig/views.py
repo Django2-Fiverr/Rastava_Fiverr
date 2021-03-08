@@ -80,7 +80,7 @@ class GroupingGigs(ListView):
     paginate_by = 9
 
     def get_queryset(self):
-        result = Gig.objects.grouping_gigs('paravid')
+        result = Gig.objects.grouping_gigs('جنگو')
         return result if result else Gig.objects.get_active_gigs()
 
 

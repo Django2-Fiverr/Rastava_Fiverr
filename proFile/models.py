@@ -41,3 +41,12 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return f'/profile/{self.user.id}'
+
+    def show_skills(self):
+        skills = self.skills.all()
+        if skills:
+            skills = list(map(str, skills))
+            return ' , '.join(skills)
+        return 'وارد نشده'
+
+    show_skills.short_description = 'مهارت های کاربر'
