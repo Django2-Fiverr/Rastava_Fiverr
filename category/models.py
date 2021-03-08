@@ -28,6 +28,7 @@ class Skills(models.Model):
 class Field(models.Model):
     title = models.CharField(max_length=50)
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
+    image = models.ImageField(upload_to = 'media_root', null= True)
     content = models.CharField(max_length=200)
 
     class Meta:

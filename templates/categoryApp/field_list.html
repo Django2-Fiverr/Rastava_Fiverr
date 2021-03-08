@@ -3,8 +3,10 @@
 {% block title %}تبلیغات و بازاریابی{% endblock %}
 {% block content %}
 
+
 {% for field in fields %}
-        <h2>{{ field.title }}</a></h2>
+        <a href="/"><h2>{{ field.title }}</h2></a>
+        <a href="/"><img src = "{{ field.image.url }}"  width="200" height="200"  alt=""/ ></a>
 {% endfor %}
 <div>
 <section class="my-5">
