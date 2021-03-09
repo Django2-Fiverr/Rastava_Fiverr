@@ -151,6 +151,17 @@ def my_purchases(request):
 
 
 @login_required
+def delete_confirmation(request, pk):
+    gig = get_object_or_404(Gig, id=pk)
+    if request.user != gig.user:
+        raise Http404('You dont have permission to modify others services')
+    context = {
+        'pk': pk
+    }
+    return render(request, 'gigs/delete_confirmation.html', context)
+
+
+@login_required
 def delete_gig(request, pk):
     gig = get_object_or_404(Gig, id=pk)
     if not gig.user == request.user:

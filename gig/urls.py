@@ -13,6 +13,7 @@ urlpatterns = [
     path('my-gigs/', views.MyGigList.as_view(), name='my_gigs'),
     path('user-gigs/<int:pk>', views.UserGigList.as_view(), name='user-gigs'),
     path('create-gig/', views.create_gig, name='create_gig'),
+    path('delete-confirmation/<int:pk>/', views.delete_confirmation, name='delete-confirmation'),
     path('delete-gig/<int:pk>', views.delete_gig, name='delete-gig'),
     path('my_sales/', views.my_sales, name='my-sales'),
     path('my_purchases/', views.my_purchases, name='my-purchases'),

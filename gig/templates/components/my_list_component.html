@@ -26,7 +26,7 @@
             <ul class="nav nav-pills nav-justified">
                 <li><a href="{% url 'gig:edit_gig' gig.id %}"><i class="fa fa-plus-square"></i> ویرایش گیگ </a></li>
                 <li><a href="{{ gig.get_absolute_url }}"><i class="fa fa-plus-square"></i>جزئیات</a></li>
-                <li><a href="{% url 'gig:delete-gig' gig.id %}"><i class="fa fa-plus-square"></i>حذف</a></li>
+                <li><a href="{% url 'gig:delete-confirmation' gig.id %}"><i class="fa fa-plus-square"></i>حذف</a></li>
             </ul>
         </div>
     </div>
