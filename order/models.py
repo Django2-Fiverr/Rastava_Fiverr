@@ -1,10 +1,26 @@
+import os
 import datetime
+
 from django.db import models
 from django.contrib.auth import get_user_model
-
 from gig.models import Gig
 
 User = get_user_model()
+
+
+def split_name(file_name):
+    base_name = os.path.basename(file_name)
+    name, ext = os.path.splitext(base_name)
+    return name, ext
+
+
+# This function changes default file name and uses the same format ( one.jpg -> two.jpg )
+# it returns an address to save the uploaded image file
+def get_name(instance, file_name):
+    name, ext = split_name(file_name)
+    current_time = datetime.date.today()
+    new_name = '{}-{}-{}{}'.format(str(current_time),instance.gig.title, instance.client, ext)
+    return 'transaction/{}/{}'.format(instance.seller, new_name)
 
 
 class Order(models.Model):
@@ -68,8 +84,10 @@ class Transaction(models.Model):
     client = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='خریدار')
     gig = models.ForeignKey(Gig, on_delete=models.CASCADE, null=True, verbose_name='گیگ مورد معامله')
     expiration = models.BooleanField(default=False, verbose_name='منقضی شده / نشده')
+    delivery_status = models.BooleanField(default=False, verbose_name='وضعیت/ تحویل')
     date_of_transaction = models.DateTimeField(verbose_name='زمان انجام معامله')
     deadline = models.DateTimeField(verbose_name='مهلت تحویل')
+    file = models.FileField(upload_to=get_name, blank=True, null=True, verbose_name='فایل ارسالی')
 
     def __str__(self):
         return f'{self.client}->{self.gig}'

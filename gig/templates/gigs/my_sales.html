@@ -27,19 +27,37 @@
                 <tbody>
                 {% for item in gigs %}
                     <tr>
-                        <td class="cart_product">
-                            <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt=""></a>
-                        </td>
+                        {% if item.gig.image %}
+                            <td class="cart_product">
+                                <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt=""></a>
+                            </td>
+                        {% else %}
+                            <td class="cart_product">
+                                <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" width="180px"
+                                                height="110px" alt=""></a>
+                            </td>
+                        {% endif %}
                         <td class="cart_description">
                             <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.title }}</a>
                             </h4>
                             <p>کد گیگ مورد نظر : {{ item.gig.id }}</p>
                         </td>
-                        {% if item.expiration %}
-                            <td class="cart_quantity">
+                        {% if item.delivery_status %}
+                            <td>
                                 <div class="cart_quantity_button" style="margin-left: 20px"><span
                                         class="text-success"></span>
-                                    <h4 class="text-danger"> منقضی شده </h4>
+                                    <h4 class="text-success"> انجام شده </h4>
+                                </div>
+                            </td>
+                            <td class="cart_total ">
+                                <p class="cart_total_price" style="margin-right: 60px">{{ item.gig.cost }} تومان</p>
+                            </td>
+                            <td class="cart_total ">
+                                <a href="{% url 'proFile:profile' item.client.id %}">
+                                    <p
+                                            class="cart_total_price pull-left">{{ item.client.get_full_name }}
+                                    </p>
+                                </a>
                             </td>
                         {% else %}
                             {% if item.remaining_time > 5 %}
@@ -49,10 +67,10 @@
                                         <input class="cart_quantity_input alert-success" type="text" name="quantity"
                                                value="{{ item.remaining_time }}"
                                                autocomplete="off"
-                                               size="2">
+                                               size="2"/>
                                     </div>
                                 </td>
-                            {% else %}
+                            {% elif item.remaining_time >= 0 %}
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button" style="margin-left: 20px"><span
                                             class="text-danger">روز</span>
@@ -62,16 +80,40 @@
                                                size="2">
                                     </div>
                                 </td>
+                            {% else %}
+                                <td>
+                                    <div class="cart_quantity_button" style="margin-left: 20px"><span
+                                            class="text-success"></span>
+                                        <h4 class="text-danger"> منقضی شده </h4>
+                                    </div>
+                                </td>
+
                             {% endif %}
+                            <td class="cart_total ">
+                                <p class="cart_total_price" style="margin-right: 60px">{{ item.gig.cost }} تومان</p>
+                            </td>
+                            <td class="cart_total ">
+                                <a href="{% url 'proFile:profile' item.client.id %}">
+                                    <p
+                                            class="cart_total_price pull-left">{{ item.client.get_full_name }}
+                                    </p>
+                                </a>
+                            </td>
+                            </tr>
+                            <tr>
+                                {% if not item.expiration %}
+                                    <td style="align-items: center;">
+
+                                        <form method="POST" enctype="multipart/form-data"
+                                              action="{% url 'gig:deliver' item.id %}">
+                                            {% csrf_token %}
+                                            {{ form.as_p }}
+                                            <button type="submit" class="btn btn-success nav">تحویل سفارش</button>
+                                        </form>
+                                    </td>
+                                {% endif %}
+                            </tr>
                         {% endif %}
-                        <td class="cart_total ">
-                            <p class="cart_total_price" style="margin-right: 60px">{{ item.gig.cost }} تومان</p>
-                        </td>
-                        <td class="cart_total ">
-                            <a href="{% url 'proFile:profile' item.client.id %}"><p
-                                    class="cart_total_price pull-left">{{ item.client.get_full_name }} </p></a>
-                        </td>
-                    </tr>
                 {% endfor %}
                 {% else %}
                 <div class="alert alert-danger">

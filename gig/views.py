@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 from order.models import Transaction
 from order.forms import OrderForm
 from .models import Gig
-from .forms import GigForm
+from .forms import GigForm, TransactionForm
 
 User = get_user_model()
 
@@ -53,7 +53,7 @@ class GigList(ListView):
 
 def gig_detail(request, pk):
     gig = Gig.objects.get_by_id(pk)
-    order_form = OrderForm(request.POST or None, initial={'count': 0, 'gig_id': pk})
+    order_form = OrderForm(request.POST or None, initial={'deadline': 0, 'gig_id': pk})
     if not gig:
         raise Http404('یافت نشد')
     context = {
@@ -115,7 +115,10 @@ class UserGigList(ListView):
 
 @login_required
 def edit_gig(request, id):
-    form = GigForm(instance=request.user.gig_set.filter(id=id).first())
+    gig = get_object_or_404(Gig,id = id)
+    if request.user != gig.user:
+        return render(request,'gigs/deny_edit.html')
+    form = GigForm(instance=gig)
     if request.method == 'POST':
         form = GigForm(instance=request.user.gig_set.filter(id=id).first(),
                        files=request.FILES,
@@ -135,8 +138,10 @@ def edit_gig(request, id):
 @login_required
 def my_sales(request):
     gigs = Transaction.objects.filter(seller=request.user)
+    form = TransactionForm()
     context = {
-        'gigs': gigs
+        'gigs': gigs,
+        'form': form,
     }
     return render(request, 'gigs/my_sales.html', context)
 
@@ -168,3 +173,16 @@ def delete_gig(request, pk):
         raise Http404('Not allowed')
     gig.delete()
     return redirect('gig:my_gigs')
+
+
+@login_required
+def deliver(request, pk):
+    if request.method == 'POST':
+        transaction = get_object_or_404(Transaction, id=pk)
+        form = TransactionForm(instance=transaction, files=request.FILES, data=request.POST)
+        if form.is_valid():
+            transaction.delivery_status = True
+            form.save()
+    else:
+        return redirect('gig:my-sales')
+    return redirect('gig:my-sales')

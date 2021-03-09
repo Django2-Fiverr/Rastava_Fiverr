@@ -18,4 +18,5 @@ urlpatterns = [
     path('my_sales/', views.my_sales, name='my-sales'),
     path('my_purchases/', views.my_purchases, name='my-purchases'),
     path('edit-gig/<int:id>', views.edit_gig, name='edit_gig'),
+    path('deliver/<int:pk>/', views.deliver, name='deliver'),
 ]

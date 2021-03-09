@@ -27,42 +27,49 @@
                 <tbody>
                 {% for item in gigs %}
                     <tr>
-                        <td class="cart_product">
-                            <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt=""></a>
-                        </td>
+                        {% if item.gig.image %}
+                            <td class="cart_product">
+                                <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt=""></a>
+                            </td>
+                        {% else %}
+                            <td class="cart_product">
+                                <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" width="180px"
+                                                height="110px" alt=""></a>
+                            </td>
+                        {% endif %}
                         <td class="cart_description">
                             <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.title }}</a>
                             </h4>
                             <p>کد گیگ مورد نظر : {{ item.gig.id }}</p>
                         </td>
-                        {% if item.expiration %}
+                        {% if item.remaining_time > 5 %}
                             <td class="cart_quantity">
+                                <div class="cart_quantity_button" style="margin-left: 20px"><span
+                                        class="text-success">روز</span>
+                                    <input class="cart_quantity_input alert-success" type="text" name="quantity"
+                                           value="{{ item.remaining_time }}"
+                                           autocomplete="off"
+                                           size="2"/>
+                                </div>
+                            </td>
+                        {% elif item.remaining_time >= 0 %}
+                            <td class="cart_quantity">
+                                <div class="cart_quantity_button" style="margin-left: 20px"><span
+                                        class="text-danger">روز</span>
+                                    <input class="cart_quantity_input alert-danger" type="text" name="quantity"
+                                           value="{{ item.remaining_time }}"
+                                           autocomplete="off"
+                                           size="2">
+                                </div>
+                            </td>
+                        {% else %}
+                            <td>
                                 <div class="cart_quantity_button" style="margin-left: 20px"><span
                                         class="text-success"></span>
                                     <h4 class="text-danger"> منقضی شده </h4>
+                                </div>
                             </td>
-                        {% else %}
-                            {% if item.remaining_time > 5 %}
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button" style="margin-left: 20px"><span
-                                            class="text-success">روز</span>
-                                        <input class="cart_quantity_input alert-success" type="text" name="quantity"
-                                               value="{{ item.remaining_time }}"
-                                               autocomplete="off"
-                                               size="2">
-                                    </div>
-                                </td>
-                            {% else %}
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button" style="margin-left: 20px"><span
-                                            class="text-danger">روز</span>
-                                        <input class="cart_quantity_input alert-danger" type="text" name="quantity"
-                                               value="{{ item.remaining_time }}"
-                                               autocomplete="off"
-                                               size="2">
-                                    </div>
-                                </td>
-                            {% endif %}
+
                         {% endif %}
                         <td class="cart_total ">
                             <p class="cart_total_price" style="margin-right: 60px">{{ item.gig.cost }} تومان</p>
@@ -71,6 +78,15 @@
                             <a href="{% url 'proFile:profile' item.seller.id %}"><p
                                     class="cart_total_price pull-left">{{ item.seller.get_full_name }} </p></a>
                         </td>
+                        {% if item.delivery_status %}
+                            <td>
+                                <a href="{{ item.file.url }}">
+                                    <button class="btn btn-success btn-block">
+                                        دریافت محتوا
+                                    </button>
+                                </a>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 {% else %}

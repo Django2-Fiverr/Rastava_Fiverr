@@ -15,10 +15,10 @@
                             <div class="view-product">
                                 {% if gig.image %}
                                     <img src="{{ gig.image.url }}" alt="">
+                                    <a href="{{ gig.image.url }}"><h3>دانلود عکس</h3></a>
                                 {% else %}
                                     <img src="{% static 'images/product-details/1.jpg' %}" alt="">
                                 {% endif %}
-                                <h3>بزرگنمایـی</h3>
                             </div>
                             <div id="similar-product" class="carousel slide" data-ride="carousel">
 
@@ -63,23 +63,32 @@
 									<span>
 										<span>قیمت : {{ gig.cost }} تومان</span>
 									</span>
-                                    <form method="post" action="{% url 'order:add-order' %}">
-                                        {% csrf_token %}
-                                        <span>
+                                    {% if not request.user == gig.user %}
+                                        <form method="post" action="{% url 'order:add-order' %}">
+                                            {% csrf_token %}
+                                            <span>
                                     <label> مهلت به روز :</label>
                                         {{ order_form.deadline }}
                                         {{ order_form.gig_id }}
-                                            {% for error in order_form.count.errors %}
-                                                <p style="color: red">{{ error }}</p>
-                                                <br>
-                                            {% endfor %}
+                                                {% for error in order_form.deadline.errors %}
+                                                    <p style="color: red">{{ error }}</p>
+                                                    <br>
+                                                {% endfor %}
                                     </span><br><br>
 
-                                        <button type="submit" class="btn btn-fefault cart pull-right">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            افـزودن به سبـد خریـد
+                                            <button type="submit" class="btn btn-fefault cart pull-right">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                افـزودن به سبـد خریـد
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <br><br>  <a href="{% url 'gig:edit_gig' gig.id %}">
+                                        <button class="btn btn-success">
+                                            ویرایش گیگ
                                         </button>
-                                    </form>
+                                    </a>
+
+                                    {% endif %}
                                 </div>
                                 <br>
                                 <div><br><br>

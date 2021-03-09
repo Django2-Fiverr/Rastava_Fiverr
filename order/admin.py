@@ -18,7 +18,7 @@ class AdminOrderDetail(admin.ModelAdmin):
 
 
 @admin.register(Transaction)
-class AdminOrderDetail(admin.ModelAdmin):
-    list_display = ('seller', 'client', 'gig', 'deadline','expiration')
+class AdminTransaction(admin.ModelAdmin):
+    list_display = ('seller', 'client', 'gig', 'deadline', 'expiration','delivery_status')
     list_filter = ('seller', 'client', 'gig')
     search_fields = ('gig', 'client', 'seller')

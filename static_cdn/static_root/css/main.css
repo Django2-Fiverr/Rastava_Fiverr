@@ -83,8 +83,8 @@ a#scrollUp i{
 *******Header CSS******
 **************************/
 #header {
-	border-bottom: solid 2px #FD9B18;
-	margin-bottom: 20px;
+	/* border-bottom: solid 2px #cfcfcf; */
+	margin-bottom: 50px;
 }
 
 .header_top {
@@ -156,12 +156,14 @@ a#scrollUp i{
 	background:#CE3C2D;
 }
 
-.header-middle .container .row {
-  border-bottom: 1px solid #f5f5f5;
-  margin-left: 0;
-  margin-right: 0;
-  padding-bottom: 20px;
-  padding-top: 20px;
+.header-middle {
+  padding: 0px 30px;
+  /* border-bottom: 1px solid #000000; */
+  /* margin-left: 0;
+  margin-right: 0; */
+  width: 100%;
+  /* padding-bottom: 20px;
+  padding-top: 20px; */
 }
 
 .header-middle .container .row .col-sm-4{
@@ -211,9 +213,10 @@ a#scrollUp i{
 }
 
 .shop-menu ul li {
-  display:inline-block;
+  display:flex;
   padding-left: 15px;
   padding-right: 15px;
+
 }
 
 .shop-menu ul li:first-child {
@@ -234,6 +237,7 @@ a#scrollUp i{
   padding:0;
   padding-right: 0;
   margin-top: 10px;
+  
 }
 
 
@@ -249,8 +253,9 @@ a#scrollUp i{
 
 
 .header-bottom {
-  padding-bottom: 10px;
-  padding-top: 30px; 
+  padding: 20px;
+  background-color: #563b6b;
+  color: white;
 }
 
 .navbar-collapse.collapse{
@@ -268,7 +273,7 @@ a#scrollUp i{
 }
 
 .mainmenu ul li a {
-	color: #696763;
+	color: #afafaf;
 	font-family: 'BYekan', sans-serif;
 	font-size: 14pt;
 	font-weight: 300;
@@ -279,21 +284,22 @@ a#scrollUp i{
 
 .mainmenu ul li a:hover, .mainmenu ul li a.active,  .shop-menu ul li a.active{
 	background:none;
-	color:#fdb45e;
+	color:#ffffff;
 }
 
 .search_box input {
   text-align: right;
-  background: #F0F0E9;
-  border: medium none;
+  border: none;
+  /* background: #F0F0E9; */
+  border-radius: 50px;
   color: #B2B2B2;
   font-family: 'BYekan';
   font-size: 12px;
   font-weight: 300;
   height: 35px;
   outline: medium none;
-  padding-right: 10px;
-  width: 155px;
+  padding: 15px 20px;
+  width: 335px;
   background-image: url(../images/home/searchicon.png);
   background-repeat: no-repeat;
   background-position: 10px;
@@ -917,11 +923,17 @@ h2.title {
 }
 
 .product-image-wrapper{
-	border:1px solid #F7F7F5;
+	/* border:1px solid #ffffff; */
 	overflow: hidden;
 	margin-bottom:30px;
+  cursor: pointer;
 }
-
+.product-image-wrapper:hover {
+  box-shadow: 0px 0px 10px 8px rgb(228, 228, 228);
+}
+.product-image-wrapper:hover img {
+  opacity: 1;
+}
 .single-products {
   position: relative;
 }
@@ -955,8 +967,14 @@ h2.title {
 
 .productinfo img{
   width: 100%;
+  opacity: 0.7;
+  /* border: 3px solid #f8f8f8; */
+  border-radius: 5px;
+  
 }
-
+/* .productinfo img:hover {
+  opacity: 1;
+} */
 .productinfo{
  position:relative;
 }
@@ -1024,7 +1042,7 @@ h2.title {
 }
 
 .add-to-cart:hover {
-  background: #FE980F;
+  background: #03941b;
   border: 0 none;
   border-radius: 0;
   color: #FFFFFF;
@@ -1039,7 +1057,7 @@ h2.title {
 }
 
 .add-to-cart:hover {
-  background: #FE980F;
+  background: #059912;
   color: #FFFFFF;
 }
 
@@ -1048,7 +1066,7 @@ h2.title {
 }
 
 .choose ul li a {
-  color: #B3AFA8;
+  color: #096879;
   font-family: 'BYekan', sans-serif;
   font-size: 13px;
   padding-left: 0;
@@ -1061,7 +1079,7 @@ h2.title {
 
 .choose ul li a:hover{
 	background:none;
-	color:#FE980F;
+	color:#099fcc;
 }
 
 .category-tab {

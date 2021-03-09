@@ -1,66 +1,60 @@
 {% extends 'shared/_MainLayout.html' %}
 {% load static %}
 
-{% block title %}صفه ی اصلی{% endblock %}
+{% block title %}صفحه اصلی{% endblock %}
 
 {% block content %}
 
-<section id="slider">
-    <!--slider-->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#slider-carousel" data-slide-to="1"></li>
-                    </ol>
 
-                    <div class="carousel-inner">
+    
 
-                        <div class="item active">
-                            <div class="col-sm-6">
-                                <h1><span>SHOP</span>CENTER</h1>
-                                <h2>Shop Center</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-                                <img src="{% static 'images/home/girl2.jpg' %}" class="girl img-responsive" alt="" />
-                                <img src="{% static 'images/home/pricing.png' %}" class="pricing" alt="" />
-                            </div>
-                        </div>
+<div style="margin: 30px 0px;">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="display: flex; justify-content: center; align-items: center; padding-right: 100px; text-align: right;">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
 
-                        <div class="item">
-                            <div class="col-sm-6">
-                                <h1><span>SHOP</span>CENTER</h1>
-                                <h2>Shop Center</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-                                <img src="{% static 'images/home/girl2.jpg' %}" class="girl img-responsive" alt="" />
-                                <img src="{% static 'images/home/pricing.png' %}" class="pricing" alt="" />
-                            </div>
-                        </div>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" style="display: flex; justify-content: center; align-items: center;">
 
-                    </div>
-
-                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </div>
-
-            </div>
+      <div class="item active">
+        <img src="{% static 'images/home/slider1.jpg' %}" alt="Los Angeles" style="width: 1400px; height: 500px;">
+        <div class="carousel-caption" style="position: absolute; top: 0px; right: 60%;">
+          <h3 style="font-size: 40px; background-color: #ff0655; padding: 10px 0px; opacity: 0.8; border-radius: 50px;">خرید آسان</h3>
         </div>
+      </div>
+
+      <div class="item">
+        <img src="{% static 'images/home/slider2.jpg' %}" alt="Chicago" style="width: 1400px; height: 500px;">
+        <div class="carousel-caption" style="position: absolute; top: 0px; right: 60%;">
+          <h3 style="font-size: 40px; background-color: #ff0655; padding: 10px 0px; opacity: 0.8; border-radius: 50px;">خدمات بهتر</h3>
+        </div>
+      </div>
+    
+      <div class="item" >
+        <img src="{% static 'images/home/slider3.jpg' %}" alt="New York" style="width: 1400px; height: 500px;">
+        <div class="carousel-caption" style="position: absolute; top: 0px; right: 60%;">
+          <h3 style="font-size: 40px; background-color: #ff0655; padding: 10px 0px; opacity: 0.8; border-radius: 50px;">کیفیت برتر</h3>
+        </div>
+      </div>
+  
     </div>
-</section>
-<!--/slider-->
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" style="background-color: #000; font-size: 30px; padding: 30px;"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next" >
+      <span class="glyphicon glyphicon-chevron-right" style="background-color: #000; font-size: 30px; padding: 30px;"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
 
 <section>
     <div class="container">
@@ -77,7 +71,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Gallery.jpg' %}" alt="" />
+                                            <img src="{% static 'images/home/ranSomeWare.jpg' %}" alt="" />
                                             <h2>1.250.000 R</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -91,7 +85,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Gallery.jpg' %}" alt="" />
+                                            <img src="{% static 'images/home/ranSomeWare.jpg' %}" alt="" />
                                             <h2>1.250.000 R</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -105,7 +99,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Gallery.jpg' %}" alt="" />
+                                            <img src="{% static 'images/home/ranSomeWare.jpg' %}" alt="" />
                                             <h2>1.250.000 R</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -119,7 +113,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Gallery.jpg' %}" alt="" />
+                                            <img src="{% static 'images/home/ranSomeWare.jpg' %}" alt="" />
                                             <h2>1.250.000 R</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -135,7 +129,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Gallery.jpg' %}" alt="" />
+                                            <img src="{% static 'images/home/ranSomeWare.jpg' %}" alt="" />
                                             <h2>1.250.000 R</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -149,7 +143,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Gallery.jpg' %}" alt="" />
+                                            <img src="{% static 'images/home/ranSomeWare.jpg' %}" alt="" />
                                             <h2>1.250.000 R</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -163,7 +157,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Gallery.jpg' %}" alt="" />
+                                            <img src="{% static 'images/home/ranSomeWare.jpg' %}" alt="" />
                                             <h2>1.250.000 R</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -177,7 +171,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Gallery.jpg' %}" alt="" />
+                                            <img src="{% static 'images/home/ranSomeWare.jpg' %}" alt="" />
                                             <h2>1.250.000 R</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -212,20 +206,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -243,20 +230,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -274,20 +254,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -305,20 +278,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -338,20 +304,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -369,20 +328,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -400,20 +352,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -431,20 +376,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -482,20 +420,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -513,20 +444,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -544,20 +468,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -575,20 +492,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -608,20 +518,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -639,20 +542,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -670,20 +566,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -701,20 +590,13 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/product.jpg' %}" alt="" />
+                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}" alt="" />
                                                 <h2>2.500.000 R</h2>
                                                 <p>توضیحات کوتاه محصـول</p>
                                                 <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
                                             </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
-                                                    <h2>2.500.000 R</h2>
-                                                    <p>توضیحات کوتاه محصـول</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <div class="choose">
                                             <ul class="nav nav-pills nav-justified">
@@ -757,7 +639,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -771,7 +653,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -785,7 +667,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -799,7 +681,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -816,7 +698,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -830,7 +712,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -844,7 +726,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -858,7 +740,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -875,7 +757,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -889,7 +771,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -903,7 +785,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -917,7 +799,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -934,7 +816,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -948,7 +830,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -962,7 +844,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -976,7 +858,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -993,7 +875,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -1007,7 +889,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -1021,7 +903,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
@@ -1035,7 +917,7 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{% static 'images/home/Tabs.png' %}" alt="" />
+                                            <img src="{% static 'images/home/backtrack.jpg' %}" alt="" />
                                             <h2>560.000 ريال</h2>
                                             <p>توضیحات کوتاه محصول</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
