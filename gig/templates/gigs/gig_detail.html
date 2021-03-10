@@ -74,11 +74,11 @@
                                                 <br>
                                             {% endfor %}
                                     </span><br><br>
-
-                                        <button type="submit" class="btn btn-fefault cart pull-right">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            افـزودن به سبـد خریـد
-                                        </button>
+                                <button type="submit" class="btn btn-fefault cart pull-right">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    افـزودن به سبـد خریـد
+                                </button>
+                               
                                     </form>
                                 </div>
                                 <br>
@@ -286,20 +286,29 @@
                                 <div class='col-md-6 col-md-offset-3'>
                                    
                                    {% if user.is_authenticated %}
-                                   <header>
-                                     <h2><b>دیدگاه خود را به اشتراک بگذارید </b></h2>
-                                   </header>   
-                                   <p> gig id : {{ gig.id }}</p>
-                                   <form method="POST" action="">{% csrf_token %}
-                                       {{ cmform.as_p }}
-                                            <script src='https://www.google.com/recaptcha/api.js'></script>
-                                            <div class="g-recaptcha" data-sitekey="6LeCZnQaAAAAAF06IyLiugnjuj1N77aLR_TdD-l-"></div>
-                                            <br>
-                                       <button type="submit" class="save btn btn-default">افزودن دیدگاه</button>
-                                   </form>
+                                        <header>
+                                            <h2><b>دیدگاه خود را به اشتراک بگذارید </b></h2>
+                                        </header>
+                                        {% if buyer %}
+                                        {% for i in buyer %}
+                                                {% if i.client and i.client == request.user %}
+                                                <form method="POST" action="">{% csrf_token %}
+                                                    {{ cmform.as_p }}
+                                                    <br>
+                                                    <button type="submit" class="save btn btn-default">افزودن دیدگاه</button>
+                                                </form>
+                                                {% else %}
+                                                <h1>Not allowed</h1>
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% else %}
+                                        <p style="color: rgb(206, 2, 2); opacity: 0.8; font-size: 20px;">برای به اشتراک گذاشتن دیدگاه, ابتدا گیگ را خریداری کنید</p>
+                                        {% endif %}
                                    {% else %}
                                    <a style="color: rgb(255, 153, 0); font-size: 16px;" href="/accounts/login?next={{request.path}}"><span style="color: rgb(15, 49, 49);">برای به اشتراک گذاری دیدگاه خود به حساب کاربـری</span><span><b> وارد</b></span><span style="color: rgb(15, 49, 49);"> شوید </span></a>
+                                   
                                    {% endif %}
+                                   
                                </div>
                             </div>
                     </div>
@@ -317,9 +326,13 @@
                                                     <img src="{% static 'images/home/recommend1.jpg' %}" alt="">
                                                     <h2>1.250.000 ريال</h2>
                                                     <p>توضیحات کوتاه محصول</p>
+                                                    
                                                     <button type="button" class="btn btn-default add-to-cart"><i
                                                             class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
                                                     </button>
+                                                    
+                                                    
+                                                   
                                                 </div>
                                             </div>
                                         </div>

@@ -64,7 +64,7 @@ class OrderDetail(models.Model):
 
 
 class Transaction(models.Model):
-    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user', null=True, verbose_name='فروشنده')
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_transaction', null=True, verbose_name='فروشنده')
     client = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='خریدار')
     gig = models.ForeignKey(Gig, on_delete=models.CASCADE, null=True, verbose_name='گیگ مورد معامله')
     expiration = models.BooleanField(default=False, verbose_name='منقضی شده / نشده')

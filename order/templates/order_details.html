@@ -26,10 +26,21 @@
             </thead>
             <tbody>
             {% for item in order_items %}
+
+
+            
+
+            
                 <tr>
+                    {% if item.gig.image %}
                     <td class="cart_product">
                         <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt=""></a>
                     </td>
+                    {% else %}
+                        <td class="cart_product">
+                        <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" width="180px" height="110px" alt=""></a>
+                    </td>
+                    {% endif %}
                     <td class="cart_description">
                         <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.title }}</a>
                         </h4>

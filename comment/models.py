@@ -10,7 +10,7 @@ User = get_user_model()
 class Comment(models.Model):
     gig = models.ForeignKey(Gig, on_delete=models.CASCADE, related_name='comment_gig')
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='profile', null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comment')
     subject = models.CharField(max_length=20)
     email = models.EmailField(max_length=30)
     content = models.TextField(max_length=150)

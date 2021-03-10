@@ -68,11 +68,7 @@ class Gig(models.Model):
 
     # returns the name of the gig owner
     def __str__(self):
-<<<<<<< HEAD
-        return f'{self.user.username}-{self.title}'
-=======
         return f'{self.title}'
->>>>>>> sajad
 
     def get_absolute_url(self):
         return f'/gigs/gig-detail/{self.id}/'

@@ -13,8 +13,7 @@ from django.conf import settings
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-
-from order.models import Transaction
+from order.models import Transaction, OrderDetail
 from order.forms import OrderForm
 from .forms import GigForm
 
@@ -58,9 +57,11 @@ class GigList(ListView):
 # GIG + COMMENTS
 def gig_detail(request, pk):
     gig = Gig.objects.get_by_id(pk)
-    #info = gig.comment_gig.all()
+    order_form = OrderForm(request.POST or None, initial={'count': 0, 'gig_id': pk})
     info = Comment.objects.filter(status=True, gig=gig)
     comment = ''
+    cmform = ''
+    buyer = Transaction.objects.filter(gig=gig)
     if request.method == "POST":
         cmform = CommentForm(request.POST)
         if cmform.is_valid():
@@ -69,16 +70,17 @@ def gig_detail(request, pk):
             comment.gig = gig
             comment.publish = timezone.now()
             comment.save()
-           
+            messages.success(request, 'comment added')
     else:
-        order_form = OrderForm(request.POST or None, initial={'count': 0, 'gig_id': pk})
         cmform = CommentForm()
         if not gig:
             raise Http404('یافت نشد')
+    
     context = {'info': info, 
                'cmform': cmform,
                'gig': gig,
                'order_form': order_form,
+               'buyer': buyer,
     }
     return render(request, 'gigs/gig_detail.html', context)
 
@@ -96,6 +98,7 @@ def update_comment(request, pk):
         if my_form.is_valid():
             comment = my_form.save(commit=False)
             comment.save()
+            return redirect('/gigs/gigs-list')
     context = {
         'detail': detail,
         'my_form': my_form,
@@ -109,7 +112,7 @@ def delete_comment(request, id):
     obj = Comment.objects.get(id = id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('gig:my_gigs')
+        return redirect('/gigs/gigs-list')
     return render(request, "delete_cm.html", context)
 
 
