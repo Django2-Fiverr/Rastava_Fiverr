@@ -13,8 +13,8 @@ User = get_user_model()
 # This function splits file name and its format ( one.jpg -> one + .jpg )
 def split_name(file_name):
     base_name = os.path.basename(file_name)
-    name, format = os.path.splitext(base_name)
-    return name, format
+    name, ext = os.path.splitext(base_name)
+    return name, ext
 
 
 # This function changes default file name and uses the same format ( one.jpg -> two.jpg )

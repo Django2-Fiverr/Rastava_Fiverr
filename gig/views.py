@@ -9,6 +9,7 @@ from order.models import Transaction
 from order.forms import OrderForm
 from .models import Gig
 from .forms import GigForm, TransactionForm
+from category.models import Category
 
 User = get_user_model()
 
@@ -56,9 +57,11 @@ def gig_detail(request, pk):
     order_form = OrderForm(request.POST or None, initial={'deadline': 0, 'gig_id': pk})
     if not gig:
         raise Http404('یافت نشد')
+    category = Category.objects.all()
     context = {
         'gig': gig,
         'order_form': order_form,
+        'categories': category,
     }
     return render(request, 'gigs/gig_detail.html', context)
 
@@ -115,9 +118,9 @@ class UserGigList(ListView):
 
 @login_required
 def edit_gig(request, id):
-    gig = get_object_or_404(Gig,id = id)
+    gig = get_object_or_404(Gig, id=id)
     if request.user != gig.user:
-        return render(request,'gigs/deny_edit.html')
+        return render(request, 'gigs/deny_edit.html')
     form = GigForm(instance=gig)
     if request.method == 'POST':
         form = GigForm(instance=request.user.gig_set.filter(id=id).first(),

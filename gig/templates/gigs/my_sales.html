@@ -100,7 +100,7 @@
                                 </a>
                             </td>
                             </tr>
-                            <tr>
+                            <tr class="row pull-left">
                                 {% if not item.expiration %}
                                     <td style="align-items: center;">
 
@@ -108,7 +108,7 @@
                                               action="{% url 'gig:deliver' item.id %}">
                                             {% csrf_token %}
                                             {{ form.as_p }}
-                                            <button type="submit" class="btn btn-success nav">تحویل سفارش</button>
+                                            <button type="submit" class="btn btn-success nav btn-block">ارسال محتوا</button>
                                         </form>
                                     </td>
                                 {% endif %}

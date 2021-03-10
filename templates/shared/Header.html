@@ -94,23 +94,25 @@
                     <div class="mainmenu pull-right">
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li><a href="/" class="active">خـانه</a></li>
-                            <li class="dropdown"><a href="#">فروشگـاه<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="{% url 'gig:gig_list' %}">محصولات</a></li>
-                                    <li><a href="#">جزئیات محصولات</a></li>
-                                    <li><a href="#">پرداخت</a></li>
-                                    <li><a href="#">سبـد خریـد</a></li>
-                                    <li><a href="{% url 'user:login' %}">ورود</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown"><a href="#">اخبـار<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="#">آخریـن اخبـار</a></li>
-                                    <li><a href="#">صفحـه خبـر</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">درباره مـا</a></li>
-                            <li><a href="#">تماس با مـا</a></li>
+                            <li><a href="{% url 'gig:gig_list' %}">فروشگاه</a></li>
+
+                            {% for category in categories %}
+
+
+                                <li class="dropdown"><a href="#">{{ category.name }}<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        {% for field in category.field_set.all %}
+                                            <li><a href="{% url 'gig:grouping' field %}">{{ field.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+
+
+                            {% endfor %}
+
+
+                            <li><a href="{% url 'site-info:about-us' %}">درباره مـا</a></li>
+                            <li><a href="{% url 'site-info:contact-us' %}">تماس با مـا</a></li>
                         </ul>
                     </div>
                 </div>

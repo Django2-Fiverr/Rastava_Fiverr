@@ -37,3 +37,9 @@ class TransactionForm(forms.ModelForm):
             'file',
             # 'pk',
         )
+        widgets = {
+            'file': forms.FileInput(attrs={'class': 'btn btn-info'})
+        }
+        labels={
+            'file' : 'ارسال فایل'
+        }
