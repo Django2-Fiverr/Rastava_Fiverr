@@ -293,7 +293,7 @@ a#scrollUp i {
     border: 2px solid #424141;
     /* background: #F0F0E9; */
     border-radius: 50px;
-    color: #B2B2B2;
+    color: #0c0c0c;
     font-family: 'BYekan';
     font-size: 12px;
     font-weight: 300;
@@ -645,7 +645,7 @@ ul.sub-menu {
 }
 
 .carousel-indicators li.active {
-    background: #FE980F;
+    background: #42075b;
 }
 
 .item {
@@ -1686,9 +1686,10 @@ h2.title {
 }
 
 .breadcrumbs .breadcrumb li a {
-    background: #FE980F;
+    background: #42075b;
     color: #FFFFFF;
     padding: 3px 10px;
+    text-decoration: none;
 }
 
 .breadcrumbs .breadcrumb li a:after {
@@ -1697,7 +1698,8 @@ h2.title {
     width: auto;
     border-width: 8px;
     border-style: solid;
-    border-color: transparent #FE980F transparent transparent;
+    border-color: transparent #42075b transparent transparent;
+    text-decoration: none;
     position: absolute;
     top: 11px;
     right: 42px;
@@ -1754,12 +1756,13 @@ h2.title {
 #cart_items .cart_info .cart_description h4 a {
     color: #363432;
     font-family: 'BYekan', sans-serif;
-    font-size: 16pt;
+    font-size: 14pt;
     font-weight: normal;
 
 }
 
 #cart_items .cart_info .cart_description p {
+    padding-right: 8px;
     color: #696763
 }
 
@@ -1771,7 +1774,7 @@ h2.title {
 
 
 #cart_items .cart_info .cart_total_price {
-    color: #FE980F;
+    color: #42075b;
     font-size: 16pt;
 }
 
@@ -1794,6 +1797,7 @@ h2.title {
 
 
 .cart_quantity_input {
+    margin-right: 60px;
     color: #696763;
     float: right;
     font-size: 16px;
@@ -1849,7 +1853,7 @@ h2.title {
 }
 
 #do_action .heading h3 {
-    color: #FC9D1E;
+    color: #42075b;
     font-size: 16pt !important;
 }
 
@@ -1965,7 +1969,7 @@ h2.title {
 }
 
 .update, .check_out {
-    background: #FE980F;
+    background: #42075b;
     border-radius: 0;
     color: #FFFFFF;
     margin-top: 8px;

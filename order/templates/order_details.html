@@ -6,7 +6,7 @@
     <div class="container">
         <div class="breadcrumbs">
             <ol class="breadcrumb">
-                <li><a href="#">خانـه</a></li>
+                <li><a href="/">خانـه</a></li>
                 <li class="active">پرداخت</li>
             </ol>
         </div><!--/breadcrums-->
@@ -16,9 +16,8 @@
             <thead>
             <tr class="cart_menu">
                 <td class="image">تصویر</td>
-                <td class="pull-right">نام</td>
-                <td class="quantity pull-left">مهلت تحویل</td>
-                <td class=""></td>
+                <td>نام</td>
+                <td class="quantity">مهلت تحویل</td>
                 <td class="total">مجمـوع</td>
                 <td class="total">حذف</td>
                 <td></td>
@@ -37,7 +36,7 @@
                     </td>
                     {% endif %}
                     <td class="cart_description">
-                        <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.title }}</a>
+                        <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.field }}</a>
                         </h4>
                         <p>کد گیگ مورد نظر : {{ item.gig.id }}</p>
                     </td>
@@ -54,7 +53,7 @@
                     <td class="cart_total ">
                         <p class="cart_total_price" style="margin-right: 60px">{{ item.price }} تومان</p>
                     </td>
-                    <td class="cart_delete pull-left">
+                    <td class="cart_delete">
                         <a class="cart_quantity_delete" href="{% url 'order:delete-order' item.id %}"><i
                                 class="fa fa-times"></i></a>
                     </td>

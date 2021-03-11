@@ -6,7 +6,7 @@
         <div class="container">
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
-                    <li><a href="#">خانـه</a></li>
+                    <li><a href="/">خانـه</a></li>
                     <li class="active">پرداخت</li>
                 </ol>
             </div><!--/breadcrums-->
@@ -16,20 +16,19 @@
                 <thead>
                 <tr class="cart_menu">
                     <td class="image">تصویر</td>
-                    <td class="pull-right">نام</td>
-                    <td class="quantity pull-left" style="margin-right: 50px;">مهلت باقیمانده</td>
-                    <td class=""></td>
+                    <td class="">نام</td>
+                    <td class="quantity" style="margin-right: 50px;">مهلت باقیمانده</td>
                     <td class="total">قیمت</td>
-                    <td class="total pull-left"> نام فروشنده</td>
+                    <td class="total"> نام فروشنده</td>
                     <td></td>
                 </tr>
                 </thead>
                 <tbody>
                 {% for item in gigs %}
-                    <tr>
+                    <tr style="text-align: center">
                         {% if item.gig.image %}
                             <td class="cart_product">
-                                <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt=""></a>
+                                <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt="" style="margin-left:20px"></a>
                             </td>
                         {% else %}
                             <td class="cart_product">
@@ -38,7 +37,7 @@
                             </td>
                         {% endif %}
                         <td class="cart_description">
-                            <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.title }}</a>
+                            <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.field }}</a>
                             </h4>
                             <p>کد گیگ مورد نظر : {{ item.gig.id }}</p>
                         </td>
@@ -76,7 +75,7 @@
                         </td>
                         <td class="cart_total ">
                             <a href="{% url 'proFile:profile' item.seller.id %}"><p
-                                    class="cart_total_price pull-left">{{ item.seller.get_full_name }} </p></a>
+                                    class="cart_total_price">{{ item.seller.get_full_name }} </p></a>
                         </td>
                         {% if item.delivery_status %}
                             <td>

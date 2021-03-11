@@ -6,7 +6,7 @@
         <div class="container">
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
-                    <li><a href="#">خانـه</a></li>
+                    <li><a href="/">خانـه</a></li>
                     <li class="active">پرداخت</li>
                 </ol>
             </div><!--/breadcrums-->
@@ -16,20 +16,20 @@
                 <thead>
                 <tr class="cart_menu">
                     <td class="image">تصویر</td>
-                    <td class="pull-right">نام</td>
-                    <td class="quantity pull-left" style="margin-right: 50px;">مهلت باقیمانده</td>
-                    <td class=""></td>
+                    <td class="">نام</td>
+                    <td class="quantity" style="margin-right: 50px;">مهلت باقیمانده</td>
                     <td class="total">قیمت</td>
-                    <td class="total pull-left"> نام خریدار</td>
+                    <td class="total"> نام خریدار</td>
                     <td></td>
                 </tr>
                 </thead>
                 <tbody>
                 {% for item in gigs %}
-                    <tr>
+                    <tr style="text-align: center">
                         {% if item.gig.image %}
                             <td class="cart_product">
-                                <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt=""></a>
+                                <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt=""
+                                                style="border-radius:20px;border:solid 3px #42075b"></a>
                             </td>
                         {% else %}
                             <td class="cart_product">
@@ -38,7 +38,7 @@
                             </td>
                         {% endif %}
                         <td class="cart_description">
-                            <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.title }}</a>
+                            <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.field }}</a>
                             </h4>
                             <p>کد گیگ مورد نظر : {{ item.gig.id }}</p>
                         </td>
@@ -55,7 +55,7 @@
                             <td class="cart_total ">
                                 <a href="{% url 'proFile:profile' item.client.id %}">
                                     <p
-                                            class="cart_total_price pull-left">{{ item.client.get_full_name }}
+                                            class="cart_total_price">{{ item.client.get_full_name }}
                                     </p>
                                 </a>
                             </td>
@@ -95,24 +95,26 @@
                             <td class="cart_total ">
                                 <a href="{% url 'proFile:profile' item.client.id %}">
                                     <p
-                                            class="cart_total_price pull-left">{{ item.client.get_full_name }}
+                                            class="cart_total_price">{{ item.client.get_full_name }}
                                     </p>
                                 </a>
                             </td>
                             </tr>
-                            <tr class="row pull-left">
+                            <td>
                                 {% if not item.expiration %}
-                                    <td style="align-items: center;">
+                                    <td>
 
                                         <form method="POST" enctype="multipart/form-data"
                                               action="{% url 'gig:deliver' item.id %}">
                                             {% csrf_token %}
-                                            {{ form.as_p }}
-                                            <button type="submit" class="btn btn-success nav btn-block">ارسال محتوا</button>
+                                            <div class="">{{ form.as_p }}</div>
+                                            <button type="submit" class="btn btn-success btn nav">ارسال محتوا</button>
                                         </form>
                                     </td>
                                 {% endif %}
-                            </tr>
+                            </td>
+                            <br><br>
+                            <br><br>
                         {% endif %}
                 {% endfor %}
                 {% else %}
