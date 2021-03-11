@@ -6,8 +6,6 @@
 {% block content %}
 
 
-
-
     <div style="margin: 30px 0px;">
         <div id="myCarousel" class="carousel slide" data-ride="carousel"
              style="display: flex; justify-content: center; align-items: center; padding-right: 100px; text-align: right;">
@@ -16,36 +14,48 @@
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+                <li data-target="#myCarousel" data-slide-to="4"></li>
+                <li data-target="#myCarousel" data-slide-to="5"></li>
+                <li data-target="#myCarousel" data-slide-to="6"></li>
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" style="display: flex; justify-content: center; align-items: center;">
 
-                <div class="item active">
-                    <img src="{% static 'images/home/slider1.jpg' %}" alt="Los Angeles"
-                         style="width: 1400px; height: 500px;">
-                    <div class="carousel-caption" style="position: absolute; top: 0px; right: 60%;">
-                        <h3 style="font-size: 40px; background-color: #ff0655; padding: 10px 0px; opacity: 0.8; border-radius: 50px;">
-                            خرید آسان</h3>
-                    </div>
+                <div class="item active" >
+                    <img src="{% static 'images/home/sample.jpeg' %}" alt="Los Angeles"
+                         style="width: 1400px; height: 500px;border:solid 6px #4f0c93">
                 </div>
 
                 <div class="item">
-                    <img src="{% static 'images/home/slider2.jpg' %}" alt="Chicago"
-                         style="width: 1400px; height: 500px;">
-                    <div class="carousel-caption" style="position: absolute; top: 0px; right: 60%;">
-                        <h3 style="font-size: 40px; background-color: #ff0655; padding: 10px 0px; opacity: 0.8; border-radius: 50px;">
-                            خدمات بهتر</h3>
-                    </div>
+                    <img src="{% static 'images/home/sample1.jpeg' %}" alt="Chicago"
+                         style="width: 1400px; height: 500px;border:solid 6px #4f0c93">
                 </div>
 
                 <div class="item">
-                    <img src="{% static 'images/home/slider3.jpg' %}" alt="New York"
-                         style="width: 1400px; height: 500px;">
-                    <div class="carousel-caption" style="position: absolute; top: 0px; right: 60%;">
-                        <h3 style="font-size: 40px; background-color: #ff0655; padding: 10px 0px; opacity: 0.8; border-radius: 50px;">
-                            کیفیت برتر</h3>
-                    </div>
+                    <img src="{% static 'images/home/sample2.jpeg' %}" alt="New York"
+                         style="width: 1400px; height: 500px;border:solid 6px #4f0c93">
+                </div>
+
+                <div class="item">
+                    <img src="{% static 'images/home/sample3.jpeg' %}" alt="New York"
+                         style="width: 1400px; height: 500px;border:solid 6px #4f0c93">
+                </div>
+
+                <div class="item">
+                    <img src="{% static 'images/home/sample4.jpeg' %}" alt="New York"
+                         style="width: 1400px; height: 500px;border:solid 6px #4f0c93">
+                </div>
+
+                <div class="item">
+                    <img src="{% static 'images/home/sample5.jpeg' %}" alt="New York"
+                         style="width: 1400px; height: 500px;border:solid 6px #4f0c93">
+                </div>
+
+                <div class="item">
+                    <img src="{% static 'images/home/sample6.jpeg' %}" alt="New York"
+                         style="width: 1400px; height: 500px;border:solid 6px #4f0c93">
                 </div>
 
             </div>
@@ -94,7 +104,7 @@
                                                                  alt=""/>
                                                         </a>
                                                     {% endif %}
-                                                    <h2>{{ gig.cost }} تومان</h2>
+                                                    <h2>{{ gig.re_format_cost }} تومان</h2>
                                                     <p>{{ gig.field }}</p>
                                                     <a href="{% url 'gig:gig_detail' gig.id %}"
                                                        class="btn btn-default add-to-cart"><i
@@ -126,7 +136,7 @@
                                                                  alt=""/>
                                                         </a>
                                                     {% endif %}
-                                                    <h2>{{ gig.cost }} تومان</h2>
+                                                    <h2>{{ gig.re_format_cost }} تومان</h2>
                                                     <p>{{ gig.field }}</p>
                                                     <a href="{% url 'gig:gig_detail' gig.id %}"
                                                        class="btn btn-default add-to-cart"><i
@@ -179,7 +189,7 @@
                                                                          alt=""/>
                                                                 </a>
                                                             {% endif %}
-                                                            <h2>{{ gig.cost }} تومان</h2>
+                                                            <h2>{{ gig.re_format_cost }} تومان</h2>
                                                             <p>{{ gig.field }}</p>
                                                             <a href="{% url 'gig:gig_detail' gig.id %}"
                                                                class="btn btn-default add-to-cart"><i
@@ -216,7 +226,7 @@
                                                                          alt=""/>
                                                                 </a>
                                                             {% endif %}
-                                                            <h2>{{ gig.cost }} تومان</h2>
+                                                            <h2>{{ gig.re_format_cost }} تومان</h2>
                                                             <p>{{ gig.field }}</p>
                                                             <a href="{% url 'gig:gig_detail' gig.id %}"
                                                                class="btn btn-default add-to-cart"><i
@@ -272,7 +282,7 @@
                                                                          alt=""/>
                                                                 </a>
                                                             {% endif %}
-                                                            <h2>{{ gig.cost }} تومان</h2>
+                                                            <h2>{{ gig.re_format_cost }} تومان</h2>
                                                             <p>{{ gig.field }}</p>
                                                             <a href="{% url 'gig:gig_detail' gig.id %}"
                                                                class="btn btn-default add-to-cart"><i
@@ -308,7 +318,7 @@
                                                                          alt=""/>
                                                                 </a>
                                                             {% endif %}
-                                                            <h2>{{ gig.cost }} تومان</h2>
+                                                            <h2>{{ gig.re_format_cost }} تومان</h2>
                                                             <p>{{ gig.field }}</p>
                                                             <a href="{% url 'gig:gig_detail' gig.id %}"
                                                                class="btn btn-default add-to-cart"><i

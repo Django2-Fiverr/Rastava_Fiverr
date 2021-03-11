@@ -46,7 +46,7 @@
                                 </div>
                                 <div>
 									<span>
-										<span>قیمت : {{ gig.cost }} تومان</span>
+										<span>قیمت : {{ gig.re_format_cost }} تومان</span>
 									</span>
                                     {% if not request.user == gig.user %}
                                         <form method="post" action="{% url 'order:add-order' %}">

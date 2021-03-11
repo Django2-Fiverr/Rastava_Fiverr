@@ -1,14 +1,27 @@
 from django.contrib import admin
-from .models import Comment
+from .models import Comment, ReplyComment
 
 
 def approve_comments(modeladmin, request, queryset):
     number = queryset.update(status=True)
     if number == 1:
-        message = 'یک پیام '
+        message = 'یک مورد '
     else:
-        message = '{} پیام '.format(number)
-    modeladmin.message_user(request, '{}'.format(message))
+        message = '{} مورد '.format(number)
+    modeladmin.message_user(request, '{} با موفقیت منتشر شدند.'.format(message))
+
+
+def disable_comments(modeladmin, queryset, request):
+    number = queryset.update(status=False)
+    if number == 1:
+        result = ' یک مورد'
+    else:
+        result = f'{number} مورد '
+    modeladmin.message_user(request, f'{result} باموفقیت غیر فعال شدند ')
+
+
+approve_comments.short_description = 'تغییر وضعیت به حالت انتشار'
+disable_comments.short_description = 'تغییر وضعیت به حالت غیر فعال'
 
 
 @admin.register(Comment)
@@ -16,4 +29,12 @@ class CommentsAdmin(admin.ModelAdmin):
     list_display = ('gig', 'user', 'content', 'publish', 'status')
     list_filter = ('status', 'publish')
     search_fields = ('content',)
-    actions = ['approve_comments']
+    actions = [approve_comments,disable_comments]
+
+
+@admin.register(ReplyComment)
+class ReplyAdmin(admin.ModelAdmin):
+    list_display = ('comment', 'create', 'publish', 'status')
+    list_filter = ('comment', 'create', 'publish', 'status')
+    search_fields = ('comment', 'create', 'publish', 'status')
+    actions = [approve_comments,disable_comments]

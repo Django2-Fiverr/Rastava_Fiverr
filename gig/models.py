@@ -71,3 +71,17 @@ class Gig(models.Model):
 
     def get_absolute_url(self):
         return f'/gigs/gig-detail/{self.id}/'
+
+    def re_format_cost(self):
+        counter = 1
+        temp_var = list()
+        cost = str(self.cost)
+        for num in reversed(cost):
+            if counter % 3 == 0:
+                temp_var.append(num)
+                temp_var.append('/')
+            else:
+                temp_var.append(num)
+            counter += 1
+        result = ''.join(reversed(temp_var))
+        return result.strip('/')

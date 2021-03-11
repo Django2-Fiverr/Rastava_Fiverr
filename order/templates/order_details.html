@@ -51,7 +51,7 @@
                     </td>
 
                     <td class="cart_total ">
-                        <p class="cart_total_price" style="margin-right: 60px">{{ item.price }} تومان</p>
+                        <p class="cart_total_price" style="margin-right: 60px">{{ item.gig.re_format_cost }} تومان</p>
                     </td>
                     <td class="cart_delete">
                         <a class="cart_quantity_delete" href="{% url 'order:delete-order' item.id %}"><i
@@ -84,7 +84,6 @@
                 <ul>
                     <li>مجمـوع سبـد خریـد <span>{{ order.convert_total_price }} تومان</span></li>
                     <li>مالیـات (9%) <span>{{ order.calculate_taxes }} تومان</span></li>
-                    <li>هزینـه حمل و نقـل <span>رایـگان</span></li>
                     <li>مجمـوع <span>{{ order.convert_total_payment_price }} تومان</span></li>
                 </ul>
                 <a class="btn btn-default update" href="{% url 'gig:gig_list' %}">به روز رسانی سبـد خریـد </a>

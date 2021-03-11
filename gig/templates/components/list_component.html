@@ -9,7 +9,7 @@
                     {% else %}
                         <img src="{% static 'images/product-details/1.jpg' %}" width="200" height="200" alt="">
                     {% endif %}
-                    <h2>{{ gig.cost }} تومان</h2>
+                    <h2>{{ gig.re_format_cost }} تومان</h2>
                     <p>{{ gig.title }}</p>
                     <a href="{{ gig.get_absolute_url }}" class="btn btn-default add-to-cart"><i
                             class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>

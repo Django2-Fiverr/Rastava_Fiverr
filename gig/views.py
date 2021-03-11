@@ -1,14 +1,14 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
-from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
-from django.contrib.auth import get_user_model
+from django.shortcuts import render, redirect, get_object_or_404
 
+from .forms import GigForm, TransactionForm
+from .models import Gig
 from order.models import Transaction
 from order.forms import OrderForm
-from .models import Gig
-from .forms import GigForm, TransactionForm
 from category.models import Category
 
 User = get_user_model()

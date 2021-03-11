@@ -8,6 +8,20 @@ from gig.models import Gig
 User = get_user_model()
 
 
+def re_format_cost(self, price):
+    counter = 1
+    temp_var = list()
+    for num in reversed(str(price)):
+        if counter % 3 == 0:
+            temp_var.append(num)
+            temp_var.append('/')
+        else:
+            temp_var.append(num)
+        counter += 1
+    result = ''.join(reversed(temp_var))
+    return result.strip('/')
+
+
 def split_name(file_name):
     base_name = os.path.basename(file_name)
     name, ext = os.path.splitext(base_name)
@@ -19,7 +33,7 @@ def split_name(file_name):
 def get_name(instance, file_name):
     name, ext = split_name(file_name)
     current_time = datetime.date.today()
-    new_name = '{}-{}-{}{}'.format(str(current_time),instance.gig.title, instance.client, ext)
+    new_name = '{}-{}-{}{}'.format(str(current_time), instance.gig.title, instance.client, ext)
     return 'transaction/{}/{}'.format(instance.seller, new_name)
 
 
@@ -47,21 +61,21 @@ class Order(models.Model):
 
     def convert_total_price(self):
         price = self.get_total_price()
-        return format(price, ',.2f')
+        return re_format_cost(self,price)
 
     def calculate_taxes(self):
         taxes = self.get_total_price() * 0.09
-        return format(taxes, ',.2f')
+        return re_format_cost(self,int(taxes))
 
     def get_total_payment_price(self):
         result = self.get_total_price() * 1.09 * 10
         return round(result, 2)
 
     def convert_total_payment_price(self):
-        price = self.get_total_payment_price() / 10
-        return format(price, ',.2f')
+        price = self.get_total_price()
+        return re_format_cost(self,price)
 
-    get_total_price.short_description = 'قیمت کل سبد خرید'
+    convert_total_payment_price.short_description = 'قیمت کل سبد خرید'
     show_gigs.short_description = 'محتویات سبد خرید'
 
 
