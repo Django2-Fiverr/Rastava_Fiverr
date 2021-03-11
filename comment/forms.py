@@ -5,10 +5,13 @@ from .models import ReplyComment
 
 
 class CommentForm(forms.ModelForm):
+    pk = forms.IntegerField(widget=forms.HiddenInput())
+
     class Meta:
         model = Comment
         fields = (
             'content',
+            'pk',
         )
         widgets = {
             'content': forms.Textarea(attrs={'class': 'form-control'}),
@@ -16,10 +19,13 @@ class CommentForm(forms.ModelForm):
 
 
 class ReplyForm(forms.ModelForm):
+    pk = forms.IntegerField(widget=forms.HiddenInput())
+
     class Meta:
         model = ReplyComment
         fields = (
             'content',
+            'pk',
         )
 
         widgets = {
