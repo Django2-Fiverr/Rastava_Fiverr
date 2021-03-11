@@ -1,7 +1,7 @@
 {% extends 'shared/_MainLayout.html' %}
 {% load static %}
 
-{% block title %}فهرست گیگ ها{% endblock %}
+{% block title %}فهرست پست ها{% endblock %}
 
 {% block content %}
     <section>
@@ -10,14 +10,12 @@
 
                 <div class="col-sm-12">
                     <div class="features_items"><!--features_items-->
-                        {% block sell %}{% endblock %}
-                        <h2 class="title text-center">لیست گیگ ها</h2>
-                        {% for gig in page_obj %}
+                        <h2 class="title text-center">لیست پست ها</h2>
+                        {% for field in page_obj %}
                             {% block list %}
-                                {% include 'components/list_component.html' with gig=gig %}
+                                {% include 'components/list_components.html' with field=field %}
                             {% endblock %}
                         {% endfor %}
-
 
                         <div class="clearfix"></div>
                         <ul class="pagination">

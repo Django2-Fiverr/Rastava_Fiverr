@@ -97,18 +97,19 @@
                     <div class="view-product col-md-offset-3" style="width:320px;height: 250px">
 
                         {% if profile.image %}
-                            <img src="{{ profile.image.url }}" alt="">
+                            <img src="{{ profile.image.url }}" alt=""  style="border-color:#42075b;border-width: 5px;">
                         {% else %}
-                            <img src="{% static 'images/product-details/1.jpg' %}" alt="">
+                            <img src="{% static 'images/product-details/1.jpg' %}" alt=""  style="border-color:#42075b;border-width: 5px;">
                         {% endif %}
 
                     </div>
 
                 </div>
                 <div class="col-sm-7">
-                    <div class="product-information"><!--/product-information-->
+                    <div class="product-information" style="font-size: 16px"><!--/product-information-->
                         <div>
-                            <h2>مشخصات کاربر</h2>
+                            <h1> {{ test }} </h1>
+                            <h3>مشخصات کاربر</h3>
                             <br>
                             <h3 style="color: tomato">{{ profile.user.first_name }} {{ profile.user.last_name }}</h3>
                             <br>

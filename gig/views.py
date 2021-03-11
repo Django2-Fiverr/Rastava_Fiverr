@@ -12,6 +12,7 @@ from .forms import GigForm, TransactionForm
 from category.models import Category
 
 User = get_user_model()
+category = Category.objects.all()
 
 
 @login_required
@@ -19,7 +20,8 @@ def create_gig(request):
     if request.method == 'POST':
         form = GigForm(data=request.POST, files=request.FILES)
         context = {
-            'form': form
+            'form': form,
+            'categories': category,
         }
         if form.is_valid():
             data = form.cleaned_data
@@ -32,6 +34,7 @@ def create_gig(request):
             'text': 'ایجاد گیگ',
             'operation': 'ایجاد گیگ جدید',
             'title': 'ایجاد گیگ',
+            'categories': category,
         }
     # return render(request, 'gigs/gig_operation.html', context)
     return render(request, 'gigs/gig_operation.html', context)
@@ -43,13 +46,13 @@ class GigList(ListView):
     context_object_name = 'gigs'
     paginate_by = 9
 
-    def get_queryset(self):
-        return Gig.objects.get_active_gigs()
-
     def get_context_data(self, *args, **kwargs):
         context = super(GigList, self).get_context_data(*args, **kwargs)
-        context['test'] = 'Hello men'
+        context['categories'] = category
         return context
+
+    def get_queryset(self):
+        return Gig.objects.get_active_gigs()
 
 
 def gig_detail(request, pk):
@@ -57,7 +60,6 @@ def gig_detail(request, pk):
     order_form = OrderForm(request.POST or None, initial={'deadline': 0, 'gig_id': pk})
     if not gig:
         raise Http404('یافت نشد')
-    category = Category.objects.all()
     context = {
         'gig': gig,
         'order_form': order_form,
@@ -66,11 +68,16 @@ def gig_detail(request, pk):
     return render(request, 'gigs/gig_detail.html', context)
 
 
-class SearchGig(LoginRequiredMixin, ListView):
+class SearchGig(ListView):
     model = Gig
     template_name = 'gigs/gig_list.html'
     context_object_name = 'gigs'
     paginate_by = 9
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SearchGig, self).get_context_data(*args, **kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
     def get_queryset(self):
         request = self.request
@@ -87,10 +94,15 @@ class GroupingGigs(ListView):
     context_object_name = 'gigs'
     paginate_by = 9
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(GroupingGigs, self).get_context_data(*args, **kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
     def get_queryset(self):
         title = self.kwargs.get('title')
         result = Gig.objects.grouping_gigs(title)
-        return result if result else Gig.objects.get_active_gigs()
+        return result if result else Gig.objects.none()
 
 
 class MyGigList(LoginRequiredMixin, ListView):
@@ -98,6 +110,11 @@ class MyGigList(LoginRequiredMixin, ListView):
     template_name = 'components/my_gig.html'
     context_object_name = 'gigs'
     paginate_by = 9
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MyGigList, self).get_context_data(*args, **kwargs)
+        context['categories'] = category
+        return context
 
     def get_queryset(self):
         request = self.request
@@ -114,6 +131,11 @@ class UserGigList(ListView):
         pk = self.kwargs.get('pk')
         user = User.objects.filter(id=pk).first()
         return Gig.objects.filter(user=user, active=True)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserGigList, self).get_context_data(*args, **kwargs)
+        context['categories'] = category
+        return context
 
 
 @login_required
@@ -134,6 +156,7 @@ def edit_gig(request, id):
         'text': 'اعمال ویرایش',
         'operation': 'ویرایش گیگ',
         'title': 'ویرایش گیگ',
+        'categories': category,
     }
     return render(request, 'gigs/gig_operation.html', context)
 
@@ -145,6 +168,7 @@ def my_sales(request):
     context = {
         'gigs': gigs,
         'form': form,
+        'categories': category,
     }
     return render(request, 'gigs/my_sales.html', context)
 
@@ -153,7 +177,8 @@ def my_sales(request):
 def my_purchases(request):
     gigs = Transaction.objects.filter(client=request.user)
     context = {
-        'gigs': gigs
+        'gigs': gigs,
+        'categories': category,
     }
     return render(request, 'gigs/my_purchases.html', context)
 
@@ -164,7 +189,8 @@ def delete_confirmation(request, pk):
     if request.user != gig.user:
         raise Http404('You dont have permission to modify others services')
     context = {
-        'pk': pk
+        'pk': pk,
+        'categories': category,
     }
     return render(request, 'gigs/delete_confirmation.html', context)
 

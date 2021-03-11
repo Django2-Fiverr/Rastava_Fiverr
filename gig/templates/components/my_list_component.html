@@ -4,9 +4,13 @@
         <div class="single-products">
             <div class="productinfo text-center">
                 {% if gig.image %}
-                    <img src="{{ gig.image.url }}" width="200" height="200" alt="">
+                    <a href="{{ gig.get_absolute_url }}">
+                        <img src="{{ gig.image.url }}" width="200" height="200" alt="">
+                    </a>
                 {% else %}
-                    <img src="{% static 'images/product-details/1.jpg' %}" width="200" height="200" alt="">
+                    <a href="{{ gig.get_absolute_url }}">
+                        <img src="{% static 'images/product-details/1.jpg' %}" width="200" height="200" alt="">
+                    </a>
                 {% endif %}
                 <h2>{{ gig.cost }} تومان</h2>
                 <p>{{ gig.title }}</p>

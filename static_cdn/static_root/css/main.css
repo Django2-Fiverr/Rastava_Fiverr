@@ -68,7 +68,7 @@ a#scrollUp {
   bottom: 0px;
   right: 10px;
   padding: 5px 10px;
-  background: #FE980F;
+  background: #42075b;
   color: #FFF;
   /* -webkit-animation: bounce 2s ease infinite;
   animation: bounce 2s ease infinite; */
@@ -254,7 +254,7 @@ a#scrollUp i{
 
 .header-bottom {
   padding: 20px;
-  background-color: #563b6b;
+  background-color: #42075b;
   color: white;
 }
 
@@ -289,7 +289,7 @@ a#scrollUp i{
 
 .search_box input {
   text-align: right;
-  border: none;
+  border: 2px solid #424141;
   /* background: #F0F0E9; */
   border-radius: 50px;
   color: #B2B2B2;
@@ -912,7 +912,7 @@ h2.title:before{
 }
 
 h2.title {
-  color: #FE980F;
+  color: #42075b;
   font-family: 'BYekan', sans-serif;
   font-size: 16pt;
   font-weight: 400;
@@ -945,7 +945,7 @@ h2.title {
 }
 
 .productinfo h2{
-	color: #FE980F;
+	color: #42075b;
 	font-family: 'BYekan', sans-serif;
 	font-size: 24px;
 	font-weight: 700;
@@ -1158,7 +1158,7 @@ h2.title {
 }
 
 .recommended-item-control i:hover {
-  background: #FE980F;
+  background: #ac2cfc;
 }
 
 .recommended_items  h2 {

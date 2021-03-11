@@ -1,6 +1,7 @@
 import os
 
 from django.db import models
+from django.shortcuts import redirect
 
 
 def split_name(file_name):
@@ -16,7 +17,7 @@ def get_name(instance, file_name):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=20, help_text='Write a topic ex:photo edit, programming,...')
+    name = models.CharField(max_length=50, help_text='Write a topic ex:photo edit, programming,...')
 
     def __str__(self):
         return self.name
@@ -37,11 +38,19 @@ class Skills(models.Model):
         return self.name
 
 
+class FieldManager(models.Manager):
+
+    def get_fields(self, name):
+        return self.get_queryset().filter(category__name=name)
+
+
 class Field(models.Model):
     title = models.CharField(max_length=50, null=True, verbose_name='عنوان')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='موضوع')
     image = models.ImageField(upload_to=get_name, blank=True, null=True, verbose_name='تصویر')
     content = models.TextField(max_length=300, verbose_name='توضیحات', null=True, blank=True)
+
+    objects = FieldManager()
 
     class Meta:
         verbose_name = 'پست'
@@ -50,3 +59,6 @@ class Field(models.Model):
 
     def __str__(self):
         return self.title
+
+    # def get_absolute_url(self):
+    #     return redirect('/gigs/grouping/', self.title)

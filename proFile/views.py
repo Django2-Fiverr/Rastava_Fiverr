@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+
+from category.models import Category
 from proFile.models import Profile
 from proFile.forms import RegisterForm, UserEditForm
 from proFile.forms import ProfileEditForm
@@ -6,6 +8,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
+category = Category.objects.all()
 
 
 @login_required
@@ -13,7 +16,8 @@ def profile_view(request, pk):
     user = User.objects.filter(id=pk).first()
     context = {
         'profile': user.profile,
-        'pk':pk
+        'pk':pk,
+        'categories': category,
     }
     return render(request, 'profile_view.html', context)
 
@@ -51,5 +55,8 @@ def edit_profile(request):
             form.save()
             return redirect('proFile:profile', request.user.id)
 
-    context = {'form': form, 'profile_form': profile_form}
+    context = {'form': form,
+               'profile_form': profile_form,
+               'categories': category,
+               }
     return render(request, 'edit_profile.html', context)

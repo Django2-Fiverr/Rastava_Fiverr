@@ -26,7 +26,7 @@ from .models import Gig
 class GigForm(forms.ModelForm):
     class Meta:
         model = Gig
-        fields = ('title', 'category', 'cost', 'description', 'active', 'image')
+        fields = ('title', 'field', 'cost', 'description', 'active', 'image')
 
 
 class TransactionForm(forms.ModelForm):

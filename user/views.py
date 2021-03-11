@@ -1,11 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+
+from category.models import Category
 from .forms import LoginForm, RegisterForm
 from proFile.models import Profile
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
+category = Category.objects.all()
 
 
 # def login_user(request):
@@ -37,7 +40,8 @@ def login_user(request):
 
     form = LoginForm(request.POST or None)
     context = {
-        'form': form
+        'form': form,
+        'categories': category,
     }
     if form.is_valid():
         username = form.cleaned_data.get('username')
@@ -64,7 +68,8 @@ def register_user(request):
 
     form = RegisterForm(request.POST or None)
     context = {
-        'form': form
+        'form': form,
+        'categories': category,
     }
     if form.is_valid():
         data = form.cleaned_data

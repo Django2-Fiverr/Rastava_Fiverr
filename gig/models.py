@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from datetime import date
 
-from category.models import Category
+from category.models import Category, Field
 
 # use the custom user table ( the default one in settings.py)
 User = get_user_model()
@@ -42,13 +42,13 @@ class GigManager(models.Manager):
         return self.get_queryset().filter(lock_up, active=True).distinct()
 
     def grouping_gigs(self, title):
-        items = self.get_queryset().filter(category__name=title)
+        items = self.get_queryset().filter(field__title=title)
         return items
 
 
 class Gig(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, verbose_name='موضوع')
+    field = models.ForeignKey(Field, on_delete=models.CASCADE, null=True, verbose_name='پست')
     slug = models.SlugField(max_length=20, blank=True, verbose_name='پیوست')
     cost = models.IntegerField(verbose_name='قیمت')
     description = models.TextField(max_length=5000, verbose_name='توضیحات')
