@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Comment, ReplyComment
+from .models import Comment
 
 
 def approve_comments(modeladmin, request, queryset):
@@ -26,15 +26,7 @@ disable_comments.short_description = 'تغییر وضعیت به حالت غیر
 
 @admin.register(Comment)
 class CommentsAdmin(admin.ModelAdmin):
-    list_display = ('gig', 'user', 'content', 'publish', 'status')
+    list_display = ('gig', 'user','reply', 'content', 'publish', 'status')
     list_filter = ('status', 'publish')
     search_fields = ('content',)
-    actions = [approve_comments,disable_comments]
-
-
-@admin.register(ReplyComment)
-class ReplyAdmin(admin.ModelAdmin):
-    list_display = ('comment', 'create', 'publish', 'status')
-    list_filter = ('comment', 'create', 'publish', 'status')
-    search_fields = ('comment', 'create', 'publish', 'status')
     actions = [approve_comments,disable_comments]

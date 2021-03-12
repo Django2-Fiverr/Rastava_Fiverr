@@ -1,17 +1,8 @@
-import os
-
 from django.db import models
-from django.contrib.auth import get_user_model
 
 from category.models import Skills
-
-User = get_user_model()
-
-
-def split_name(file_name):
-    base_name = os.path.basename(file_name)
-    name, ext = os.path.splitext(base_name)
-    return name, ext
+from extensions.mainObjects import User
+from extensions.functions import split_name
 
 
 # This function changes default file name and uses the same format ( one.jpg -> two.jpg )

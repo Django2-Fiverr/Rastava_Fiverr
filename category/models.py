@@ -1,13 +1,5 @@
-import os
-
 from django.db import models
-from django.shortcuts import redirect
-
-
-def split_name(file_name):
-    base_name = os.path.basename(file_name)
-    name, ext = os.path.splitext(base_name)
-    return name, ext
+from extensions.functions import split_name
 
 
 def get_name(instance, file_name):

@@ -1,14 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 import datetime
 
-from category.models import Category
+from extensions.constants import CATEGORY
+from extensions.functions import create_time_object
 from gig.models import Gig
 from order.forms import OrderForm
 from order.models import Order, OrderDetail, Transaction
-
-category = Category.objects.all()
 
 
 def check(request, pk):
@@ -24,7 +22,7 @@ def add_order(request):
     order_form = OrderForm(request.POST or None)
     gig_id = order_form.data.get('gig_id')
     if check(request, gig_id):
-        return render(request, 'deny_buy_same_gig.html', {'categories': Category.objects.all()})
+        return render(request, 'deny_buy_same_gig.html', {'categories': CATEGORY})
     else:
         print('Hello man')
         if order_form.is_valid():
@@ -50,7 +48,7 @@ def order_details(requset):
     context = {
         'order': order,
         'order_items': order_items,
-        'categories': category,
+        'categories': CATEGORY,
     }
     return render(requset, 'order_details.html', context)
 
@@ -59,11 +57,6 @@ def delete_order(request, pk):
     item = OrderDetail.objects.get(id=pk)
     item.delete()
     return redirect('order:order-details')
-
-
-def create_time_object(time, deadline):
-    delta = datetime.timedelta(days=deadline)
-    return time + delta
 
 
 def create_transaction(request, order):

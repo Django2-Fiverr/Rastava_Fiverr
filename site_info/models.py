@@ -5,7 +5,7 @@ class Contact(models.Model):
     full_name = models.CharField(max_length=80, verbose_name='نام و نام خانوادگی')
     email = models.EmailField(verbose_name='ایمیل')
     subject = models.CharField(max_length=50, verbose_name='موضوع')
-    message = models.CharField(max_length=1000, verbose_name='متن پیام')
+    message = models.TextField(verbose_name='متن پیام')
     date = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ')
 
     class Meta:

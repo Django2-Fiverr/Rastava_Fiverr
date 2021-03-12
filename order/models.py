@@ -1,31 +1,14 @@
-import os
 import datetime
 
 from django.db import models
-from django.contrib.auth import get_user_model
+
 from gig.models import Gig
 
-User = get_user_model()
-
-
-def re_format_cost(self, price):
-    counter = 1
-    temp_var = list()
-    for num in reversed(str(price)):
-        if counter % 3 == 0:
-            temp_var.append(num)
-            temp_var.append('/')
-        else:
-            temp_var.append(num)
-        counter += 1
-    result = ''.join(reversed(temp_var))
-    return result.strip('/')
-
-
-def split_name(file_name):
-    base_name = os.path.basename(file_name)
-    name, ext = os.path.splitext(base_name)
-    return name, ext
+from extensions.mainObjects import User
+from extensions.functions import re_format_price
+from extensions.functions import split_name
+from extensions.functions import remaining_time
+from extensions.functions import get_total_price
 
 
 # This function changes default file name and uses the same format ( one.jpg -> two.jpg )
@@ -54,18 +37,15 @@ class Order(models.Model):
         return ' ,'.join(names)
 
     def get_total_price(self):
-        summation = 0
-        for item in self.orderdetail_set.all():
-            summation += item.price
-        return summation
+        return get_total_price(self)
 
     def convert_total_price(self):
         price = self.get_total_price()
-        return re_format_cost(self,price)
+        return re_format_price(price)
 
     def calculate_taxes(self):
         taxes = self.get_total_price() * 0.09
-        return re_format_cost(self,int(taxes))
+        return re_format_price(int(taxes))
 
     def get_total_payment_price(self):
         result = self.get_total_price() * 1.09 * 10
@@ -73,7 +53,7 @@ class Order(models.Model):
 
     def convert_total_payment_price(self):
         price = self.get_total_price()
-        return re_format_cost(self,price)
+        return re_format_price(price)
 
     convert_total_payment_price.short_description = 'قیمت کل سبد خرید'
     show_gigs.short_description = 'محتویات سبد خرید'
@@ -111,10 +91,4 @@ class Transaction(models.Model):
         verbose_name_plural = 'معاملات'
 
     def remaining_time(self):
-        date = self.deadline.date()
-        time = self.deadline.time()
-        result = datetime.datetime.combine(date, time) - datetime.datetime.now()
-        if result.days < 0:
-            self.expiration = True
-            self.save()
-        return result.days
+        return remaining_time(self)

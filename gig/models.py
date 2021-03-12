@@ -1,24 +1,13 @@
-import os
 from django.db import models
-from django.contrib.auth import get_user_model
+
+from extensions.functions import re_format_price, split_name
+from extensions.mainObjects import User
 from django.db.models import Q
 from datetime import date
 
 from category.models import Category, Field
 
-# use the custom user table ( the default one in settings.py)
-User = get_user_model()
 
-
-# This function splits file name and its format ( one.jpg -> one + .jpg )
-def split_name(file_name):
-    base_name = os.path.basename(file_name)
-    name, ext = os.path.splitext(base_name)
-    return name, ext
-
-
-# This function changes default file name and uses the same format ( one.jpg -> two.jpg )
-# it returns an address to save the uploaded image file
 def get_name(instance, file_name):
     name, ext = split_name(file_name)
     current_time = str(date.today())
@@ -65,7 +54,6 @@ class Gig(models.Model):
         verbose_name_plural = 'گیگ ها'
         ordering = ('-create',)
 
-    # returns the name of the gig owner
     def __str__(self):
         return f'{self.title}'
 
@@ -73,15 +61,4 @@ class Gig(models.Model):
         return f'/gigs/gig-detail/{self.id}/'
 
     def re_format_cost(self):
-        counter = 1
-        temp_var = list()
-        cost = str(self.cost)
-        for num in reversed(cost):
-            if counter % 3 == 0:
-                temp_var.append(num)
-                temp_var.append('/')
-            else:
-                temp_var.append(num)
-            counter += 1
-        result = ''.join(reversed(temp_var))
-        return result.strip('/')
+        return re_format_price(self.cost)
