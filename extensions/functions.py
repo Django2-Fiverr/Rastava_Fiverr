@@ -42,7 +42,7 @@ def remaining_time(obj):
 def get_total_price(obj):
     summation = 0
     for item in obj.orderdetail_set.all():
-        summation += item.price
+        summation += item.gig.cost
     return summation
 
 

@@ -62,7 +62,6 @@ class Order(models.Model):
 class OrderDetail(models.Model):
     gig = models.ForeignKey(Gig, on_delete=models.CASCADE, verbose_name='گیگ مرد نظر')
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='سبد خرید')
-    price = models.PositiveIntegerField(verbose_name='قیمت گیگ')
     deadline = models.IntegerField(verbose_name='مهلت تحویل سفارش')
 
     class Meta:
@@ -71,6 +70,11 @@ class OrderDetail(models.Model):
 
     def __str__(self):
         return self.gig.title
+
+    def get_cost(self):
+        return self.gig.cost
+
+    get_cost.short_description = "قیمت"
 
 
 class Transaction(models.Model):

@@ -39,7 +39,7 @@ class Gig(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
     field = models.ForeignKey(Field, on_delete=models.CASCADE, null=True, verbose_name='پست')
     slug = models.SlugField(max_length=20, blank=True, verbose_name='پیوست')
-    cost = models.IntegerField(verbose_name='قیمت')
+    cost = models.PositiveIntegerField(verbose_name='قیمت')
     description = models.TextField(max_length=5000, verbose_name='توضیحات')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='کاربر')
     sell_count = models.IntegerField(default=0, verbose_name='تعداد دفعات فروش')
