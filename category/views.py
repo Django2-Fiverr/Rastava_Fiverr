@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from django.views import generic
 
-from .models import Field, Category
-category = Category.objects.all()
+from extensions.constants import CATEGORY
+from .models import Field
 
 
 class FieldsView(generic.ListView):
@@ -12,7 +11,7 @@ class FieldsView(generic.ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(FieldsView,self).get_context_data(*args,**kwargs)
-        context['categories'] = category
+        context['categories'] = CATEGORY
         return context
 
     def get_queryset(self):

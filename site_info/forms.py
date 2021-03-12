@@ -28,7 +28,7 @@ class ContactForm(forms.ModelForm):
 
     def clean_full_name(self):
         full_name = self.cleaned_data.get('full_name')
-        if not full_name.isalpha():
+        if any([char.isdigit() for char in full_name]):
             raise forms.ValidationError('نام و نام خانوادگی نمی تواند شامل اعداد باشد.')
         else:
             return full_name

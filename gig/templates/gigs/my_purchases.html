@@ -28,7 +28,7 @@
                     <tr style="text-align: center">
                         {% if item.gig.image %}
                             <td class="cart_product">
-                                <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt="" style="margin-left:20px"></a>
+                                <a href="{{ item.gig.get_absolute_url }}"><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt="" style="margin-left:20px; border-radius: 20px;border: solid #42075b"></a>
                             </td>
                         {% else %}
                             <td class="cart_product">
@@ -71,7 +71,7 @@
 
                         {% endif %}
                         <td class="cart_total ">
-                            <p class="cart_total_price" style="margin-right: 60px">{{ item.gig.cost }} تومان</p>
+                            <p class="cart_total_price" style="margin-right: 60px">{{ item.gig.re_format_cost }} تومان</p>
                         </td>
                         <td class="cart_total ">
                             <a href="{% url 'proFile:profile' item.seller.id %}"><p
