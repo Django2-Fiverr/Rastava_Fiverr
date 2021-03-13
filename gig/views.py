@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from .models import Gig
 from django.utils import timezone
@@ -56,21 +56,22 @@ class GigList(ListView):
 
 # GIG + COMMENTS
 def gig_detail(request, pk):
+    user = User.objects.filter(id=pk).first()
     gig = Gig.objects.get_by_id(pk)
     order_form = OrderForm(request.POST or None, initial={'count': 0, 'gig_id': pk})
-    info = Comment.objects.filter(status=True, gig=gig)
-    comment = ''
-    cmform = ''
+    info = Comment.objects.filter(status=True, gig=gig, reply=None)
     buyer = Transaction.objects.filter(gig=gig)
     if request.method == "POST":
         cmform = CommentForm(request.POST)
         if cmform.is_valid():
-            comment = cmform.save(commit=False)
-            comment.user = request.user
-            comment.gig = gig
-            comment.publish = timezone.now()
+            content = request.POST.get('content')
+            reply_id = request.POST.get('comment_id')
+            comment_qs = None
+            if reply_id:
+                comment_qs = Comment.objects.get(id=reply_id)
+            comment = Comment.objects.create(gig=gig, user=request.user, content=content, reply=comment_qs)
             comment.save()
-            messages.success(request, 'comment added')
+            return HttpResponseRedirect(comment.gig.get_absolute_url())        
     else:
         cmform = CommentForm()
         if not gig:

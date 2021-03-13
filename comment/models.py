@@ -16,6 +16,7 @@ class Comment(models.Model):
     content = models.TextField(max_length=150)
     publish = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=True)
+    reply = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='replies')
 
     class Meta:
         ordering = ("-publish",)
@@ -23,5 +24,5 @@ class Comment(models.Model):
     def __str__(self):
         return f'Comment by {self.user}'
 
-    #def get_absolute_url(self):
-        #return reverse('gig:delete_comment', kwargs={'id': self.id})
+    def get_absolute_url(self):
+        return reverse('gig:delete_comment', kwargs={'id': self.id})
