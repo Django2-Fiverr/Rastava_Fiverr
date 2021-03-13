@@ -32,8 +32,7 @@ def add_order(request):
             gig_id = order_form.cleaned_data['gig_id']
             gig = Gig.objects.get(id=gig_id)
             deadline = order_form.cleaned_data.get('deadline')
-            price = gig.cost
-            order.orderdetail_set.create(price=price, gig=gig, deadline=deadline)
+            order.orderdetail_set.create(gig=gig, deadline=deadline)
             return redirect('gig:gig_detail', gig_id)
         return redirect('gig:gig_detail', gig_id)
 

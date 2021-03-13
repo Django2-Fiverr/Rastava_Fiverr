@@ -4,12 +4,13 @@ from django.http import Http404
 from django.views.generic import ListView
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import GigForm, TransactionForm
-from .models import Gig
 from order.models import Transaction
 from order.forms import OrderForm
-from extensions.constants import CATEGORY
+from comment.forms import CommentForm
+from extensions.constants import CATEGORY, COMMENTS, set_comment_publish
 from extensions.mainObjects import User
+from .models import Gig
+from .forms import GigForm, TransactionForm
 
 
 @login_required
@@ -53,14 +54,27 @@ class GigList(ListView):
 
 
 def gig_detail(request, pk):
+    set_comment_publish()
     gig = Gig.objects.get_by_id(pk)
     order_form = OrderForm(request.POST or None, initial={'deadline': 0, 'gig_id': pk})
+    comment_form = CommentForm(request.POST or None, initial={'gig_id': pk})
     if not gig:
         raise Http404('یافت نشد')
+    if request.user.is_anonymous:
+        gig_list = None
+        message = 'باید عضو سایت شوید'
+    else:
+        transaction_list = Transaction.objects.filter(gig=gig, client=request.user)
+        gig_list = [transaction.gig for transaction in transaction_list]
+        message = 'گیگ را خریداری نمایید'
     context = {
         'gig': gig,
+        'gig_list': gig_list,
         'order_form': order_form,
+        'comment_form': comment_form,
         'categories': CATEGORY,
+        'comments': COMMENTS.filter(gig__id=pk, reply_to=None,status=True),
+        'message': message,
     }
     return render(request, 'gigs/gig_detail.html', context)
 
@@ -209,6 +223,4 @@ def deliver(request, pk):
         if form.is_valid():
             transaction.delivery_status = True
             form.save()
-    else:
-        return redirect('gig:my-sales')
     return redirect('gig:my-sales')

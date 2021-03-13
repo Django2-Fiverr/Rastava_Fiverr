@@ -4,13 +4,13 @@ from .models import Comment
 
 
 class CommentForm(forms.ModelForm):
-    pk = forms.IntegerField(widget=forms.HiddenInput())
+    gig_id = forms.IntegerField(widget=forms.HiddenInput())
 
     class Meta:
         model = Comment
         fields = (
             'content',
-            'pk',
+            'gig_id',
         )
         widgets = {
             'content': forms.Textarea(attrs={'class': 'form-control'}),

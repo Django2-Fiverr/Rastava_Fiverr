@@ -49,11 +49,11 @@ class Order(models.Model):
 
     def get_total_payment_price(self):
         result = self.get_total_price() * 1.09 * 10
-        return round(result, 2)
+        return result
 
     def convert_total_payment_price(self):
-        price = self.get_total_price()
-        return re_format_price(price)
+        price = self.get_total_payment_price()
+        return re_format_price(int(price/10))
 
     convert_total_payment_price.short_description = 'قیمت کل سبد خرید'
     show_gigs.short_description = 'محتویات سبد خرید'

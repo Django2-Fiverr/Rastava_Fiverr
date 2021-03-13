@@ -23,6 +23,8 @@ def login_user(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
             return redirect('/')
         else:
             form.add_error('username', 'کاربری با مشخصات فوق یافت نشد')

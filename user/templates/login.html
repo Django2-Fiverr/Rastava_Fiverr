@@ -56,7 +56,9 @@ text-align: center;">یا</p>
                             {% for error in form.password.errors %}
                                 <p style="color: red;"> {{ error }} </p>
                             {% endfor %}
-
+                            {% if request.GET.next %}
+                                <input type="hidden" name="next" value="{{ request.GET.next }}">
+                            {% endif %}
 
                             <button type="submit" class="btn btn-default">ورود</button>
                         </form>
