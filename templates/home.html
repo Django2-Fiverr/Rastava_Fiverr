@@ -8,7 +8,7 @@
 
     <div style="margin: 30px 0px;">
         <div id="myCarousel" class="carousel slide" data-ride="carousel"
-             style="display: flex; justify-content: center; align-items: center; padding-right: 100px; text-align: right;">
+             style="display: flex; justify-content: center; align-items: center; padding-right: 100px; text-align: right;direction:ltr">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -23,7 +23,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" style="display: flex; justify-content: center; align-items: center;">
 
-                <div class="item active" >
+                <div class="item active">
                     <img src="{% static 'images/home/sample.jpeg' %}" alt="Los Angeles"
                          style="width: 1400px; height: 500px;border:solid 6px #808080">
                 </div>
@@ -150,389 +150,389 @@
 
                             </div>
                         </div>
-                            <a class="left recommended-item-control" href="#recommended-item-carousel"
-                               data-slide="prev">
+                        <a class="left recommended-item-control" href="#recommended-item-carousel"
+                           data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right recommended-item-control" href="#recommended-item-carousel"
+                           data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!--/NewProduct_items-->
+
+                <div class="col-sm-12 padding-right">
+                    <div class="features_items">
+                        <!--RetailSale_items-->
+                        <h2 class="title text-center">جدیدترین ها</h2>
+                        <div id="new-item-carousel" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+
+                                <div class="item active">
+
+
+                                    {% for gig in newest_gigs1 %}
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        {% if gig.image %}
+                                                            <a href="{% url 'gig:gig_detail' gig.id %}">
+                                                                <img src="{{ gig.image.url }}" width="268px"
+                                                                     height="134px"
+                                                                     alt=""/>
+                                                            </a>
+                                                        {% else %}
+                                                            <a href="{% url 'gig:gig_detail' gig.id %}">
+                                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}"
+                                                                     alt=""/>
+                                                            </a>
+                                                        {% endif %}
+                                                        <h2>{{ gig.re_format_cost }} تومان</h2>
+                                                        <p>{{ gig.field }}</p>
+                                                        <a href="{% url 'gig:gig_detail' gig.id %}"
+                                                           class="btn btn-default add-to-cart"><i
+                                                                class="/gigs/gig-detail/{{ gig.id }}"></i>افزودن به
+                                                            سبـد
+                                                            خرید</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+
+                                </div>
+
+
+                                <div class="item">
+
+
+                                    {% for gig in newest_gigs2 %}
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        {% if gig.image %}
+                                                            <a href="{% url 'gig:gig_detail' gig.id %}">
+                                                                <img src="{{ gig.image.url }}" width="268px"
+                                                                     height="134px"
+                                                                     alt=""/>
+                                                            </a>
+                                                        {% else %}
+                                                            <a href="{% url 'gig:gig_detail' gig.id %}">
+                                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}"
+                                                                     alt=""/>
+                                                            </a>
+                                                        {% endif %}
+                                                        <h2>{{ gig.re_format_cost }} تومان</h2>
+                                                        <p>{{ gig.field }}</p>
+                                                        <a href="{% url 'gig:gig_detail' gig.id %}"
+                                                           class="btn btn-default add-to-cart"><i
+                                                                class="/gigs/gig-detail/{{ gig.id }}"></i>افزودن به
+                                                            سبـد
+                                                            خرید</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+
+                                </div>
+
+                            </div>
+                            <a class="left recommended-item-control" href="#new-item-carousel" data-slide="prev">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a class="right recommended-item-control" href="#recommended-item-carousel"
-                               data-slide="next">
+                            <a class="right recommended-item-control" href="#new-item-carousel" data-slide="next">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
                     </div>
-                    <!--/NewProduct_items-->
+                    <!--RetailSale_items-->
 
-                    <div class="col-sm-12 padding-right">
-                        <div class="features_items">
-                            <!--RetailSale_items-->
-                            <h2 class="title text-center">جدیدترین ها</h2>
-                            <div id="new-item-carousel" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-
-                                    <div class="item active">
-
-
-                                        {% for gig in newest_gigs1 %}
-                                            <div class="col-sm-3">
-                                                <div class="product-image-wrapper">
-                                                    <div class="single-products">
-                                                        <div class="productinfo text-center">
-                                                            {% if gig.image %}
-                                                                <a href="{% url 'gig:gig_detail' gig.id %}">
-                                                                    <img src="{{ gig.image.url }}" width="268px"
-                                                                         height="134px"
-                                                                         alt=""/>
-                                                                </a>
-                                                            {% else %}
-                                                                <a href="{% url 'gig:gig_detail' gig.id %}">
-                                                                    <img src="{% static 'images/home/memoryLeaks.jpg' %}"
-                                                                         alt=""/>
-                                                                </a>
-                                                            {% endif %}
-                                                            <h2>{{ gig.re_format_cost }} تومان</h2>
-                                                            <p>{{ gig.field }}</p>
-                                                            <a href="{% url 'gig:gig_detail' gig.id %}"
-                                                               class="btn btn-default add-to-cart"><i
-                                                                    class="/gigs/gig-detail/{{ gig.id }}"></i>افزودن به
-                                                                سبـد
-                                                                خرید</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-
-
-                                    </div>
-
-
-                                    <div class="item">
-
-
-                                        {% for gig in newest_gigs2 %}
-                                            <div class="col-sm-3">
-                                                <div class="product-image-wrapper">
-                                                    <div class="single-products">
-                                                        <div class="productinfo text-center">
-                                                            {% if gig.image %}
-                                                                <a href="{% url 'gig:gig_detail' gig.id %}">
-                                                                    <img src="{{ gig.image.url }}" width="268px"
-                                                                         height="134px"
-                                                                         alt=""/>
-                                                                </a>
-                                                            {% else %}
-                                                                <a href="{% url 'gig:gig_detail' gig.id %}">
-                                                                    <img src="{% static 'images/home/memoryLeaks.jpg' %}"
-                                                                         alt=""/>
-                                                                </a>
-                                                            {% endif %}
-                                                            <h2>{{ gig.re_format_cost }} تومان</h2>
-                                                            <p>{{ gig.field }}</p>
-                                                            <a href="{% url 'gig:gig_detail' gig.id %}"
-                                                               class="btn btn-default add-to-cart"><i
-                                                                    class="/gigs/gig-detail/{{ gig.id }}"></i>افزودن به
-                                                                سبـد
-                                                                خرید</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-
-
-                                    </div>
-
-                                </div>
-                                <a class="left recommended-item-control" href="#new-item-carousel" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="right recommended-item-control" href="#new-item-carousel" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <!--RetailSale_items-->
-
-                        <div class="features_items">
-                            <!--WholeSale_items-->
-                            <h2 class="title text-center">پرطرفدارترین ها</h2>
-
-                            <div id="major-item-carousel" class="carousel slide" data-ride="carousel">
-
-
-                                <div class="carousel-inner">
-
-                                    <div class="item active">
-
-
-                                        {% for gig in most_popular_gigs1 %}
-                                            <div class="col-sm-3">
-                                                <div class="product-image-wrapper">
-                                                    <div class="single-products">
-                                                        <div class="productinfo text-center">
-                                                            {% if gig.image %}
-                                                                <a href="{% url 'gig:gig_detail' gig.id %}">
-                                                                    <img src="{{ gig.image.url }}" width="268px"
-                                                                         height="134px"
-                                                                         alt=""/>
-                                                                </a>
-                                                            {% else %}
-                                                                <a href="{% url 'gig:gig_detail' gig.id %}">
-                                                                    <img src="{% static 'images/home/memoryLeaks.jpg' %}"
-                                                                         alt=""/>
-                                                                </a>
-                                                            {% endif %}
-                                                            <h2>{{ gig.re_format_cost }} تومان</h2>
-                                                            <p>{{ gig.field }}</p>
-                                                            <a href="{% url 'gig:gig_detail' gig.id %}"
-                                                               class="btn btn-default add-to-cart"><i
-                                                                    class="/gigs/gig-detail/{{ gig.id }}"></i>افزودن به
-                                                                سبـد
-                                                                خرید</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-
-
-                                    </div>
-
-                                    <div class="item">
-
-
-                                        {% for gig in most_popular_gigs2 %}
-                                            <div class="col-sm-3">
-                                                <div class="product-image-wrapper">
-                                                    <div class="single-products">
-                                                        <div class="productinfo text-center">
-                                                            {% if gig.image %}
-                                                                <a href="{% url 'gig:gig_detail' gig.id %}">
-                                                                    <img src="{{ gig.image.url }}" width="268px"
-                                                                         height="134px"
-                                                                         alt=""/>
-                                                                </a>
-                                                            {% else %}
-                                                                <a href="{% url 'gig:gig_detail' gig.id %}">
-                                                                    <img src="{% static 'images/home/memoryLeaks.jpg' %}"
-                                                                         alt=""/>
-                                                                </a>
-                                                            {% endif %}
-                                                            <h2>{{ gig.re_format_cost }} تومان</h2>
-                                                            <p>{{ gig.field }}</p>
-                                                            <a href="{% url 'gig:gig_detail' gig.id %}"
-                                                               class="btn btn-default add-to-cart"><i
-                                                                    class="/gigs/gig-detail/{{ gig.id }}"></i>افزودن به
-                                                                سبـد
-                                                                خرید</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-
-
-                                    </div>
-
-                                </div>
-
-
-                                <a class="left recommended-item-control" href="#major-item-carousel" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="right recommended-item-control" href="#major-item-carousel" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="features_items">
                         <!--WholeSale_items-->
+                        <h2 class="title text-center">پرطرفدارترین ها</h2>
 
-                        <div class="category-tab">
-                            <!--category-tab-->
-                            <div class="col-sm-12">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#Tab_001" data-toggle="tab">فعالترین ها</a></li>
-                                    <li><a href="#Tab_002" data-toggle="tab">پرطرفدارترین ها</a></li>
-                                    <li><a href="#Tab_003" data-toggle="tab">ماهر ترین ها</a></li>
-                                    <li><a href="#Tab_004" data-toggle="tab">درجه داران سایت</a></li>
-                                    <li><a href="#Tab_005" data-toggle="tab">مدیران سایت</a></li>
-                                </ul>
+                        <div id="major-item-carousel" class="carousel slide" data-ride="carousel">
+
+
+                            <div class="carousel-inner">
+
+                                <div class="item active">
+
+
+                                    {% for gig in most_popular_gigs1 %}
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        {% if gig.image %}
+                                                            <a href="{% url 'gig:gig_detail' gig.id %}">
+                                                                <img src="{{ gig.image.url }}" width="268px"
+                                                                     height="134px"
+                                                                     alt=""/>
+                                                            </a>
+                                                        {% else %}
+                                                            <a href="{% url 'gig:gig_detail' gig.id %}">
+                                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}"
+                                                                     alt=""/>
+                                                            </a>
+                                                        {% endif %}
+                                                        <h2>{{ gig.re_format_cost }} تومان</h2>
+                                                        <p>{{ gig.field }}</p>
+                                                        <a href="{% url 'gig:gig_detail' gig.id %}"
+                                                           class="btn btn-default add-to-cart"><i
+                                                                class="/gigs/gig-detail/{{ gig.id }}"></i>افزودن به
+                                                            سبـد
+                                                            خرید</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+
+                                </div>
+
+                                <div class="item">
+
+
+                                    {% for gig in most_popular_gigs2 %}
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        {% if gig.image %}
+                                                            <a href="{% url 'gig:gig_detail' gig.id %}">
+                                                                <img src="{{ gig.image.url }}" width="268px"
+                                                                     height="134px"
+                                                                     alt=""/>
+                                                            </a>
+                                                        {% else %}
+                                                            <a href="{% url 'gig:gig_detail' gig.id %}">
+                                                                <img src="{% static 'images/home/memoryLeaks.jpg' %}"
+                                                                     alt=""/>
+                                                            </a>
+                                                        {% endif %}
+                                                        <h2>{{ gig.re_format_cost }} تومان</h2>
+                                                        <p>{{ gig.field }}</p>
+                                                        <a href="{% url 'gig:gig_detail' gig.id %}"
+                                                           class="btn btn-default add-to-cart"><i
+                                                                class="/gigs/gig-detail/{{ gig.id }}"></i>افزودن به
+                                                            سبـد
+                                                            خرید</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+
+                                </div>
+
                             </div>
-                            <div class="tab-content">
 
-                                <div class="tab-pane fade active in" id="Tab_001">
 
-                                    {% for user in active_users %}
-                                        <div class="col-sm-3">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        {% if user.profile.image %}
-                                                            <a href="{{ user.profile.get_absolute_url }}">
-                                                                <img src="{{ user.profile.image.url }}" width="268px"
-                                                                     height="240px alt=""/>
-                                                            </a>
-                                                        {% else %}
-                                                            <a href="{{ user.profile.get_absolute_url }}">
-                                                                <img src="{% static 'images/home/backtrack.jpg' %}"
-                                                                     alt=""/></a>
-                                                        {% endif %}
+                            <a class="left recommended-item-control" href="#major-item-carousel" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="right recommended-item-control" href="#major-item-carousel" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--WholeSale_items-->
+
+                    <div class="category-tab">
+                        <!--category-tab-->
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#Tab_001" data-toggle="tab">فعالترین ها</a></li>
+                                <li><a href="#Tab_002" data-toggle="tab">پرطرفدارترین ها</a></li>
+                                <li><a href="#Tab_003" data-toggle="tab">ماهر ترین ها</a></li>
+                                <li><a href="#Tab_004" data-toggle="tab">درجه داران سایت</a></li>
+                                <li><a href="#Tab_005" data-toggle="tab">مدیران سایت</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+
+                            <div class="tab-pane fade active in" id="Tab_001">
+
+                                {% for user in active_users %}
+                                    <div class="col-sm-3">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    {% if user.profile.image %}
                                                         <a href="{{ user.profile.get_absolute_url }}">
-                                                            <h2>{{ user.get_full_name }}</h2>
+                                                            <img src="{{ user.profile.image.url }}" width="268px"
+                                                                 height="240px alt=""/>
                                                         </a>
-                                                        <a href="{{ user.profile.get_absolute_url }}"
-                                                           class="btn btn-default add-to-cart">
-                                                            <b>
-                                                                مشاهده ی پروفایل
-                                                            </b>
-                                                        </a>
-                                                    </div>
-
+                                                    {% else %}
+                                                        <a href="{{ user.profile.get_absolute_url }}">
+                                                            <img src="{% static 'images/home/backtrack.jpg' %}"
+                                                                 alt=""/></a>
+                                                    {% endif %}
+                                                    <a href="{{ user.profile.get_absolute_url }}">
+                                                        <h2>{{ user.get_full_name }}</h2>
+                                                    </a>
+                                                    <a href="{{ user.profile.get_absolute_url }}"
+                                                       class="btn btn-default add-to-cart">
+                                                        <b>
+                                                            مشاهده ی پروفایل
+                                                        </b>
+                                                    </a>
                                                 </div>
+
                                             </div>
                                         </div>
-                                    {% endfor %}
+                                    </div>
+                                {% endfor %}
 
-                                </div>
+                            </div>
 
-                                <div class="tab-pane fade" id="Tab_002">
-                                    {% for user in most_popular_users %}
-                                        <div class="col-sm-3">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        {% if user.profile.image %}
-                                                            <a href="{{ user.profile.get_absolute_url }}">
-                                                                <img src="{{ user.profile.image.url }}" width="268px"
-                                                                     height="240px alt=""/>
-                                                            </a>
-                                                        {% else %}
-                                                            <a href="{{ user.profile.get_absolute_url }}">
-                                                                <img src="{% static 'images/home/backtrack.jpg' %}"
-                                                                     alt=""/></a>
-                                                        {% endif %}
+                            <div class="tab-pane fade" id="Tab_002">
+                                {% for user in most_popular_users %}
+                                    <div class="col-sm-3">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    {% if user.profile.image %}
                                                         <a href="{{ user.profile.get_absolute_url }}">
-                                                            <h2>{{ user.get_full_name }}</h2>
+                                                            <img src="{{ user.profile.image.url }}" width="268px"
+                                                                 height="240px alt=""/>
                                                         </a>
-                                                        <a href="{{ user.profile.get_absolute_url }}"
-                                                           class="btn btn-default add-to-cart">
-                                                            <b>
-                                                                مشاهده ی پروفایل
-                                                            </b>
-                                                        </a>
-                                                    </div>
-
+                                                    {% else %}
+                                                        <a href="{{ user.profile.get_absolute_url }}">
+                                                            <img src="{% static 'images/home/backtrack.jpg' %}"
+                                                                 alt=""/></a>
+                                                    {% endif %}
+                                                    <a href="{{ user.profile.get_absolute_url }}">
+                                                        <h2>{{ user.get_full_name }}</h2>
+                                                    </a>
+                                                    <a href="{{ user.profile.get_absolute_url }}"
+                                                       class="btn btn-default add-to-cart">
+                                                        <b>
+                                                            مشاهده ی پروفایل
+                                                        </b>
+                                                    </a>
                                                 </div>
+
                                             </div>
                                         </div>
-                                    {% endfor %}
-                                </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
 
-                                <div class="tab-pane fade" id="Tab_003">
-                                    {% for user in professional_users %}
-                                        <div class="col-sm-3">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        {% if user.profile.image %}
-                                                            <a href="{{ user.profile.get_absolute_url }}">
-                                                                <img src="{{ user.profile.image.url }}" width="268px"
-                                                                     height="240px alt=""/>
-                                                            </a>
-                                                        {% else %}
-                                                            <a href="{{ user.profile.get_absolute_url }}">
-                                                                <img src="{% static 'images/home/backtrack.jpg' %}"
-                                                                     alt=""/></a>
-                                                        {% endif %}
+                            <div class="tab-pane fade" id="Tab_003">
+                                {% for user in professional_users %}
+                                    <div class="col-sm-3">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    {% if user.profile.image %}
                                                         <a href="{{ user.profile.get_absolute_url }}">
-                                                            <h2>{{ user.get_full_name }}</h2>
+                                                            <img src="{{ user.profile.image.url }}" width="268px"
+                                                                 height="240px alt=""/>
                                                         </a>
-                                                        <a href="{{ user.profile.get_absolute_url }}"
-                                                           class="btn btn-default add-to-cart">
-                                                            <b>
-                                                                مشاهده ی پروفایل
-                                                            </b>
-                                                        </a>
-                                                    </div>
-
+                                                    {% else %}
+                                                        <a href="{{ user.profile.get_absolute_url }}">
+                                                            <img src="{% static 'images/home/backtrack.jpg' %}"
+                                                                 alt=""/></a>
+                                                    {% endif %}
+                                                    <a href="{{ user.profile.get_absolute_url }}">
+                                                        <h2>{{ user.get_full_name }}</h2>
+                                                    </a>
+                                                    <a href="{{ user.profile.get_absolute_url }}"
+                                                       class="btn btn-default add-to-cart">
+                                                        <b>
+                                                            مشاهده ی پروفایل
+                                                        </b>
+                                                    </a>
                                                 </div>
+
                                             </div>
                                         </div>
-                                    {% endfor %}
-                                </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
 
-                                <div class="tab-pane fade" id="Tab_004">
-                                    {% for user in graded_users %}
-                                        <div class="col-sm-3">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        {% if user.profile.image %}
-                                                            <a href="{{ user.profile.get_absolute_url }}">
-                                                                <img src="{{ user.profile.image.url }}" width="268px"
-                                                                     height="240px alt=""/>
-                                                            </a>
-                                                        {% else %}
-                                                            <a href="{{ user.profile.get_absolute_url }}">
-                                                                <img src="{% static 'images/home/backtrack.jpg' %}"
-                                                                     alt=""/></a>
-                                                        {% endif %}
+                            <div class="tab-pane fade" id="Tab_004">
+                                {% for user in graded_users %}
+                                    <div class="col-sm-3">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    {% if user.profile.image %}
                                                         <a href="{{ user.profile.get_absolute_url }}">
-                                                            <h2>{{ user.get_full_name }}</h2>
+                                                            <img src="{{ user.profile.image.url }}" width="268px"
+                                                                 height="240px alt=""/>
                                                         </a>
-                                                        <a href="{{ user.profile.get_absolute_url }}"
-                                                           class="btn btn-default add-to-cart">
-                                                            <b>
-                                                                مشاهده ی پروفایل
-                                                            </b>
-                                                        </a>
-                                                    </div>
-
+                                                    {% else %}
+                                                        <a href="{{ user.profile.get_absolute_url }}">
+                                                            <img src="{% static 'images/home/backtrack.jpg' %}"
+                                                                 alt=""/></a>
+                                                    {% endif %}
+                                                    <a href="{{ user.profile.get_absolute_url }}">
+                                                        <h2>{{ user.get_full_name }}</h2>
+                                                    </a>
+                                                    <a href="{{ user.profile.get_absolute_url }}"
+                                                       class="btn btn-default add-to-cart">
+                                                        <b>
+                                                            مشاهده ی پروفایل
+                                                        </b>
+                                                    </a>
                                                 </div>
+
                                             </div>
                                         </div>
-                                    {% endfor %}
-                                </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
 
-                                <div class="tab-pane fade" id="Tab_005">
-                                    {% for user in admins %}
-                                        <div class="col-sm-3">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        {% if user.profile.image %}
-                                                            <a href="{{ user.profile.get_absolute_url }}">
-                                                                <img src="{{ user.profile.image.url }}" width="268px"
-                                                                     height="240px alt=""/>
-                                                            </a>
-                                                        {% else %}
-                                                            <a href="{{ user.profile.get_absolute_url }}">
-                                                                <img src="{% static 'images/home/backtrack.jpg' %}"
-                                                                     alt=""/></a>
-                                                        {% endif %}
+                            <div class="tab-pane fade" id="Tab_005">
+                                {% for user in admins %}
+                                    <div class="col-sm-3">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    {% if user.profile.image %}
                                                         <a href="{{ user.profile.get_absolute_url }}">
-                                                            <h2>{{ user.get_full_name }}</h2>
+                                                            <img src="{{ user.profile.image.url }}" width="268px"
+                                                                 height="240px alt=""/>
                                                         </a>
-                                                        <a href="{{ user.profile.get_absolute_url }}"
-                                                           class="btn btn-default add-to-cart">
-                                                            <b>
-                                                                مشاهده ی پروفایل
-                                                            </b>
-                                                        </a>
-                                                    </div>
-
+                                                    {% else %}
+                                                        <a href="{{ user.profile.get_absolute_url }}">
+                                                            <img src="{% static 'images/home/backtrack.jpg' %}"
+                                                                 alt=""/></a>
+                                                    {% endif %}
+                                                    <a href="{{ user.profile.get_absolute_url }}">
+                                                        <h2>{{ user.get_full_name }}</h2>
+                                                    </a>
+                                                    <a href="{{ user.profile.get_absolute_url }}"
+                                                       class="btn btn-default add-to-cart">
+                                                        <b>
+                                                            مشاهده ی پروفایل
+                                                        </b>
+                                                    </a>
                                                 </div>
+
                                             </div>
                                         </div>
-                                    {% endfor %}
-                                </div>
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
-                        <!--/category-tab-->
                     </div>
-
+                    <!--/category-tab-->
                 </div>
+
             </div>
+        </div>
     </section>
 
 {% endblock %}

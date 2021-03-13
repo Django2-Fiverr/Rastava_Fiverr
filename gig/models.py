@@ -27,7 +27,8 @@ class GigManager(models.Manager):
         return None
 
     def search(self, query):
-        lock_up = Q(title__icontains=query) | Q(description__icontains=query)
+        lock_up = Q(title__icontains=query) | Q(description__icontains=query) | Q(
+            field__category__name__icontains=query) | Q(field__title__icontains=query)
         return self.get_queryset().filter(lock_up, active=True).distinct()
 
     def grouping_gigs(self, title):
