@@ -1,24 +1,13 @@
-import os
 from django.db import models
-from django.contrib.auth import get_user_model
+
+from extensions.functions import re_format_price, split_name
+from extensions.mainObjects import User
 from django.db.models import Q
 from datetime import date
-from django.utils import timezone
-from category.models import Category
 
-# use the custom user table ( the default one in settings.py)
-User = get_user_model()
+from category.models import Category, Field
 
 
-# This function splits file name and its format ( one.jpg -> one + .jpg )
-def split_name(file_name):
-    base_name = os.path.basename(file_name)
-    name, format = os.path.splitext(base_name)
-    return name, format
-
-
-# This function changes default file name and uses the same format ( one.jpg -> two.jpg )
-# it returns an address to save the uploaded image file
 def get_name(instance, file_name):
     name, ext = split_name(file_name)
     current_time = str(date.today())
@@ -41,17 +30,16 @@ class GigManager(models.Manager):
         lock_up = Q(title__icontains=query) | Q(description__icontains=query)
         return self.get_queryset().filter(lock_up, active=True).distinct()
 
-   
-    def grouping_gigs(self, slug):
-        items = self.get_queryset().filter(category__name=slug)
+    def grouping_gigs(self, title):
+        items = self.get_queryset().filter(field__title=title)
         return items
 
 
 class Gig(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, verbose_name='موضوع')
+    field = models.ForeignKey(Field, on_delete=models.CASCADE, null=True, verbose_name='پست')
     slug = models.SlugField(max_length=20, blank=True, verbose_name='پیوست')
-    cost = models.IntegerField(verbose_name='قیمت')
+    cost = models.PositiveIntegerField(verbose_name='قیمت')
     description = models.TextField(max_length=5000, verbose_name='توضیحات')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='کاربر')
     sell_count = models.IntegerField(default=0, verbose_name='تعداد دفعات فروش')
@@ -66,14 +54,11 @@ class Gig(models.Model):
         verbose_name_plural = 'گیگ ها'
         ordering = ('-create',)
 
-    # returns the name of the gig owner
     def __str__(self):
         return f'{self.title}'
 
     def get_absolute_url(self):
         return f'/gigs/gig-detail/{self.id}/'
 
-
-
-
-
+    def re_format_cost(self):
+        return re_format_price(self.cost)

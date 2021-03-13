@@ -4,29 +4,26 @@
         <div class="single-products">
             <div class="productinfo text-center">
                 {% if gig.image %}
-                    <img src="{{ gig.image.url }}" width="200" height="200" alt="">
+                    <a href="{{ gig.get_absolute_url }}">
+                        <img src="{{ gig.image.url }}" width="200" height="200" alt="">
+                    </a>
                 {% else %}
-                    <img src="{% static 'images/product-details/1.jpg' %}" width="200" height="200" alt="">
+                    <a href="{{ gig.get_absolute_url }}">
+                        <img src="{% static 'images/product-details/1.jpg' %}" width="200" height="200" alt="">
+                    </a>
                 {% endif %}
-                <h2>{{ gig.cost }} تومان</h2>
+                <h2>{{ gig.re_format_cost }} تومان</h2>
                 <p>{{ gig.title }}</p>
                 <a href="#" class="btn btn-default add-to-cart"><i
                         class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
             </div>
-            <div class="product-overlay">
-                <div class="overlay-content">
-                    <h3><a href="{{ gig.get_absolute_url }}" style="color:#ff6347">{{ gig.title }}</a></h3>
-                    <h2>{{ gig.cost }} تومان</h2>
-                    <a href="#" class="btn btn-default add-to-cart"><i
-                            class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
-                </div>
-            </div>
+
         </div>
         <div class="choose">
             <ul class="nav nav-pills nav-justified">
                 <li><a href="{% url 'gig:edit_gig' gig.id %}"><i class="fa fa-plus-square"></i> ویرایش گیگ </a></li>
                 <li><a href="{{ gig.get_absolute_url }}"><i class="fa fa-plus-square"></i>جزئیات</a></li>
-                <li><a href="{% url 'gig:delete-gig' gig.id %}"><i class="fa fa-plus-square"></i>حذف</a></li>
+                <li><a href="{% url 'gig:delete-confirmation' gig.id %}"><i class="fa fa-plus-square"></i>حذف</a></li>
             </ul>
         </div>
     </div>

@@ -1,28 +1,41 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 import datetime
 
+from extensions.constants import CATEGORY
+from extensions.functions import create_time_object
 from gig.models import Gig
 from order.forms import OrderForm
 from order.models import Order, OrderDetail, Transaction
+
+
+def check(request, pk):
+    gig = get_object_or_404(Gig, id=pk)
+    transaction = Transaction.objects.filter(client=request.user, gig=gig, expiration=False, delivery_status=False)
+    if transaction:
+        return True
+    return False
 
 
 @login_required
 def add_order(request):
     order_form = OrderForm(request.POST or None)
     gig_id = order_form.data.get('gig_id')
-    print(order_form.data)
-    if order_form.is_valid():
-        order = Order.objects.filter(owner=request.user, paid=False).first()
-        if not order:
-            order = Order.objects.create(owner=request.user, paid=False)
-        gig_id = order_form.cleaned_data['gig_id']
-        gig = Gig.objects.get(id=gig_id)
-        deadline = order_form.cleaned_data.get('deadline')
-        price = gig.cost
-        order.orderdetail_set.create(price=price, gig=gig, deadline=deadline)
+    if check(request, gig_id):
+        return render(request, 'deny_buy_same_gig.html', {'categories': CATEGORY})
+    else:
+        print('Hello man')
+        if order_form.is_valid():
+            order = Order.objects.filter(owner=request.user, paid=False).first()
+            if not order:
+                order = Order.objects.create(owner=request.user, paid=False)
+            gig_id = order_form.cleaned_data['gig_id']
+            gig = Gig.objects.get(id=gig_id)
+            deadline = order_form.cleaned_data.get('deadline')
+            price = gig.cost
+            order.orderdetail_set.create(price=price, gig=gig, deadline=deadline)
+            return redirect('gig:gig_detail', gig_id)
         return redirect('gig:gig_detail', gig_id)
-    return redirect('gig:gig_detail', gig_id)
 
 
 @login_required
@@ -34,7 +47,8 @@ def order_details(requset):
         order_items = None
     context = {
         'order': order,
-        'order_items': order_items
+        'order_items': order_items,
+        'categories': CATEGORY,
     }
     return render(requset, 'order_details.html', context)
 
@@ -43,11 +57,6 @@ def delete_order(request, pk):
     item = OrderDetail.objects.get(id=pk)
     item.delete()
     return redirect('order:order-details')
-
-
-def create_time_object(time, deadline):
-    delta = datetime.timedelta(days=deadline)
-    return time + delta
 
 
 def create_transaction(request, order):

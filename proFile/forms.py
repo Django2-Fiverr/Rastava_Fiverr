@@ -1,10 +1,7 @@
 from django import forms
-# from user.models import User
-from proFile.models import Profile, Skills
-from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext_lazy as _
 
-User = get_user_model()
+from proFile.models import Profile
+from extensions.mainObjects import User
 
 
 class RegisterForm(forms.ModelForm):

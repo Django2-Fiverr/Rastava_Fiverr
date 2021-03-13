@@ -1,0 +1,21 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %}
+    <b style="text-align : center;">
+        <h3>
+            گیگ مورد نظر قبلا توسط شما <strong style="color: red;">خریداری</strong> شده و هنوز تحویل داده نشده یا باطل
+            نشده است
+        </h3>
+
+        <br><br>
+
+        <h4>
+            <a href="{% url 'gig:my-purchases' %}"> بازگشت </a> به خرید های من
+        </h4>
+
+        <br><br>
+    </b>
+{% endblock %}
+
+

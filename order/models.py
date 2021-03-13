@@ -1,10 +1,23 @@
 import datetime
+
 from django.db import models
-from django.contrib.auth import get_user_model
 
 from gig.models import Gig
 
-User = get_user_model()
+from extensions.mainObjects import User
+from extensions.functions import re_format_price
+from extensions.functions import split_name
+from extensions.functions import remaining_time
+from extensions.functions import get_total_price
+
+
+# This function changes default file name and uses the same format ( one.jpg -> two.jpg )
+# it returns an address to save the uploaded image file
+def get_name(instance, file_name):
+    name, ext = split_name(file_name)
+    current_time = datetime.date.today()
+    new_name = '{}-{}-{}{}'.format(str(current_time), instance.gig.title, instance.client, ext)
+    return 'transaction/{}/{}'.format(instance.seller, new_name)
 
 
 class Order(models.Model):
@@ -24,35 +37,31 @@ class Order(models.Model):
         return ' ,'.join(names)
 
     def get_total_price(self):
-        summation = 0
-        for item in self.orderdetail_set.all():
-            summation += item.price
-        return summation
+        return get_total_price(self)
 
     def convert_total_price(self):
         price = self.get_total_price()
-        return format(price, ',.2f')
+        return re_format_price(price)
 
     def calculate_taxes(self):
         taxes = self.get_total_price() * 0.09
-        return format(taxes, ',.2f')
+        return re_format_price(int(taxes))
 
     def get_total_payment_price(self):
         result = self.get_total_price() * 1.09 * 10
         return round(result, 2)
 
     def convert_total_payment_price(self):
-        price = self.get_total_payment_price() / 10
-        return format(price, ',.2f')
+        price = self.get_total_price()
+        return re_format_price(price)
 
-    get_total_price.short_description = 'قیمت کل سبد خرید'
+    convert_total_payment_price.short_description = 'قیمت کل سبد خرید'
     show_gigs.short_description = 'محتویات سبد خرید'
 
 
 class OrderDetail(models.Model):
     gig = models.ForeignKey(Gig, on_delete=models.CASCADE, verbose_name='گیگ مرد نظر')
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='سبد خرید')
-    price = models.PositiveIntegerField(verbose_name='قیمت گیگ')
     deadline = models.IntegerField(verbose_name='مهلت تحویل سفارش')
 
     class Meta:
@@ -62,14 +71,21 @@ class OrderDetail(models.Model):
     def __str__(self):
         return self.gig.title
 
+    def get_cost(self):
+        return self.gig.cost
+
+    get_cost.short_description = "قیمت"
+
 
 class Transaction(models.Model):
-    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_transaction', null=True, verbose_name='فروشنده')
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user', null=True, verbose_name='فروشنده')
     client = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='خریدار')
     gig = models.ForeignKey(Gig, on_delete=models.CASCADE, null=True, verbose_name='گیگ مورد معامله')
     expiration = models.BooleanField(default=False, verbose_name='منقضی شده / نشده')
+    delivery_status = models.BooleanField(default=False, verbose_name='وضعیت/ تحویل')
     date_of_transaction = models.DateTimeField(verbose_name='زمان انجام معامله')
     deadline = models.DateTimeField(verbose_name='مهلت تحویل')
+    file = models.FileField(upload_to=get_name, blank=True, null=True, verbose_name='فایل ارسالی')
 
     def __str__(self):
         return f'{self.client}->{self.gig}'
@@ -79,10 +95,4 @@ class Transaction(models.Model):
         verbose_name_plural = 'معاملات'
 
     def remaining_time(self):
-        date = self.deadline.date()
-        time = self.deadline.time()
-        result = datetime.datetime.combine(date, time) - datetime.datetime.now()
-        if result.days < 0:
-            self.expiration = True
-            self.save()
-        return result.days
+        return remaining_time(self)

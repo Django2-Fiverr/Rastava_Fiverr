@@ -1,0 +1,26 @@
+{% load static %}
+<div class="col-sm-4 pull-right">
+    <div class="product-image-wrapper">
+        <div class="single-products">
+            <a href="{{ field.get_absolute_url }}">
+                <div class="productinfo text-center">
+                    {% if field.image %}
+                        <a href="/gigs/grouping/{{ field.title }}"><img src="{{ field.image.url }}" width="200"
+                                                                        height="200" alt=""></a>
+                    {% else %}
+                        <a href="/gigs/grouping/{{ field.title }}">
+                            <img src="{% static 'images/product-details/1.jpg' %}" width="200" height="200" alt="">
+                        </a>
+                    {% endif %}
+                    <a href="/gigs/grouping/{{ field.title }}"><p>{{ field.title }}</p></a>
+                </div>
+            </a>
+
+        </div>
+        <div class="choose">
+            <ul class="nav nav-pills nav-justified">
+                <li><a href="/gigs/grouping/{{ field.title }}"><i class="fa fa-plus-square"></i>مشاهده گیگ ها</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
