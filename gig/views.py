@@ -83,6 +83,9 @@ def gig_detail(request, pk):
                'order_form': order_form,
                'buyer': buyer,
     }
+    if request.is_ajax():
+        html = render_to_string('gig/gig_detail.html', context, request=request)
+        return JsonResponse({'form': html})
     return render(request, 'gigs/gig_detail.html', context)
 
 
@@ -99,7 +102,7 @@ def update_comment(request, pk):
         if my_form.is_valid():
             comment = my_form.save(commit=False)
             comment.save()
-            return redirect('/gigs/gigs-list')
+            return HttpResponseRedirect(comment.gig.get_absolute_url())
     context = {
         'detail': detail,
         'my_form': my_form,
@@ -113,7 +116,7 @@ def delete_comment(request, id):
     obj = Comment.objects.get(id = id)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/gigs/gigs-list')
+        return HttpResponseRedirect(obj.gig.get_absolute_url())
     return render(request, "delete_cm.html", context)
 
 

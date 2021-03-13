@@ -105,7 +105,8 @@
                             <li><a href="#details" data-toggle="tab">جزئیات</a></li>
                             <li><a href="#companyprofile" data-toggle="tab">درباره سازنده</a></li>
                             <li><a href="#tag" data-toggle="tab">برچسب</a></li>
-                            <li class="active"><a href="#reviews" data-toggle="tab">دیدگاه ها ({{ info.count }})</a></li>
+                            <li class="active"><a href="#reviews" data-toggle="tab">دیدگاه ها ({{ info.count }})</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="tab-content">
@@ -233,7 +234,7 @@
                             </div>
                         </div>
 
-                        <div class="fade active in" id="reviews">
+                        <div class="fade active in main-comment-section" id="reviews">
                             <div class="col-sm-12">
                                 <ul>
                                     <div style="margin-right: 10px;">
@@ -275,7 +276,8 @@
                                                 style="opacity: 0.8; font-size: 12px; width:58px;height:25px;">ویرایش</a>
                                             {% endif %}
                                             {% if request.user.id == gig.user.id %}
-                                            <button type="button" name="button" class="toggle-replies btn btn-default">پاسخ</button>
+                                            <button type="button" name="comment_id"
+                                                class="toggle-replies btn btn-default btn-outline-dark" value="{{ i.id }}">پاسخ</button>
                                             {% endif %}
 
                                             <div class="toggle-form container" style="display: none;">
@@ -283,27 +285,29 @@
                                                 <div id="ex1" class="form-group row">
 
 
-                                                    <form method="POST" >
+                                                    <form method="POST" class="reply-form-ajax" action="." style="width: 45%;">
                                                         {% csrf_token %}
                                                         <input type="hidden" name="comment_id" value="{{ i.id }}">
                                                         {{ cmform.as_p }}
                                                         <br>
-                                                        <button type="submit" class="save btn btn-default" style="border-radius: 5px;">افزودن دیدگاه</button>
-                                                            
+                                                        <button type="submit" class="save btn btn-default"
+                                                            style="border-radius: 5px;">افزودن دیدگاه</button>
+
                                                     </form>
                                                 </div>
                                                 <br>
-                                                
+
                                                 <br>
                                                 <!-- <a href="#" rel="modal:close" class="btn btn-default">بستن</a> -->
                                             </div>
-                                            
+
                                             <br>
                                             <div class="container" style="margin-right: 100px;">
                                                 <div class="form-group row">
                                                     {% for r in i.replies.all %}
                                                     <p> در پاسخ به <span style="opacity: 0.7;">{{ i.user.username }}</span></p>
                                                             
+
                                                     <blockquote>
                                                         <p>
                                                             {% if r.user.profile.image %}
@@ -328,28 +332,39 @@
                                                             style="font-size: 15px; opacity: 0.8; font-family: Arial, Helvetica, sans-serif;">
                                                             {{ r.content }}
                                                         </ul>
+                                                        {% if user.id == gig.user.id %}
+                                                        <a href="{% url 'gig:delete_comment' r.id %}"
+                                                            class="btn btn-default"
+                                                            style="opacity: 0.8; font-size: 12px; width:46px;height:25px;">حذف</a>
+                                                        <a href="{% url 'gig:update_comment' r.id %}"
+                                                            class="btn btn-default"
+                                                            style="opacity: 0.8; font-size: 12px; width:58px;height:25px;">ویرایش</a>
+                                                        {% endif %}
                                                     </blockquote>
+                                                    
                                                     {% endfor %}
                                                 </div>
 
                                             </div>
                                             <br>
-                                            <hr style=" border-width: 1px; border-color: rgb(255, 153, 0); opacity: 0.4;">
+                                            <hr
+                                                style=" border-width: 1px; border-color: rgb(255, 153, 0); opacity: 0.4;">
                                             {% endfor %}
                                         </ul>
                                         <div class='col-md-12'>
                                             <div class='col-md-6 col-md-offset-3'>
 
                                                 {% if user.is_authenticated %}
-                                                
+
                                                 {% if buyer %}
                                                 {% for i in buyer %}
                                                 {% if i.client and i.client == request.user and request.user.id != gig.user.id %}
                                                 <header>
                                                     <h3><b>دیدگاه خود را به اشتراک بگذارید </b></h3>
                                                 </header>
-                                                <div>
-                                                    <form method="POST" id="">
+                                                <div style="text-align: center;">
+                                                    <button type="button" name="button" class=" btn btn-default" id='toggle-comment' style="font-size: 20pt; background-color: rgb(11, 43, 61);">⮛</button>
+                                                    <form method="POST" class="comment-form-ajax" action="." id="toggle-cm-form" style="display: none;">
                                                         {% csrf_token %}
 
                                                         {{ cmform.as_p }}
@@ -359,10 +374,8 @@
                                                     </form>
                                                     <br>
                                                 </div>
-
-
                                                 {% else %}
-                                                <p style="color: rgb(206, 2, 2); opacity: 0.8; font-size: 20px;">برای بهاشتراک گذاشتن دیدگاه, ابتدا گیگ را خریداری کنید</p>
+                                                <p></p>
                                                 {% endif %}
                                                 {% endfor %}
                                                 {% else %}
@@ -385,6 +398,7 @@
                                 </ul>
                             </div>
                         </div>
+                    
 
                     </div>
                 </div>
@@ -640,14 +654,45 @@
     </div>
 </section>
 <script>
-    $(document).ready(function(){
-  $(".toggle-replies").click(function(){
-    $(".toggle-form").animate({
-      height: 'toggle'
+    $(document).ready(function () {
+        $(".toggle-replies").click(function () {
+            $(".toggle-form").animate({
+                height: 'toggle'
+            });
+        });
     });
-  });
-});
 </script>
+
+<script>
+    $(document).ready(function () {
+        $("#toggle-comment").click(function () {
+            $("#toggle-cm-form").animate({
+                height: 'toggle'
+            });
+        });
+    });
+</script>
+
+<!-- Ajax to prevent whole page refresh -->
+
+<!-- <script>
+    $(document).on('submit', '.comment-form-ajax', function(event){
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response) {
+               $('.main-comment-section').html(response['form']);
+            },
+            error: function(rs, e) {
+                console.log(rs.responseText);
+            }
+        })
+    })
+</script> -->
+
 <!-- <script>
     $('.toggle-relies').click(function() {
   $('.toggle-form').toggle();
