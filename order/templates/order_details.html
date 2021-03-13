@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 
+<<<<<<< HEAD
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">
@@ -46,61 +47,101 @@
                         </h4>
                         <p>کد گیگ مورد نظر : {{ item.gig.id }}</p>
                     </td>
-
-                    <td class="cart_quantity">
-                        <div class="cart_quantity_button" style="margin-left: 20px">
-                            <input class="cart_quantity_input" type="text" name="quantity"
-                                   value="{{ item.deadline }}"
-                                   autocomplete="off"
-                                   size="2">
-                        </div>
-                    </td>
-
-                    <td class="cart_total ">
-                        <p class="cart_total_price" style="margin-right: 60px">{{ item.price }} تومان</p>
-                    </td>
-                    <td class="cart_delete pull-left">
-                        <a class="cart_quantity_delete" href="{% url 'order:delete-order' item.id %}"><i
-                                class="fa fa-times"></i></a>
-                    </td>
+=======
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/">خانـه</a></li>
+                    <li class="active">پرداخت</li>
+                </ol>
+            </div><!--/breadcrums-->
+            {% if order_items and order_items|length > 0 %}
+                <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                <thead>
+                <tr class="cart_menu">
+                    <td class="image">تصویر</td>
+                    <td>نام</td>
+                    <td class="quantity">مهلت تحویل</td>
+                    <td class="total">مجمـوع</td>
+                    <td class="total">حذف</td>
+                    <td></td>
                 </tr>
-            {% endfor %}
-            {% else %}
-            <div class="alert alert-danger">
-                <h4 class="warning"> سبد خرید شما خالی میباشد </h4>
+                </thead>
+                <tbody>
+                {% for item in order_items %}
+                    <tr>
+                        {% if item.gig.image %}
+                            <td class="cart_product">
+                                <a href=""><img src="{{ item.gig.image.url }}" width="180px" height="110px" alt=""></a>
+                            </td>
+                        {% else %}
+                            <td class="cart_product">
+                                <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" width="180px"
+                                                height="110px" alt=""></a>
+                            </td>
+                        {% endif %}
+                        <td class="cart_description">
+                            <h4><a href="{{ item.gig.get_absolute_url }}">{{ item.gig.field }}</a>
+                            </h4>
+                            <p>کد گیگ مورد نظر : {{ item.gig.id }}</p>
+                        </td>
+>>>>>>> sajad
+
+                        <td class="cart_quantity">
+                            <div class="cart_quantity_button" style="margin-left: 20px">
+                                <input class="cart_quantity_input" type="text" name="quantity"
+                                       value="{{ item.deadline }}"
+                                       autocomplete="off"
+                                       size="2">
+                            </div>
+                        </td>
+
+                        <td class="cart_total ">
+                            <p class="cart_total_price" style="margin-right: 60px">{{ item.gig.re_format_cost }}
+                                تومان</p>
+                        </td>
+                        <td class="cart_delete">
+                            <a class="cart_quantity_delete" href="{% url 'order:delete-order' item.id %}"><i
+                                    class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                <div class="alert alert-danger">
+                    <h4 class="warning"> سبد خرید شما خالی میباشد </h4>
+                </div>
+                </tbody>
+            {% endif %}
+            </table>
             </div>
-            </tbody>
-        {% endif %}
-        </table>
         </div>
-    </div>
-</section>
+    </section>
 
+    <section id="do_action">
+        <div class="container">
+            <div class="heading">
+                <h3>نهایی کردن سفارش یا ادامه خریـد ؟! </h3>
+                <p>در صورتیکـه کوپن خریـد و یا کد تخفیف داریـد میتوانید از آن استفاده نمایید | با استفاده از بخش مربوطه
+                    هزینه حمل و نقل خود را محاسبـه نمایید</p>
+            </div>
 
-<section id="do_action">
-    <div class="container">
-        <div class="heading">
-            <h3>نهایی کردن سفارش یا ادامه خریـد ؟! </h3>
-            <p>در صورتیکـه کوپن خریـد و یا کد تخفیف داریـد میتوانید از آن استفاده نمایید | با استفاده از بخش مربوطه
-                هزینه حمل و نقل خود را محاسبـه نمایید</p>
-        </div>
-
-        <div class="col-sm-6">
-            <div class="total_area">
-                <ul>
-                    <li>مجمـوع سبـد خریـد <span>{{ order.convert_total_price }} تومان</span></li>
-                    <li>مالیـات (9%) <span>{{ order.calculate_taxes }} تومان</span></li>
-                    <li>هزینـه حمل و نقـل <span>رایـگان</span></li>
-                    <li>مجمـوع <span>{{ order.convert_total_payment_price }} تومان</span></li>
-                </ul>
-                <a class="btn btn-default update" href="{% url 'gig:gig_list' %}">به روز رسانی سبـد خریـد </a>
-                {% if order_items and order_items|length > 0 %}
-                    <a class="btn btn-default check_out" href="/payment/go-to-gateway/ ">پرداخت</a>
-                {% endif %}
+            <div class="col-sm-6">
+                <div class="total_area">
+                    <ul>
+                        <li>مجمـوع سبـد خریـد <span>{{ order.convert_total_price }} تومان</span></li>
+                        <li>مالیـات (9%) <span>{{ order.calculate_taxes }} تومان</span></li>
+                        <li>مجمـوع <span>{{ order.convert_total_payment_price }} تومان</span></li>
+                    </ul>
+                    <a class="btn btn-default update" href="{% url 'gig:gig_list' %}">به روز رسانی سبـد خریـد </a>
+                    {% if order_items and order_items|length > 0 %}
+                        <a class="btn btn-default check_out" href="/payment/go-to-gateway/ ">پرداخت</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-    </div>
-</section>
+        </div>
+    </section>
 
 {% endblock %}

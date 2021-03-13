@@ -30,7 +30,6 @@ __pycache__/
 .idea/
 .Python
 .idea/*
-*/migrations/*
 build/
 develop-eggs/
 dist/
@@ -49,8 +48,6 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-migrations/
-static_cdn/media_root/*
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -84,8 +81,7 @@ pytestdebug.log
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
-db.sqlite3-journal
+
 
 # Flask stuff:
 instance/

@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -46,14 +45,15 @@ INSTALLED_APPS = [
     'proFile',
     'user',
     'category',
+    'site_info',
     # google auth section
-    'django.contrib.sites', # for google auth / must be above the rest <--
+    'django.contrib.sites',  # for google auth / must be above the rest <--
     'authApp',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    #gateway section
+    # gateway section
     'azbankgateways',
     'payment',
 ]
@@ -73,7 +73,7 @@ ROOT_URLCONF = 'Fiverr.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,7 +87,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Fiverr.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -117,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -129,14 +127,14 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
+USE_TZ = False
 
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+<<<<<<< HEAD
 
 
 # Google Auth section starts
@@ -147,6 +145,18 @@ GOOGLE_RECAPTCHA_SECRET_KEY = '6LeCZnQaAAAAAGjFuhrEQGNh6h0ZUrOlwRqUhJWZ'
 SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
+=======
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'static_root')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'media_root')
+
+# Google Auth section starts
+
+SITE_ID = 2
+>>>>>>> sajad
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -162,15 +172,15 @@ SOCIALACCOUNT_PROVIDERS = {
             'profile',
             'email',
         ],
-        'AUTH_PARAMS' : {
-            'access_type' : 'online',
+        'AUTH_PARAMS': {
+            'access_type': 'online',
         }
     }
 }
 
-
 # Google Auth section ends
 
+<<<<<<< HEAD
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -182,20 +192,27 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'static_root')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'static_cdn','media_root')
 #Gateway setting starts
+=======
+# Gateway setting starts
+>>>>>>> sajad
 
 AZ_IRANIAN_BANK_GATEWAYS = {
-   'GATEWAYS': {
-       'ZARINPAL': {
-           'MERCHANT_CODE': '1344b5d4-0048-11e8-94db-005056a205be',
-       },
-   },
-   'DEFAULT': 'ZARINPAL',
-   'CURRENCY': 'IRR', # اختیاری
-   'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
-   'TRACKING_CODE_LENGTH': 16, # اختیاری
-   'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
-   'BANK_PRIORITIES': [
-   ], # اختیاری
+    'GATEWAYS': {
+        'ZARINPAL': {
+            'MERCHANT_CODE': '1344b5d4-0048-11e8-94db-005056a205be',
+        },
+    },
+    'DEFAULT': 'ZARINPAL',
+    'CURRENCY': 'IRR',  # اختیاری
+    'TRACKING_CODE_QUERY_PARAM': 'tc',  # اختیاری
+    'TRACKING_CODE_LENGTH': 16,  # اختیاری
+    'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader',  # اختیاری
+    'BANK_PRIORITIES': [
+    ],  # اختیاری
 }
 
+<<<<<<< HEAD
 #Gateway setting ends
+=======
+# Gateway setting ends
+>>>>>>> sajad

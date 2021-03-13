@@ -1,5 +1,6 @@
 from django import forms
 from category.models import Category
+from order.models import Transaction
 from .models import Gig
 
 
@@ -25,5 +26,20 @@ from .models import Gig
 class GigForm(forms.ModelForm):
     class Meta:
         model = Gig
-        fields = ('title', 'category', 'cost', 'description', 'active' ,'image')
+        fields = ('title', 'field', 'cost', 'description', 'active', 'image')
 
+
+class TransactionForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        # pk = forms.IntegerField(widget=forms.HiddenInput())
+        fields = (
+            'file',
+            # 'pk',
+        )
+        widgets = {
+            'file': forms.FileInput(attrs={})
+        }
+        labels={
+            'file' : 'ارسال فایل'
+        }

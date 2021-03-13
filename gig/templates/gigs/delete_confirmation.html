@@ -1,0 +1,27 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h3 class="text-center text-danger"> آیا مطمئن هستید؟ </h3>
+    <br><br><br>
+    <div class="container">
+        <div style="margin: 50px;">
+            <ul class="nav nav-justified">
+                <li style="padding: 20px">
+                    <a href="{% url 'gig:delete-gig' pk %}">
+                        <button class="btn btn-danger btn-block" style="margin-left: 100px;">
+                            <font color="#f0f8ff">بله</font>
+                        </button>
+                    </a>
+                </li>
+                <li style="padding: 20px">
+                    <a href="{% url 'gig:my_gigs' %}">
+                        <button class="btn btn-success btn-block"><font color="#f0f8ff">خیر</font></button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

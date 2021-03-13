@@ -5,6 +5,6 @@ User = get_user_model()
 
 @admin.register(User)
 class AdminUser(admin.ModelAdmin):
-    list_display = ('username', 'first_name', 'date_joined','is_staff','is_anonymous')
+    list_display = ('username', 'first_name', 'last_name', 'date_joined','email')
     list_filter = ('date_joined',)
     search_fields = ('first_name', 'last_name', 'email', 'username', 'phone_number')

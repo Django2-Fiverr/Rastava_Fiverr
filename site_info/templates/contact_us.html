@@ -1,0 +1,71 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% block title %}تماس با ما{% endblock %}
+{% block content %}
+
+        <h2 class="text-right">تماس با ما</h2><br/>
+        <div class="row">
+            <div class="col-md-6">
+                <form method="POST">
+                    {% csrf_token %}
+                    <label for="{{ form.full_name.id_for_label }}">نام و نام خانوادگی :</label>
+                    {{ form.full_name }}
+                    {% for error in form.full_name.errors %}
+                        <p style="color: red;"> {{ error }} </p>
+                    {% endfor %}
+
+                    <label for="{{ form.subject.id_for_label }}">موضوع :</label>
+                    {{ form.subject }}
+                    {% for error in form.subject.errors %}
+                        <p style="color: red;"> {{ error }} </p>
+                    {% endfor %}
+
+                    <label for="{{ form.email.id_for_label }}">ایمیل :</label>
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                        <p style="color: red;"> {{ error }} </p>
+                    {% endfor %}
+
+                    <label for="{{ form.message.id_for_label }}">متن پیام :</label>
+                    {{ form.message }}
+                    {% for error in form.message.errors %}
+                        <p style="color: red;"> {{ error }} </p>
+                    {% endfor %}
+
+                    <input class="btn btn-primary" type="submit" value="ارسال"/><br/><br/>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div style="width: 100%">
+                        <iframe width="100%" height="413" frameborder="0" scrolling="no" marginheight="0"
+                                marginwidth="0"
+                                src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=Tehran+(Fiverr)&amp;t=&amp;z=11&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                        </iframe>
+                        آدرس شرکت
+                        <br/> <br/><br/>
+
+                        <h4><b>
+                            خدمات مشتری:
+                        </h4></b> <br/>
+                        <h4>
+                            شماره تماس: 00000000 021
+                        </h4>
+                        <h4>
+                            ایمیل: <a href="mailto:usa@mysite.com">
+                            Fiverr@Fiverr.com
+                        </h4>
+                        </a>
+                        <h4>
+                            دفتر مرکزی: Rastava
+                        </h4>
+                        <h4>
+                            شماره تماس: 00000000 021
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/><br/><br/>
+
+{% endblock %}

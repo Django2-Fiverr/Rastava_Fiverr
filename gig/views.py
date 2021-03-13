@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.views.generic import ListView, DetailView
-from .models import Gig
 from django.utils import timezone
 from comment.models import Comment
 from comment.forms import CommentForm, UpdateCommentForm
@@ -15,17 +14,18 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from order.models import Transaction, OrderDetail
 from order.forms import OrderForm
-from .forms import GigForm
-
-User = get_user_model()
-
+from extensions.constants import CATEGORY, COMMENTS, set_comment_publish
+from extensions.mainObjects import User
+from .models import Gig
+from .forms import GigForm, TransactionForm
 
 @login_required
 def create_gig(request):
     if request.method == 'POST':
         form = GigForm(data=request.POST, files=request.FILES)
         context = {
-            'form': form
+            'form': form,
+            'categories': CATEGORY,
         }
         if form.is_valid():
             data = form.cleaned_data
@@ -38,6 +38,7 @@ def create_gig(request):
             'text': 'ایجاد گیگ',
             'operation': 'ایجاد گیگ جدید',
             'title': 'ایجاد گیگ',
+            'categories': CATEGORY,
         }
     # return render(request, 'gigs/gig_operation.html', context)
     return render(request, 'gigs/gig_operation.html', context)
@@ -48,6 +49,11 @@ class GigList(ListView):
     template_name = 'gigs/gig_list.html'
     context_object_name = 'gigs'
     paginate_by = 9
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(GigList, self).get_context_data(*args, **kwargs)
+        context['categories'] = CATEGORY
+        return context
 
     def get_queryset(self):
         return Gig.objects.get_active_gigs()
@@ -131,6 +137,11 @@ class SearchGig(LoginRequiredMixin, ListView):
     context_object_name = 'gigs'
     paginate_by = 9
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(SearchGig, self).get_context_data(*args, **kwargs)
+        context['categories'] = CATEGORY
+        return context
+
     def get_queryset(self):
         request = self.request
         query = request.GET.get('q')
@@ -146,9 +157,15 @@ class GroupingGigs(ListView):
     context_object_name = 'gigs'
     paginate_by = 9
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(GroupingGigs, self).get_context_data(*args, **kwargs)
+        context['categories'] = CATEGORY
+        return context
+
     def get_queryset(self):
-        result = Gig.objects.grouping_gigs('paravid')
-        return result if result else Gig.objects.get_active_gigs()
+        title = self.kwargs.get('title')
+        result = Gig.objects.grouping_gigs(title)
+        return result if result else Gig.objects.none()
 
 
 class MyGigList(LoginRequiredMixin, ListView):
@@ -156,6 +173,11 @@ class MyGigList(LoginRequiredMixin, ListView):
     template_name = 'components/my_gig.html'
     context_object_name = 'gigs'
     paginate_by = 9
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(MyGigList, self).get_context_data(*args, **kwargs)
+        context['categories'] = CATEGORY
+        return context
 
     def get_queryset(self):
         request = self.request
@@ -170,13 +192,21 @@ class UserGigList(ListView):
 
     def get_queryset(self):
         pk = self.kwargs.get('pk')
-        user = User.objects.filter(id=pk).first()
+        user = get_object_or_404(User, id=pk)
         return Gig.objects.filter(user=user, active=True)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserGigList, self).get_context_data(*args, **kwargs)
+        context['categories'] = CATEGORY
+        return context
 
 
 @login_required
 def edit_gig(request, id):
-    form = GigForm(instance=request.user.gig_set.filter(id=id).first())
+    gig = get_object_or_404(Gig, id=id)
+    if request.user != gig.user:
+        return render(request, 'gigs/deny_edit.html')
+    form = GigForm(instance=gig)
     if request.method == 'POST':
         form = GigForm(instance=request.user.gig_set.filter(id=id).first(),
                        files=request.FILES,
@@ -189,6 +219,7 @@ def edit_gig(request, id):
         'text': 'اعمال ویرایش',
         'operation': 'ویرایش گیگ',
         'title': 'ویرایش گیگ',
+        'categories': CATEGORY,
     }
     return render(request, 'gigs/gig_operation.html', context)
 
@@ -196,8 +227,11 @@ def edit_gig(request, id):
 @login_required
 def my_sales(request):
     gigs = Transaction.objects.filter(seller=request.user)
+    form = TransactionForm()
     context = {
-        'gigs': gigs
+        'gigs': gigs,
+        'form': form,
+        'categories': CATEGORY,
     }
     return render(request, 'gigs/my_sales.html', context)
 
@@ -206,9 +240,22 @@ def my_sales(request):
 def my_purchases(request):
     gigs = Transaction.objects.filter(client=request.user)
     context = {
-        'gigs': gigs
+        'gigs': gigs,
+        'categories': CATEGORY,
     }
     return render(request, 'gigs/my_purchases.html', context)
+
+
+@login_required
+def delete_confirmation(request, pk):
+    gig = get_object_or_404(Gig, id=pk)
+    if request.user != gig.user:
+        raise Http404('You dont have permission to modify others services')
+    context = {
+        'pk': pk,
+        'categories': CATEGORY,
+    }
+    return render(request, 'gigs/delete_confirmation.html', context)
 
 
 @login_required
@@ -218,3 +265,14 @@ def delete_gig(request, pk):
         raise Http404('Not allowed')
     gig.delete()
     return redirect('gig:my_gigs')
+
+
+@login_required
+def deliver(request, pk):
+    if request.method == 'POST':
+        transaction = get_object_or_404(Transaction, id=pk)
+        form = TransactionForm(instance=transaction, files=request.FILES, data=request.POST)
+        if form.is_valid():
+            transaction.delivery_status = True
+            form.save()
+    return redirect('gig:my-sales')
