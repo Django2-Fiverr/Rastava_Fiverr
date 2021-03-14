@@ -7,6 +7,7 @@ from django.utils import datetime_safe
 
 from order.models import Order
 from order.views import create_transaction
+from extensions.constants import CATEGORY
 
 
 @login_required
@@ -61,4 +62,4 @@ def callback_gateway_view(request):
         order.save()
         create_transaction(request,order)
 
-    return render(request, 'cancle.html')
+    return render(request, 'cancle.html',{'categories':CATEGORY})
