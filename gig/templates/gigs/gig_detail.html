@@ -15,42 +15,13 @@
                     <div class="col-sm-5">
                         <div class="view-product">
                             {% if gig.image %}
-                            <img src="{{ gig.image.url }}" alt="">
+                            <img src="{{ gig.image.url }}" alt="" style="border-radius: 20px;">
                             {% else %}
-                            <img src="{% static 'images/product-details/1.jpg' %}" alt="">
+                            <img src="{% static 'images/product-details/1.jpg' %}" alt="" style="border-radius: 20px;">
                             {% endif %}
-                            <h3>بزرگنمایـی</h3>
+
                         </div>
-                        <div id="similar-product" class="carousel slide" data-ride="carousel">
 
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item">
-                                    <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-                                    <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-                                    <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-                                </div>
-                                <div class="item active">
-                                    <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-                                    <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-                                    <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-                                    <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-                                    <a href=""><img src="{% static 'images/product-details/similar1.jpg' %}" alt=""></a>
-                                </div>
-
-                            </div>
-
-                            <!-- Controls -->
-                            <a class="right item-control" href="#similar-product" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                            <a class="left item-control" href="#similar-product" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                        </div>
 
                     </div>
                     <div class="col-sm-7">
@@ -63,7 +34,7 @@
                             </div>
                             <div>
                                 <span>
-                                    <span>قیمت : {{ gig.cost }} تومان</span>
+                                    <span>قیمت : {{ gig.re_format_cost }} تومان</span>
                                 </span>
                                 <form method="post" action="{% url 'order:add-order' %}">
                                     {% csrf_token %}
@@ -76,7 +47,8 @@
                                         <br>
                                         {% endfor %}
                                     </span><br><br>
-                                    <button type="submit" class="btn btn-fefault cart pull-right">
+                                    <button type="submit" class="btn btn-fefault cart pull-right"
+                                        style="border-radius: 10px;">
                                         <i class="fa fa-shopping-cart"></i>
                                         افـزودن به سبـد خریـد
                                     </button>
@@ -101,7 +73,11 @@
                 <div class="category-tab shop-details-tab">
                     <!--category-tab-->
                     <div class="col-sm-12">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                        border-top-left-radius: 45px;
+                        border-top-right-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        border-bottom-left-radius: 10px;">
                             <li><a href="#details" data-toggle="tab">جزئیات</a></li>
                             <li><a href="#companyprofile" data-toggle="tab">درباره سازنده</a></li>
                             <li><a href="#tag" data-toggle="tab">برچسب</a></li>
@@ -240,11 +216,15 @@
                                     <div style="margin-right: 10px;">
 
                                         <br>
-                                        <h2>دیدگاه ها</h2>
-
                                         <ul>
-                                            <h4 style="text-align: center;"> {{ info.count }} دیدگاه برای این گیگ ثبت
+                                            {% if info.count > 0 %}
+                                            <h4 style="text-align: center; color: rgb(67, 8, 122);"> {{ info.count }}
+                                                دیدگاه برای این گیگ ثبت
                                                 شده است</h4>
+                                            {% else %}
+                                            <h4 style="text-align: center; color: rgb(67, 8, 122);">
+                                                اولین نفری باشید که دیدگاه خود را به اشتراک میگذارد.</h4>
+                                            {% endif %}
                                             {% for i in info %}
                                             <blockquote>
                                                 <p>
@@ -256,16 +236,19 @@
                                                         height="40px" width="40px"
                                                         style="border-radius: 100px; margin-left: 10px;">
                                                     {% endif %}
-                                                    <span style="color: rgb(20, 36, 37);
-                                                            opacity: 0.7;"> {{ i.publish }} </span>
-                                                    <span style="color: rgb(255, 153, 0);">•</span>
-                                                    <span style="color: rgb(20, 36, 37); opacity: 0.7;">{{ i.user }}
+                                                    <span
+                                                        style="color: rgb(20, 36, 37); opacity: 0.7; font-size: 10pt; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">{{ i.user }}
                                                     </span>
+                                                    <span style="color: rgb(108, 10, 138);">•</span>
+                                                    
+                                                    <span
+                                                        style="color: rgb(20, 36, 37);
+                                                            opacity: 0.7; font-size: 10pt; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">{{ i.time_ago }}</span>
                                                 <p>{{ i.content }}</p>
                                                 </p>
 
                                                 <ul
-                                                    style="font-size: 15px; opacity: 0.8; font-family: Arial, Helvetica, sans-serif;">
+                                                    style="font-size: 15px; opacity: 0.8; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
 
                                                 </ul>
                                             </blockquote>
@@ -277,7 +260,8 @@
                                             {% endif %}
                                             {% if request.user.id == gig.user.id %}
                                             <button type="button" name="comment_id"
-                                                class="toggle-replies btn btn-default btn-outline-dark" value="{{ i.id }}">پاسخ</button>
+                                                class="toggle-replies btn btn-default btn-outline-dark"
+                                                style="border-radius: 10px;" value="{{ i.id }}">پاسخ</button>
                                             {% endif %}
 
                                             <div class="toggle-form container" style="display: none;">
@@ -285,7 +269,8 @@
                                                 <div id="ex1" class="form-group row">
 
 
-                                                    <form method="POST" class="reply-form-ajax" action="." style="width: 45%;">
+                                                    <form method="POST" class="reply-form-ajax" action="."
+                                                        style="width: 45%; border-radius: 20px;">
                                                         {% csrf_token %}
                                                         <input type="hidden" name="comment_id" value="{{ i.id }}">
                                                         {{ cmform.as_p }}
@@ -305,8 +290,9 @@
                                             <div class="container" style="margin-right: 100px;">
                                                 <div class="form-group row">
                                                     {% for r in i.replies.all %}
-                                                    <p> در پاسخ به <span style="opacity: 0.7;">{{ i.user.username }}</span></p>
-                                                            
+                                                    <p> در پاسخ به <span
+                                                            style="opacity: 0.7; font-size: 10pt; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">{{ i.user.username }}</span></p>
+
 
                                                     <blockquote>
                                                         <p>
@@ -320,16 +306,19 @@
                                                                 style="border-radius: 100px; margin-left: 10px;">
                                                             {% endif %}
 
-                                                            <span style="color: rgb(20, 36, 37);
-                                                                opacity: 0.7;"> {{ r.publish }} </span>
-                                                            <span style="color: rgb(255, 153, 0);">•</span>
-                                                            <span style="color: rgb(20, 36, 37); opacity: 0.7;">{{ r.user }} </span>
-                                                                
+                                                            <span
+                                                                style="color: rgb(20, 36, 37); opacity: 0.7; font-size: 10pt; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">{{ r.user }} </span>
+                                                            <span style="color: rgb(108, 10, 138)">•</span>
+                                                            
+                                                                <span
+                                                                style="color: rgb(20, 36, 37);
+                                                                opacity: 0.7; font-size: 10pt; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                                                                {{ r.time_ago }} </span>
 
                                                         </p>
 
                                                         <ul
-                                                            style="font-size: 15px; opacity: 0.8; font-family: Arial, Helvetica, sans-serif;">
+                                                            style="font-size: 20px; opacity: 0.9; font-family: Arial, Helvetica, sans-serif;">
                                                             {{ r.content }}
                                                         </ul>
                                                         {% if user.id == gig.user.id %}
@@ -341,14 +330,13 @@
                                                             style="opacity: 0.8; font-size: 12px; width:58px;height:25px;">ویرایش</a>
                                                         {% endif %}
                                                     </blockquote>
-                                                    
+
                                                     {% endfor %}
                                                 </div>
 
                                             </div>
                                             <br>
-                                            <hr
-                                                style=" border-width: 1px; border-color: rgb(255, 153, 0); opacity: 0.4;">
+                                            <hr style=" border-width: 1px; border-color: rgb(68, 3, 88); opacity: 0.4;">
                                             {% endfor %}
                                         </ul>
                                         <div class='col-md-12'>
@@ -363,13 +351,17 @@
                                                     <h3><b>دیدگاه خود را به اشتراک بگذارید </b></h3>
                                                 </header>
                                                 <div style="text-align: center;">
-                                                    <button type="button" name="button" class=" btn btn-default" id='toggle-comment' style="font-size: 20pt; background-color: rgb(11, 43, 61);">⮛</button>
-                                                    <form method="POST" class="comment-form-ajax" action="." id="toggle-cm-form" style="display: none;">
+                                                    <button type="button" name="button" class=" btn btn-default"
+                                                        id='toggle-comment'
+                                                        style="font-size: 6pt; background-color: rgb(11, 43, 61); border-radius: 40px;">⮛</button>
+                                                    <form method="POST" class="comment-form-ajax" action="."
+                                                        id="toggle-cm-form">
                                                         {% csrf_token %}
 
                                                         {{ cmform.as_p }}
                                                         <br>
-                                                        <button type="submit" class="save btn btn-default">افزودن
+                                                        <button type="submit" class="save btn btn-default"
+                                                            style="border-radius: 40px;">افزودن
                                                             دیدگاه</button>
                                                     </form>
                                                     <br>
@@ -379,16 +371,13 @@
                                                 {% endif %}
                                                 {% endfor %}
                                                 {% else %}
-                                                <p>no buyers for this gig</p>
+                                                <b>
+                                                    <p style="color: rgb(76, 0, 92);">• تنها کاربرانی که گیگ را خریداری
+                                                        کرده اند ، میتوانند دیدگاه خود را به اشتراک بگذارند •</p>
+                                                </b>
                                                 {% endif %}
                                                 {% else %}
-                                                <a style="color: rgb(255, 153, 0); font-size: 16px;"
-                                                    href="/accounts/login?next={{request.path}}"><span
-                                                        style="color: rgb(15, 49, 49);">برای به
-                                                        اشتراک گذاری دیدگاه خود به حساب
-                                                        کاربـری</span><span><b> وارد</b></span><span
-                                                        style="color: rgb(15, 49, 49);">
-                                                        شوید </span></a>
+                                                <a style="color: rgb(255, 153, 0); font-size: 16px;" href="/accounts/login?next={{request.path}}"><span style="color: rgb(15, 49, 49);">برای به اشتراک گذاری دیدگاه خود به حساب کاربـری</span><span><b> وارد</b></span><span style="color: rgb(15, 49, 49);"> شوید </span></a>
 
                                                 {% endif %}
 
@@ -398,264 +387,16 @@
                                 </ul>
                             </div>
                         </div>
-                    
+
 
                     </div>
                 </div>
                 <!--/category-tab-->
 
 
-                <div class="recommended_items">
-                    <!--recommended_items-->
-                    <h2 class="title text-center">گیگ های مرتبط</h2>
-
-                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/recommend1.jpg' %}" alt="">
-                                                <h2>1.250.000 ريال</h2>
-                                                <p>توضیحات کوتاه محصول</p>
-
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                                                </button>
-
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/recommend2.jpg' %}" alt="">
-                                                <h2>1.250.000 ريال</h2>
-                                                <p>توضیحات کوتاه محصول</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="images/home/recommend3.jpg" alt="">
-                                                <h2>1.250.000 ريال</h2>
-                                                <p>توضیحات کوتاه محصول</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/recommend1.jpg' %}" alt="">
-                                                <h2>1.250.000 ريال</h2>
-                                                <p>توضیحات کوتاه محصول</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/recommend2.jpg' %}" alt="">
-                                                <h2>1.250.000 ريال</h2>
-                                                <p>توضیحات کوتاه محصول</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="{% static 'images/home/recommend3.jpg' %}" alt="">
-                                                <h2>1.250.000 ريال</h2>
-                                                <p>توضیحات کوتاه محصول</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <br>
-
-                                        <hr style="border-width: 2px;border-color: #5d5f5e;opacity: 50%">
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <!--/recommended_items-->
-
-            </div>
-
-            <div class="col-sm-3">
-                <div class="left-sidebar">
-                    <h2>دسته بندی محصولات</h2>
-                    <div class="panel-group category-products" id="accordian">
-                        <!--category-productsr-->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        دسته 1
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="sportswear" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="">محصول 1 </a></li>
-                                        <li><a href="">محصول 2 </a></li>
-                                        <li><a href="">محصول 3 </a></li>
-                                        <li><a href="">محصول 4</a></li>
-                                        <li><a href="">محصول 5</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#mens">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        دسته 2
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="mens" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="">محصول 1 </a></li>
-                                        <li><a href="">محصول 2 </a></li>
-                                        <li><a href="">محصول 3 </a></li>
-                                        <li><a href="">محصول 4</a></li>
-                                        <li><a href="">محصول 5</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">محصول 1</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">محصول 2</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">محصول 3</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">محصول 4</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">محصول 5</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">محصول 6</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">محصول 7</a></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/category-productsr-->
-
-                    <div class="brands_products">
-                        <!--brands_products-->
-                        <h2>برنـد ها</h2>
-                        <div class="brands-name">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href=""> <span class="pull-left">(50)</span>برنـد 1</a></li>
-                                <li><a href=""> <span class="pull-left">(56)</span>برنـد 2</a></li>
-                                <li><a href=""> <span class="pull-left">(27)</span>برنـد 3</a></li>
-                                <li><a href=""> <span class="pull-left">(32)</span>برنـد 4</a></li>
-                                <li><a href=""> <span class="pull-left">(5)</span>برنـد 5</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--/brands_products-->
-
-                    <div class="price-range">
-                        <!--price-range-->
-                        <h2>فیلتـر قیمـت</h2>
-                        <div class="well">
-                            <div class="slider slider-horizontal" style="width: 165px;">
-                                <div class="slider-track">
-                                    <div class="slider-selection" style="left: 0.025%; width: 0.02%;"></div>
-                                    <div class="slider-handle round left-round" style="left: 0.025%;"></div>
-                                    <div class="slider-handle round" style="left: 0.045%;"></div>
-                                </div>
-                                <div class="tooltip top" style="top: -30px; left: -30.4423px;">
-                                    <div class="tooltip-arrow"></div>
-                                    <div class="tooltip-inner">250 : 450</div>
-                                </div>
-                                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="1000000"
-                                    data-slider-step="5" data-slider-value="[250,450]" id="sl2" style="">
-                            </div>
-                            <br>
-                            <b>1.000.000 ريال</b> <b class="pull-left">0 ريال</b>
-                        </div>
-                    </div>
-                    <!--/price-range-->
-
-                    <div class="shipping text-center">
-                        <!--shipping-->
-                        <img src="{% static 'images/home/shipping.jpg' %}" alt="">
-                    </div>
-                    <!--/shipping-->
-
-                </div>
             </div>
 
         </div>
-
-    </div>
 </section>
 <script>
     $(document).ready(function () {
@@ -677,29 +418,5 @@
     });
 </script>
 
-<!-- Ajax to prevent whole page refresh -->
 
-<!-- <script>
-    $(document).on('submit', '.comment-form-ajax', function(event){
-        event.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function(response) {
-               $('.main-comment-section').html(response['form']);
-            },
-            error: function(rs, e) {
-                console.log(rs.responseText);
-            }
-        })
-    })
-</script> -->
-
-<!-- <script>
-    $('.toggle-relies').click(function() {
-  $('.toggle-form').toggle();
-});
-</script> -->
 {% endblock %}

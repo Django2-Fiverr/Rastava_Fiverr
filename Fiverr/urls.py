@@ -28,7 +28,6 @@ urlpatterns = [
     path('payment/',include('payment.urls')),
     path('site-info/',include('site_info.urls')),
     path('categories/',include('category.urls')),
-    path('comments/',include('comment.urls')),
     path('accounts/', include('user.urls')),
     path('gigs/', include('gig.urls')),
     path('profile/', include('proFile.urls')),

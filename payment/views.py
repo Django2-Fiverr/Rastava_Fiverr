@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.utils import datetime_safe
-
+from extensions.constants import CATEGORY
 from order.models import Order
 from order.views import create_transaction
 
@@ -60,5 +60,5 @@ def callback_gateway_view(request):
         order.date_of_payment = datetime_safe.datetime.now()
         order.save()
         create_transaction(request,order)
-
-    return render(request, 'cancle.html')
+    
+    return render(request, 'cancle.html', {'categories': CATEGORY})

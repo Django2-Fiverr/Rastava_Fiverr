@@ -4,6 +4,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from django.utils import timezone
+import datetime
 from comment.models import Comment
 from comment.forms import CommentForm, UpdateCommentForm
 import urllib
@@ -89,9 +90,9 @@ def gig_detail(request, pk):
                'order_form': order_form,
                'buyer': buyer,
     }
-    if request.is_ajax():
-        html = render_to_string('gig/gig_detail.html', context, request=request)
-        return JsonResponse({'form': html})
+    # if request.is_ajax():
+    #     html = render_to_string('gig/gig_detail.html', context, request=request)
+    #     return JsonResponse({'form': html})
     return render(request, 'gigs/gig_detail.html', context)
 
 
@@ -100,8 +101,6 @@ def update_comment(request, pk):
     gig = Gig.objects.get_by_id(pk)
     detail = Comment.objects.filter(status=True, pk=pk)
     comment = ''
-    #update_comment = ''
-    #detail = gig.comment_gig.get(id=id)
     my_form = UpdateCommentForm(instance=Comment.objects.get(pk=pk))
     if request.method == 'POST':
         my_form = UpdateCommentForm(instance=Comment.objects.get(pk=pk) ,data=request.POST)

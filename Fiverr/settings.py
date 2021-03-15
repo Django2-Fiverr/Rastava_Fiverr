@@ -134,7 +134,6 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-<<<<<<< HEAD
 
 
 # Google Auth section starts
@@ -142,10 +141,8 @@ USE_TZ = False
 GOOGLE_RECAPTCHA_SECRET_KEY = '6LeCZnQaAAAAAGjFuhrEQGNh6h0ZUrOlwRqUhJWZ'
 
 
-SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
 # ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
-=======
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'static_root')
@@ -156,7 +153,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'media_root')
 # Google Auth section starts
 
 SITE_ID = 2
->>>>>>> sajad
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -180,21 +176,7 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # Google Auth section ends
 
-<<<<<<< HEAD
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'static_root')
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'static_cdn','media_root')
-#Gateway setting starts
-=======
 # Gateway setting starts
->>>>>>> sajad
 
 AZ_IRANIAN_BANK_GATEWAYS = {
     'GATEWAYS': {
@@ -211,8 +193,4 @@ AZ_IRANIAN_BANK_GATEWAYS = {
     ],  # اختیاری
 }
 
-<<<<<<< HEAD
-#Gateway setting ends
-=======
 # Gateway setting ends
->>>>>>> sajad
