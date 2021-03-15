@@ -20,4 +20,5 @@ urlpatterns = [
     path('edit-gig/<int:id>', views.edit_gig, name='edit_gig'),
     path('<int:id>/delete', views.delete_comment, name='delete_comment'),
     path('<int:pk>/update', views.update_comment, name='update_comment'),
+    path('deliver/<int:pk>/', views.deliver, name='deliver'),
 ]

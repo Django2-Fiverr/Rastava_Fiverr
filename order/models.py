@@ -48,7 +48,7 @@ class Order(models.Model):
         return re_format_price(int(taxes))
 
     def get_total_payment_price(self):
-        result = self.get_total_price() * 1.09 * 10
+        result = self.get_total_price()
         return result
 
     def convert_total_payment_price(self):
