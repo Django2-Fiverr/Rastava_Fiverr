@@ -17,5 +17,3 @@ class FieldsView(generic.ListView):
     def get_queryset(self):
         name = self.kwargs.get('name')
         return Field.objects.get_fields(name)
-
-

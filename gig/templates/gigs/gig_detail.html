@@ -100,18 +100,18 @@
 
                         <div class="col-sm-12">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#details" data-toggle="tab">جزئیات</a></li>
-                                <li><a href="#reviews" data-toggle="tab">نظرات ({{ comments|length }})</a></li>
+                                <li><a href="#details" data-toggle="tab">جزئیات</a></li>
+                                <li class="active"><a href="#reviews" data-toggle="tab">نظرات ({{ comments|length }})</a></li>
                             </ul>
                         </div>
                         <div class="tab-content">
-                            <div class="tab-pane fade active in" id="details">
+                            <div class="tab-pane fade" id="details">
                                 <div class="col-md-12">
                                     <p style="text-align: justify; line-height: 30px;font-size: 18px">
                                         <b>{{ gig.description }}</b></p>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="reviews">
+                            <div class="tab-pane fade active in" id="reviews">
                                 <br>
                                 <h2 class="text-center"><b style="color: red">{{ comments|length }}</b>دیدگاه برای این
                                     گیگ ثبت شده است. </h2>
@@ -122,11 +122,28 @@
                                         <div style="-radius:10px ;: solid 2px #42075b;padding: 10px;">
 
                                             <ul>
-                                                <li><a href=""><i class="fa fa-user"></i>{{ comment.user }}</a></li>
-                                                <li><a href=""><i class="fa fa-clock-o"></i> {{ comment.get_time }}</a>
+                                                {% if comment.user.profile.image %}
+                                                    <li>
+                                                        <img src="{{ comment.user.profile.image.url }}"
+                                                             width="60px" height="60px"
+                                                             style="border: solid 3px #42075b; border-radius: 30px; margin-left: 20px"
+                                                             alt="">
+                                                    </li>
+                                                {% else %}
+                                                    <li>
+                                                        <img src="{% static 'images/product-details/1.jpg' %}"
+                                                             width="60px" height="60px"
+                                                             style="border: solid 2px #42075b; border-radius: 30px;"
+                                                             alt="">
+                                                    </li>
+                                                {% endif %}
+                                                <li><a href="{% url 'proFile:profile' comment.user.id %}">
+                                                    <i class="fa fa-user"></i><b>{{ comment.user }}</b></a>
                                                 </li>
-                                                <li><a href=""><i class="fa fa-calendar-o"></i> {{ comment.get_date }}
-                                                </a></li>
+                                                <li>
+                                                    <i class="fa fa-clock-o"></i> <b>{{ comment.get_time }}</b>
+                                                </li>
+
                                             </ul>
                                             <p style="font-size: 18px">{{ comment.content }}</p><br>
 
@@ -150,15 +167,30 @@
 
                                                 <div style="-radius:0px ;: solid 2px #575757;padding: 30px; margin-right:100px ">
                                                     <ul><h5>در پاسخ به <b
-                                                            style="color: #d00202">{{ comment.user.username }}</b></h5>
-                                                        <li><a href=""><i class="fa fa-user"></i>{{ reply.user }}</a>
+                                                            style="color: #d00202"><b>{{ comment.user }}</b></b></h5>
+                                                        {% if reply.user.profile.image %}
+                                                            <li>
+                                                                <img src="{{ reply.user.profile.image.url }}"
+                                                                     width="60px" height="60px"
+                                                                     style="border: solid 3px #42075b; border-radius: 30px; margin-left: 20px"
+                                                                     alt="">
+                                                            </li>
+                                                        {% else %}
+                                                            <li>
+                                                                <img src="{% static 'images/product-details/1.jpg' %}"
+                                                                     width="60px" height="60px"
+                                                                     style="border: solid 2px #42075b; border-radius: 30px;"
+                                                                     alt="">
+                                                            </li>
+                                                        {% endif %}
+                                                        <li>
+                                                            <a href="{% url 'proFile:profile' reply.user.id %}"><i
+                                                                    class="fa fa-user"></i><b>{{ reply.user }}</b></a>
                                                         </li>
-                                                        <li><a href=""><i
-                                                                class="fa fa-clock-o"></i> {{ reply.get_time }}</a>
+                                                        <li>
+                                                            <i class="fa fa-clock-o"></i> <b>{{ reply.get_time }}</b>
                                                         </li>
-                                                        <li><a href=""><i
-                                                                class="fa fa-calendar-o"></i> {{ reply.get_date }}
-                                                        </a></li>
+
                                                     </ul>
                                                     <p style="font-size: 18px">{{ reply.content }}</p>
 
@@ -184,18 +216,33 @@
                                                     {% for re_reply in reply.comment_set.all %}
                                                         <div style="-radius:0px ;: solid 2px #575757;padding: 30px; margin:20px 100px 0px 0px ">
                                                             <ul><h5>در پاسخ به <b
-                                                                    style="color: #d00202">{{ reply.user.username }}</b>
+                                                                    style="color: #d00202"><b>{{ reply.user }}</b></b>
                                                             </h5>
-                                                                <li><a href=""><i
-                                                                        class="fa fa-user"></i>{{ re_reply.user }}</a>
+                                                                {% if re_reply.user.profile.image %}
+                                                                    <li>
+                                                                        <img src="{{ re_reply.user.profile.image.url }}"
+                                                                             width="60px" height="60px"
+                                                                             style="border: solid 3px #42075b; border-radius: 30px; margin-left: 20px"
+                                                                             alt="">
+                                                                    </li>
+                                                                {% else %}
+                                                                    <li>
+                                                                        <img src="{% static 'images/product-details/1.jpg' %}"
+                                                                             width="60px" height="60px"
+                                                                             style="border: solid 2px #42075b; border-radius: 30px;"
+                                                                             alt="">
+                                                                    </li>
+                                                                {% endif %}
+                                                                <li>
+                                                                    <a href="{% url 'proFile:profile' re_reply.user.id %}"><i
+                                                                            class="fa fa-user"></i><b>{{ re_reply.user }}</b></a>
                                                                 </li>
                                                                 <li><a href=""><i
-                                                                        class="fa fa-clock-o"></i> {{ re_reply.get_time }}
+                                                                        class="fa fa-clock-o"></i>
+                                                                    <b>{{ re_reply.get_time }}</b>
                                                                 </a>
                                                                 </li>
-                                                                <li><a href=""><i
-                                                                        class="fa fa-calendar-o"></i> {{ re_reply.get_date }}
-                                                                </a></li>
+
                                                             </ul>
                                                             <p style="font-size: 18px">{{ re_reply.content }}</p>
                                                             {% if gig in gig_list or request.user == gig.user %}
@@ -257,8 +304,10 @@
                                     <h2 class="text-center">
 
 
-                                            برای ایجاد دیدگاه ابتدا <b style="color: #9e1f1f"><a href="/accounts/login?next={{ request.path }}" style="color: #922222">{{ message }}</a>
-                                        </b>
+                                        برای ایجاد دیدگاه ابتدا <b style="color: #9e1f1f"><a
+                                            href="/accounts/login?next={{ request.path }}"
+                                            style="color: #922222">{{ message }}</a>
+                                    </b>
 
                                     </h2>
                                 {% elif request.user != gig.user %}

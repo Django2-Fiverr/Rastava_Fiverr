@@ -49,3 +49,27 @@ def get_total_price(obj):
 def create_time_object(time, deadline):
     delta = datetime.timedelta(days=deadline)
     return time + delta
+
+
+def preview_time_spend(obj):
+    t_s = int((datetime.datetime.now() - obj).total_seconds())
+    seconds = t_s % 60
+    t_m = t_s // 60
+    minutes = t_m % 60
+    t_h = t_m // 60
+    hours = t_h % 24
+    t_d = t_h // 24
+    days = t_d % 30
+    t_m = t_d // 30
+    months = t_m % 12
+    result = list()
+    result.append(str(seconds) + ' ثانیه ')
+    if minutes > 0:
+        result.append(str(minutes) + ' دقیقه و')
+        if hours > 0:
+            result.append(str(hours) + ' ساعت و')
+            if days > 0:
+                result.append(str(days) + ' روز و')
+                if months > 0:
+                    result.append(str(months) + ' ماه و')
+    return ' '.join(reversed(result)) + 'قبل'

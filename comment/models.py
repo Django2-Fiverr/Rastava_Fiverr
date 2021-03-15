@@ -2,6 +2,7 @@ from django.db import models
 
 from proFile.models import Profile
 from extensions.mainObjects import User
+from extensions.functions import preview_time_spend
 from gig.models import Gig
 
 
@@ -26,4 +27,4 @@ class Comment(models.Model):
         return self.create.date().__str__()
 
     def get_time(self):
-        return self.create.time().__str__()[:8]
+        return preview_time_spend(self.create)

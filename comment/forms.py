@@ -13,5 +13,5 @@ class CommentForm(forms.ModelForm):
             'gig_id',
         )
         widgets = {
-            'content': forms.Textarea(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control','placeholder':'نظر خود را وارد کنید...'}),
         }

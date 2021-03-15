@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
@@ -73,7 +75,7 @@ def gig_detail(request, pk):
         'order_form': order_form,
         'comment_form': comment_form,
         'categories': CATEGORY,
-        'comments': COMMENTS.filter(gig__id=pk, reply_to=None,status=True),
+        'comments': COMMENTS.filter(gig__id=pk, reply_to=None, status=True),
         'message': message,
     }
     return render(request, 'gigs/gig_detail.html', context)
