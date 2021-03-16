@@ -89,6 +89,7 @@ def gig_detail(request, pk):
                'gig': gig,
                'order_form': order_form,
                'buyer': buyer,
+               'categories': CATEGORY,
     }
     # if request.is_ajax():
     #     html = render_to_string('gig/gig_detail.html', context, request=request)
@@ -112,6 +113,7 @@ def update_comment(request, pk):
         'detail': detail,
         'my_form': my_form,
         'gig': gig,
+        'categories': CATEGORY,
         }
     return render(request, 'gigs/update_comment.html', context)
 
