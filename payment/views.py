@@ -14,7 +14,7 @@ def go_to_gateway_view(request):
     # خواندن مبلغ از هر جایی که مد نظر است
     order:Order = Order.objects.filter(owner_id=request.user.id , paid=False).first()
     if order:
-        amount = order.get_total_payment_price()*10
+        amount = order.get_total_payment_price() * 1.09 * 10
     else:
         raise Http404
     # تنظیم شماره موبایل کاربر از هر جایی که مد نظر است
